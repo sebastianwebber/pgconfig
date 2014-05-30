@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PostgreSQL Configuration Tool</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/jumbotron.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">
+            <h3>PostgreSQL Configuration Tool
+              <small><sup>alpha</sup></small></h3></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <form action="#" method="post" class="form-horizontal">            
+                <fieldset>
+                    <legend>Server Details</legend>
+                    <div class="form-group">
+                        <!-- <div class="col-sm-4">
+                            <label for="cpu_count">CPU cores</label>
+                            <input class="form-control" id="cpu_count" name="server[cpu_count]" required="true" size="30" type="text" />
+                        </div> -->
+                        <div class="col-sm-12">
+                            <label for="total_memory">Total Memory</label>
+                            <div class="input-group">
+                              <input class="form-control" id="total_memory" name="server[total_memory]" required="true" size="30" type="text" value="2" />
+                              <span class="input-group-addon">GB</span>
+                            </div>
+                        </div>
+                        <!-- <div class="col-sm-6">
+                            <label for="db_size">Database size</label>
+                            <div class="input-group">
+                              <input class="form-control" id="db_size" name="server[db_size]" required="true" size="30" type="text" value="10" />
+                              <span class="input-group-addon">GB</span>
+                            </div>
+                            
+                        </div> -->
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <label for="max_connections">Total Connections</label>
+                            <input class="form-control" id="max_connections" name="server[max_connections]" required="true" size="30" type="text" value="100" />
+                        </div>
+                        <div class="col-sm-8">
+                            <label for="pg_version">Version</label>
+                            <select class="form-control" id="pg_version" name="server[pg_version]">
+                                <option value="9.3" selected="selected">9.3.x</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" id="b_generate" class="btn btn-primary btn-lg" onclick="return false;">Generate</button>
+                </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row" id="generated_data">
+        <div class="col-md-12">
+            <p class="text-center">Input your server details and press generate.</p>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>Developed by <a href="http://github.com/sebastianwebber">Sebastian Webber</a>. Based on pgtune.</p>
+      </footer>
+    </div> <!-- /container -->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/pgconfig.js"></script>
+  </body>
+</html>
