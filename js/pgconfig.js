@@ -21,23 +21,7 @@ function compute_checkpoint_related_configuration () {
         'class': 'table table-striped table-bordered'
     });
 
-    new_table.append(
-            $('<thead>').append(
-                    $('<tr>').append(
-                            $('<th>').append('Parameter')
-                        ).append(
-                            $('<th>').append('WEB')
-                        ).append(
-                            $('<th>').append('OLTP')
-                        ).append(
-                            $('<th>').append('DW')
-                        ).append(
-                            $('<th>').append('Mixed')
-                        ).append(
-                            $('<th>').append('Desktop')
-                        )
-                )
-        );
+    new_table.append(gen_table_header());
 
     tbody=$('<tbody>');
 
@@ -162,6 +146,26 @@ function format_value (value, compl, tooltip) {
 	return column;
 }
 
+function gen_table_header() {
+    return $('<thead>').append(
+                    $('<tr>').append(
+                            $('<th>').append('Parameter')
+                        ).append(
+                            $('<th>').append('WEB')
+                        ).append(
+                            $('<th>').append('OLTP')
+                        ).append(
+                            $('<th>').append('DW')
+                        ).append(
+                            $('<th>').append('Mixed')
+                        ).append(
+                            $('<th>').append('Desktop')
+                        )
+                );
+}
+
+
+
 $(document).ready(function(){
 
   $("#b_generate").click(function(){
@@ -177,23 +181,7 @@ $(document).ready(function(){
     	'class': 'table table-striped table-bordered'
     });
 
-    buffers_table.append(
-    		$('<thead>').append(
-    				$('<tr>').append(
-    						$('<th>').append('Parameter')
-    					).append(
-    						$('<th>').append('WEB')
-    					).append(
-    						$('<th>').append('OLTP')
-    					).append(
-    						$('<th>').append('DW')
-    					).append(
-    						$('<th>').append('Mixed')
-    					).append(
-    						$('<th>').append('Desktop')
-    					)
-    			)
-    	);
+    buffers_table.append(gen_table_header());
 
 
     tbody=$('<tbody>');
