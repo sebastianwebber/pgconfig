@@ -305,6 +305,7 @@ $(document).ready(function(){
 
 
     $('#generated_data').empty();
+    $('#generated_data').hide();
 
     // buffer stuff
     $('#generated_data').append(
@@ -328,8 +329,11 @@ $(document).ready(function(){
 	    $('td:nth-child(' + (ind + 1) + ')').css('background-color', '');
 	});
 
-	// initialize tooltips
-	$("[rel='tooltip'], .tooltip").tooltip();
+    // scroll to results
+    // $('#generated_data').fadeTo(300, 0.1).fadeTo(300, 1.0);
+    $('#generated_data').fadeIn(300);
+    $('html,body').animate({ scrollTop: $('#generated_data').offset().top }, 'slow');
+
 
   });
 });
