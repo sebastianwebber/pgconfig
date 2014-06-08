@@ -7,8 +7,8 @@
     <title>PostgreSQL Configuration Tool</title>
 
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/jumbotron.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" media="all" rel="stylesheet">
+    <link href="css/jumbotron.css" media="screen" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -23,7 +23,7 @@
         <div class="navbar-header">
           <a class="navbar-brand" href="#">
             <h3>PostgreSQL Configuration Tool
-              <small><sup>0.3 beta</sup></small></h3></a>
+              <small><sup class="pgconfig_version">0.3 beta</sup></small></h3></a>
         </div>
 
       <ul class="nav navbar-nav navbar-right" id="context-menu">
@@ -44,7 +44,7 @@
     </div>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
+    <div class="jumbotron hidden-print">
       <div class="container">
         <div class="row">
           <div class="col-md-6">
@@ -93,6 +93,15 @@
     </div>
 
     <div class="container">
+      <div class="visible-print">
+      <div class="row">
+        <div class="col-md-12" style="padding-left: 0px;">
+          <h1>PostgreSQL Configuration Tool
+              <small><sup class="pgconfig_version">xxxxx</sup></small></h1></a>
+        </div>
+      </div>
+      </div>
+
       <!-- Example row of columns -->
       <div class="row" id="generated_data">
         <div class="col-md-12">

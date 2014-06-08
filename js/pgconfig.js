@@ -225,9 +225,13 @@ function gen_table_header() {
                 );
 }
 
+VERSION='0.2 beta';
 
 
 $(document).ready(function(){
+
+  $('.pgconfig_version').empty();
+  $('.pgconfig_version').append(VERSION);
 
   $("#total_memory").focus();
 
