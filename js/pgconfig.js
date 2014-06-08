@@ -5,11 +5,22 @@ function roundFix(number, precision)
     return Math.round( (number * multi).toFixed(precision + 1) ) / multi;
 }
 
-function gen_tr_start(param_name, doc_url, pg_version){
+function gen_tr_start_pgsql(param_name, doc_url, pg_version){
     return $('<tr>').append(
                     $('<td>').append(
                             $('<a>', {
                                 'href' : 'http://www.postgresql.org/docs/' + pg_version + '/static/' + doc_url,
+                                target : '_BLANK'
+                            }).append(param_name)
+                        )
+                ); 
+}
+
+function gen_tr_start_simple(param_name, doc_url){
+    return $('<tr>').append(
+                    $('<td>').append(
+                            $('<a>', {
+                                'href' : doc_url,
                                 target : '_BLANK'
                             }).append(param_name)
                         )
@@ -26,7 +37,7 @@ function compute_checkpoint_related_configuration () {
     tbody=$('<tbody>');
 
     // checkpoint_segments
-    row = gen_tr_start('checkpoint_segments', 'runtime-config-wal.html#GUC-CHECKPOINT-SEGMENTS', pg_version);
+    row = gen_tr_start_pgsql('checkpoint_segments', 'runtime-config-wal.html#GUC-CHECKPOINT-SEGMENTS', pg_version);
 
     env_list.forEach(function(entry) {
 
@@ -56,7 +67,7 @@ function compute_checkpoint_related_configuration () {
     tbody.append(row);
 
     // checkpoint_completion_target
-    row = gen_tr_start('checkpoint_completion_target', 'runtime-config-wal.html#GUC-CHECKPOINT-COMPLETION-TARGET', pg_version);
+    row = gen_tr_start_pgsql('checkpoint_completion_target', 'runtime-config-wal.html#GUC-CHECKPOINT-COMPLETION-TARGET', pg_version);
 
     env_list.forEach(function(entry) {
 
@@ -84,7 +95,7 @@ function compute_checkpoint_related_configuration () {
     tbody.append(row);
 
     // wal_buffers
-    row = gen_tr_start('wal_buffers', 'runtime-config-wal.html#GUC-WAL-BUFFERS', pg_version);
+    row = gen_tr_start_pgsql('wal_buffers', 'runtime-config-wal.html#GUC-WAL-BUFFERS', pg_version);
 
     env_list.forEach(function(entry) {
 
@@ -128,6 +139,56 @@ function compute_checkpoint_related_configuration () {
     return new_panel;
 }
 
+function compute_sysctl_related_configuration () {
+    new_table=$('<table />', {
+        'class': 'table table-striped table-bordered'
+    });
+
+    new_table.append(gen_table_header());
+
+    tbody=$('<tbody>');
+
+    // checkpoint_segments
+    row = gen_tr_start_simple('kernel.shmmax', 'https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/5/html/Tuning_and_Optimizing_Red_Hat_Enterprise_Linux_for_Oracle_9i_and_10g_Databases/chap-Oracle_9i_and_10g_Tuning_Guide-Setting_Shared_Memory.html#sect-Oracle_9i_and_10g_Tuning_Guide-Setting_Shared_Memory-Setting_SHMMAX_Parameter_');
+
+    env_list.forEach(function(entry) {
+
+        switch (entry) {
+            case 'WEB':
+            case 'Mixed':
+                new_value = 32;
+                break;
+            case 'OLTP':
+                new_value = 64;
+                break;
+            case 'DW':
+                new_value = 128;
+                break;
+            case 'Desktop':
+                new_value = 3;
+                break;
+        }
+
+        row.append(
+            format_value(
+                    roundFix(new_value, 2)
+                )
+            );
+    });
+
+    tbody.append(row);
+
+    new_table.append(tbody);
+
+    new_panel=$('<div>', { class : 'panel panel-default' });
+
+    new_panel.append($('<div>', { class: 'panel-heading' }).append('sysctl related configuration'));
+    new_panel.append(new_table);
+
+
+    return new_panel;
+}
+
 
 MB = 1024;
 env_list = [ 'WEB', 'OLTP', 'DW', 'Mixed', 'Desktop' ];
@@ -149,17 +210,17 @@ function format_value (value, compl, tooltip) {
 function gen_table_header() {
     return $('<thead>').append(
                     $('<tr>').append(
-                            $('<th>').append('Parameter')
+                            $('<th>', { class: 'col-sm-7'}).append('Parameter')
                         ).append(
-                            $('<th>').append('WEB')
+                            $('<th>', { class: 'col-sm-1'}).append('WEB')
                         ).append(
-                            $('<th>').append('OLTP')
+                            $('<th>', { class: 'col-sm-1'}).append('OLTP')
                         ).append(
-                            $('<th>').append('DW')
+                            $('<th>', { class: 'col-sm-1'}).append('DW')
                         ).append(
-                            $('<th>').append('Mixed')
+                            $('<th>', { class: 'col-sm-1'}).append('Mixed')
                         ).append(
-                            $('<th>').append('Desktop')
+                            $('<th>', { class: 'col-sm-1'}).append('Desktop')
                         )
                 );
 }
@@ -167,6 +228,8 @@ function gen_table_header() {
 
 
 $(document).ready(function(){
+
+  $("#total_memory").focus();
 
   $("#b_generate").click(function(){
   	MB = 1024;
@@ -187,7 +250,7 @@ $(document).ready(function(){
     tbody=$('<tbody>');
 
     // shared_buffers
-    row = gen_tr_start('shared_buffers', 'runtime-config-resource.html#GUC-SHARED-BUFFERS', pg_version);
+    row = gen_tr_start_pgsql('shared_buffers', 'runtime-config-resource.html#GUC-SHARED-BUFFERS', pg_version);
 
     env_list.forEach(function(entry) {
     	new_value = total_memory * MB / 4;
@@ -214,7 +277,7 @@ $(document).ready(function(){
     tbody.append(row);
 
     // effective_cache_size
-    row = gen_tr_start('effective_cache_size', 'runtime-config-query.html#GUC-EFFECTIVE-CACHE-SIZE', pg_version);
+    row = gen_tr_start_pgsql('effective_cache_size', 'runtime-config-query.html#GUC-EFFECTIVE-CACHE-SIZE', pg_version);
 
     env_list.forEach(function(entry) {
     	new_value = total_memory * MB / 4 * 3;
@@ -237,7 +300,7 @@ $(document).ready(function(){
     tbody.append(row);
     
     // work_mem
-    row = gen_tr_start('work_mem', 'runtime-config-resource.html#GUC-WORK-MEM', pg_version);
+    row = gen_tr_start_pgsql('work_mem', 'runtime-config-resource.html#GUC-WORK-MEM', pg_version);
     env_list.forEach(function(entry) {
     	new_value = total_memory * MB / max_connections;
 
@@ -268,7 +331,7 @@ $(document).ready(function(){
 
     
     // maintenance_work_mem
-    row = gen_tr_start('maintenance_work_mem', 'runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM', pg_version);
+    row = gen_tr_start_pgsql('maintenance_work_mem', 'runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM', pg_version);
     env_list.forEach(function(entry) {
     	new_value = total_memory * MB / 16;
     	formula_desc = '6.25% (1/16) of total RAM up to a maximum of 2GB';
@@ -307,32 +370,66 @@ $(document).ready(function(){
     $('#generated_data').empty();
     $('#generated_data').hide();
 
+
+    // $('#generated_data').append(
+    //     $('<div>', { class: "row"}).append(
+    //                 $('<div>', { class : "col-md-12"}).append(
+    //                         $('<h1>').append('PostgreSQL Configuration')
+    //                     )
+    //             )
+    //     );
+
     // buffer stuff
     $('#generated_data').append(
-    		$('<div>', { class: "row"}).append(
-    				$('<div>', { class : "col-md-12"}).append(buffers_panel)
-    			)
-    	);
+            $('<div>', { class: "row"}).append(
+                    $('<div>', { class : "col-md-12"})
+                        .append(
+                                $('<div>', { class : "page-header", id : 'pgsql-related' }).append (
+                                        $('<h3>').append('PostgreSQL Related')
+                                    )
+                            )
+                        .append(buffers_panel)
+                )
+        );
 
     // compute_checkpoint_related_configuration
     $('#generated_data').append(compute_checkpoint_related_configuration());
 
-	// columns and rows 
-	$('td').mouseover(function () {
-	    $(this).siblings().css('background-color', '#f5f5f5');
-	    var ind = $(this).index();
-	    $('td:nth-child(' + (ind + 1) + ')').css('background-color', '#f5f5f5');
-	});
-	$('td').mouseleave(function () {
-	    $(this).siblings().css('background-color', '');
-	    var ind = $(this).index();
-	    $('td:nth-child(' + (ind + 1) + ')').css('background-color', '');
-	});
+    // OS stuff
+    // $('#generated_data').append(
+    //         $('<div>', { class: "row"}).append(
+    //                 $('<div>', { class : "col-md-12"})
+    //                     .append(
+    //                             $('<div>', { class : "page-header", id : 'pgsql-related' }).append (
+    //                                     $('<h3>').append('Operating System Related')
+    //                                 )
+    //                         )
+    //                     .append(compute_sysctl_related_configuration())
+    //             )
+    //     );
+
+
+
+    // columns and rows 
+
+    hover_color = '#f5f5f5';
+
+    $('td').mouseover(function () {
+        $(this).siblings().css('background-color', hover_color);
+        var ind = $(this).index();
+        $('td:nth-child(' + (ind + 1) + ')').css('background-color', hover_color);
+    });
+    $('td').mouseleave(function () {
+        $(this).siblings().css('background-color', '');
+        var ind = $(this).index();
+        $('td:nth-child(' + (ind + 1) + ')').css('background-color', '');
+    });
+
+
 
     // scroll to results
-    // $('#generated_data').fadeTo(300, 0.1).fadeTo(300, 1.0);
     $('#generated_data').fadeIn(300);
-    $('html,body').animate({ scrollTop: $('#generated_data').offset().top }, 'slow');
+    $('html,body').animate({ scrollTop: $('#pgsql-related').offset().top - 85 }, 'slow');
 
 
   });
