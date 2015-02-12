@@ -234,7 +234,7 @@ function gen_table_header() {
                 );
 }
 
-VERSION='0.4 beta';
+VERSION='0.45 beta';
 
 
 function generate_usage_box(env_name) {
