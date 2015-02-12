@@ -266,22 +266,27 @@ function generate_usage_stuff () {
 
 
     usage_container = $('<div>', { role: "tabpanel" });
-    file_list = $('<ul>', { class: "nav nav-tabs",  role: "tablist" });
+    file_list = $('<ul>', { class: "nav nav-pills",  role: "tablist" });
 
     env_list.forEach(function(entry) {
 
         new_id="usage_" + entry;
+
+        new_link = $('<li>', { role: "presentation"});
+        new_link.append($('<a>', { href: "#" + new_id, "arial-controls": new_id, role: "tab", "data-toggle": "pill" }).append(entry));
+
+        if (entry == "WEB") {
+            new_link.addClass('active');
+        };
+
         file_list.append(
-                $('<li>', { role: "presentation"})
-                    .append(
-                            $('<a>', { href: "#" + new_id, "arial-controls": new_id, role: "tab", "data-toggle": "tab" }).append(entry)
-                        )
+                new_link
             );
     });
 
     usage_container.append(file_list);
 
-    content_list = $('<div>', { class: "tab-content" });
+    content_list = $('<div>', { class: "tab-content", style: "padding-top: 5px;" });
 
     env_list.forEach(function(entry) {
 
