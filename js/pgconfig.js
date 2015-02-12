@@ -323,13 +323,13 @@ function generate_usage_stuff () {
                                     )
                         )
                             .append(
-                                    $('<p>').append('Add this at the bottom on your <code>postgresql.conf</code> file:')
+                                    $('<p>').append('Add this at the bottom of your <code>postgresql.conf</code> file:')
                                 )
                             .append(
                                     $('<pre>').append("include = 'tunning.conf'")
                                 )
                             .append(
-                                    $('<p>').append('Create the file <code>tunning.conf</code> inside your <code>PGDATA</code> directory and add this content:')
+                                    $('<p>').append('Select your profile and create the file <code>tunning.conf</code> inside your <code>PGDATA</code> directory and add this content:')
                                 )
                             .append(usage_container)
                             // .append(
