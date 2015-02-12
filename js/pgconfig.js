@@ -132,7 +132,7 @@ function compute_checkpoint_related_configuration () {
                 )
             );
 
-        USAGE_FILE[entry].push('wal_buffers = ' + roundFix(new_value, 2) + 'MB');
+        USAGE_FILE[entry].push('wal_buffers = ' + roundFix(new_value, 0) + 'MB');
     });
 
     tbody.append(row);
