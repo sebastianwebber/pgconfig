@@ -402,7 +402,7 @@ $(document).ready(function(){
 	    		)
 	    	);
 
-        USAGE_FILE[entry].push('shared_buffers = ' + roundFix(new_value, 2) + 'MB');
+        USAGE_FILE[entry].push('shared_buffers = ' + roundFix(new_value, 0) + 'MB');
 	});
 
     tbody.append(row);
@@ -427,7 +427,7 @@ $(document).ready(function(){
 	    		)
 	    	);
 
-        USAGE_FILE[entry].push('effective_cache_size = ' + roundFix(new_value, 2) + 'MB');
+        USAGE_FILE[entry].push('effective_cache_size = ' + roundFix(new_value, 0) + 'MB');
 
 
 	});
@@ -461,7 +461,7 @@ $(document).ready(function(){
 	    		)
 	    	);
 
-        USAGE_FILE[entry].push('work_mem = ' + roundFix(new_value, 2) + 'MB');
+        USAGE_FILE[entry].push('work_mem = ' + roundFix(new_value, 0) + 'MB');
 	});
 
     tbody.append(row);
@@ -493,7 +493,7 @@ $(document).ready(function(){
 	    	);
 
         
-        USAGE_FILE[entry].push('maintenance_work_mem = ' + roundFix(new_value, 2) + 'MB');
+        USAGE_FILE[entry].push('maintenance_work_mem = ' + roundFix(new_value, 0) + 'MB');
 	});
 
     tbody.append(row);
