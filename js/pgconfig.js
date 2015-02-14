@@ -12,7 +12,8 @@ function gen_tr_start_pgsql(param_name, doc_url, pg_version){
                     $('<td>').append(
                             $('<a>', {
                                 'href' : 'http://www.postgresql.org/docs/' + pg_version + '/static/' + doc_url,
-                                target : '_BLANK'
+                                target : '_BLANK',
+                                class: 'pgsql-documentation'
                             }).append(param_name)
                         )
                 ); 
@@ -234,7 +235,7 @@ function gen_table_header() {
                 );
 }
 
-VERSION='0.45 beta';
+VERSION='0.5 beta';
 
 
 function generate_usage_box(env_name) {
@@ -578,11 +579,41 @@ $(document).ready(function(){
     });
 
 
-
     // scroll to results
     $('#generated_data').fadeIn(300);
     $('html,body').animate({ scrollTop: $('#pgsql-related').offset().top - 85 }, 'slow');
 
 
+
+    $.getJSON('/pgdoc/9.4/doc.json', function(data) {
+
+        $.each(data.parameters, function(i, item){
+            console.log(item.name);
+
+            new_desc=$('<div>');
+            desc_lines=item.description.split('\n');
+            $.each(desc_lines, function(){
+              new_desc.append($('<p>').append(this))
+            });
+
+            new_title=item.name + ' (' + item.type + ')';
+
+            popover_link=$("a.pgsql-documentation").filter(function() {
+                return $(this).text() === item.name;
+            });
+
+            if (popover_link.text() === item.name) {
+                popover_link.popover({ 
+                    trigger: "hover", 
+                    placement: 'right',
+                    toggle : "popover",
+                    content : new_desc.html(),
+                    title: new_title,
+                    container: 'body',
+                    html: true
+                });
+            };
+        });
+    });
   });
 });
