@@ -585,7 +585,7 @@ $(document).ready(function(){
 
 
 
-    $.getJSON('/pgdoc/9.4/doc.json', function(data) {
+    $.getJSON('pgdoc/9.4/doc.json', function(data) {
 
         $.each(data.parameters, function(i, item){
             console.log(item.name);
