@@ -235,7 +235,7 @@ function gen_table_header() {
                 );
 }
 
-VERSION='0.65 beta';
+VERSION='0.7 beta';
 
 
 function generate_usage_box(env_name) {
@@ -267,12 +267,6 @@ function generate_pgbadger_box(env_name) {
         return_text += "\nsyslog_facility = 'LOCAL0'\n";
         return_text += "syslog_ident = 'postgres'\n\n";
     };
-
-
-    // USAGE_FILE[env_name].forEach(function(entry) {
-    //     return_text += entry + "\n";
-    //     // alert(entry);
-    // });
     
     return_text += "log_checkpoints = on\n";
     return_text += "log_connections = on\n";
@@ -286,13 +280,6 @@ function generate_pgbadger_box(env_name) {
 
 
 function generate_usage_stuff () {
-
-// <ul class="nav nav-pills">
-//   <li role="presentation" class="active"><a href="#">Home</a></li>
-//   <li role="presentation"><a href="#">Profile</a></li>
-//   <li role="presentation"><a href="#">Messages</a></li>
-// </ul>
-
 
     usage_container = $('<div>', { role: "tabpanel" });
     file_list = $('<ul>', { class: "nav nav-tabs",  role: "tablist" });
@@ -397,6 +384,23 @@ function generate_pgbadger_stuff () {
 
         if (entry == "stderr") {
             new_div.addClass('in active');
+        } else {
+            new_div
+                        .append (
+                                $('<h4>').append('Syslog Configuration')
+                            )
+                        .append(
+                                $('<p>').append('Add this at the bottom of your <code>/etc/rsyslog.conf</code> file:')
+                            )
+                        .append(
+                                $('<pre>').append("local0.*         -/var/log/pgsql.log")
+                            )
+                        .append(
+                                $('<p>').append('...and make a adjustment on the <code>/var/log/rsyslog.conf</code> file to add a exclusion of <code>local0</code> on <code>/var/log/messages</code>:')
+                            )
+                        .append(
+                                $('<pre>').append("*.info;mail.none;authpriv.none;cron.none;local0.none                /var/log/messages")
+                            );
         };
 
         content_list.append(new_div);
@@ -410,7 +414,7 @@ function generate_pgbadger_stuff () {
                 .append(
                     $('<div>', { class : "page-header" })
                         .append (
-                                $('<h3>').append('BONUS: PGBadger Configuration')
+                                $('<h3>').append('PGBadger Configuration')
                             )
                     )
                         .append(

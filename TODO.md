@@ -2,7 +2,7 @@
 
 ## usage stuff
 
-- add syslog configuration
+- ~~add syslog configuration~~
 
 ## Interface stuff
 
