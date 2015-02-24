@@ -264,6 +264,8 @@ function generate_pgbadger_box(env_name) {
         return_text += "log_line_prefix = '%t [%p]: [%l-1] user=%u,db=%d '\n";
     } else if (env_name === "syslog") {
         return_text += "log_line_prefix = 'user=%u,db=%d '\n";
+        return_text += "\nsyslog_facility = 'LOCAL0'\n";
+        return_text += "syslog_ident = 'postgres'\n\n";
     };
 
 
