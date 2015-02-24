@@ -387,7 +387,10 @@ function generate_pgbadger_stuff () {
         } else {
             new_div
                         .append (
-                                $('<h4>').append('Syslog Configuration')
+                                $('<div>', { class : "page-header" })
+                                    .append(
+                                        $('<h4>').append('Syslog Configuration')
+                                    )
                             )
                         .append(
                                 $('<p>').append('Add this at the bottom of your <code>/etc/rsyslog.conf</code> file:')
