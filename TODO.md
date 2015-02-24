@@ -1,5 +1,9 @@
 # TODO
 
+## usage stuff
+
+- add syslog configuration
+
 ## Interface stuff
 
 - Implement localization support. 
