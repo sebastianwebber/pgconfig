@@ -447,16 +447,20 @@ max_connections = 0;
 
 $(document).ready(function(){
 
-    env_list.forEach(function(entry) {
-        USAGE_FILE[entry] = new Array();
-    });
-
   $('.pgconfig_version').empty();
   $('.pgconfig_version').append(VERSION);
 
   $("#total_memory").focus();
 
   $("#b_generate").click(function(){
+
+    USAGE_FILE = [];
+
+    env_list.forEach(function(entry) {
+        USAGE_FILE[entry] = new Array();
+    });
+
+
   	MB = 1024;
   	env_list = [ 'WEB', 'OLTP', 'DW', 'Mixed', 'Desktop' ];
 
