@@ -16,7 +16,14 @@
 		},
 		{
 			"name": "effective_cache_size",
-			"doc_url": "http://www.postgresql.org/docs/9.4/static/runtime-config-query.html#GUC-EFFECTIVE-CACHE-SIZE" 
+			"doc_url": "http://www.postgresql.org/docs/9.4/static/runtime-config-query.html#GUC-EFFECTIVE-CACHE-SIZE",
+			"rules" : [
+				{ "env_name": "WEB", "formula": "(TOTAL_RAM / 4) * 3" },
+				{ "env_name": "OLTP", "formula": "(TOTAL_RAM / 4) * 3" },
+				{ "env_name": "DW", "formula": "(TOTAL_RAM / 4) * 3" },
+				{ "env_name": "Mixed", "formula": "(TOTAL_RAM / 4) * 3" },
+				{ "env_name": "Desktop", "formula": "(TOTAL_RAM / 4)" }
+			]
 		}
 	]
 }
