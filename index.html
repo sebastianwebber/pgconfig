@@ -23,7 +23,7 @@
         <div class="navbar-header"><a href="https://github.com/sebastianwebber/pgconfig"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
           <a class="navbar-brand" href="#">
             <h3>PostgreSQL Configuration Tool
-              <small><sup class="pgconfig_version"></sup></small></h3></a>
+              <small><sup ng-model="pgconfig.version" ng-init="pgconfig.version=1.0"></sup></small></h3></a>
         </div>
 
       <ul class="nav navbar-nav navbar-right" id="context-menu">
@@ -75,7 +75,7 @@
                     <div class="form-group">
                         <div class="col-sm-4">
                             <label for="max_connections">Total Connections</label>
-                            <input class="form-control" id="max_connections" name="server[max_connections]" required="true" size="30" type="text" value="100" />
+                            <input class="form-control" id="max_connections" name="server[max_connections]" required="true" size="30" type="text" value="100" ng-model="form.max_connections" ng-init="form.max_connections=100" />
                         </div>
                         <div class="col-sm-8">
                             <label for="pg_version">Version</label>
@@ -129,7 +129,7 @@
                     <a href="{{ parm.doc_url | adjust_version : form.version }}">{{ parm.name }}</a>
                   </td>
                   <td class="col-sm-1" ng-repeat="env in enviroments">
-                    <span ng-repeat="rule in parm.rules | filter: env.name" title="{{rule.formula}}">{{rule.formula | process_formula : form.total_ram : parm.max_value | bytes }}</span>
+                    <span ng-repeat="rule in parm.rules | filter: env.name" title="{{rule.formula}}">{{rule.formula | process_formula : form.total_ram : parm.max_value : form.max_connections | bytes }}</span>
                   </td>
                 </tr>
               </tbody>

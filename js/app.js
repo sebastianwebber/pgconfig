@@ -11,10 +11,16 @@ pgConfigApp.controller('ConfigurationController', function ($scope, $http) {
 });
 
 pgConfigApp.filter('process_formula', function() {
-  return function(input, total_ram, max_value) {
+  return function(input, total_ram, max_value, max_connections) {
 
   	var new_formula=
-  		input.replace('TOTAL_RAM', to_bytes(total_ram + 'GB'));
+    input.replace('TOTAL_RAM', to_bytes(total_ram + 'GB'));
+
+
+    if (max_connections != null) {
+      new_formula = new_formula.replace('MAX_CONNECTIONS', max_connections)
+    };
+
 
   	var resultData = eval(new_formula);
   	
@@ -36,7 +42,7 @@ pgConfigApp.filter('bytes', function() {
 		if (typeof precision === 'undefined') precision = 0;
 		var units = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB'],
 		number = Math.floor(Math.log(bytes) / Math.log(1024));
-		return (bytes / Math.pow(1024, Math.floor(number))).toFixed(precision) + ' ' + units[number];
+		return (bytes / Math.pow(1024, Math.floor(number))).toFixed(precision) +  units[number];
 	}
 }); 
 

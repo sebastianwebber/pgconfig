@@ -16,13 +16,36 @@
 		},
 		{
 			"name": "effective_cache_size",
-			"doc_url": "http://www.postgresql.org/docs/PG_VERSION/static/runtime-config-query.html#GUC-EFFECTIVE-CACHE-SIZE",
+			"doc_url": "http://www.postgresql.org/docs/PG_VERSION/static/runtime-config-resource.html#GUC-WORK-MEM",
 			"rules" : [
 				{ "env_name": "WEB", "formula": "(TOTAL_RAM / 4) * 3" },
 				{ "env_name": "OLTP", "formula": "(TOTAL_RAM / 4) * 3" },
 				{ "env_name": "DW", "formula": "(TOTAL_RAM / 4) * 3" },
 				{ "env_name": "Mixed", "formula": "(TOTAL_RAM / 4) * 3" },
 				{ "env_name": "Desktop", "formula": "(TOTAL_RAM / 4)" }
+			]
+		},
+		{
+			"name": "work_mem",
+			"doc_url": "http://www.postgresql.org/docs/PG_VERSION/static/runtime-config-query.html#GUC-EFFECTIVE-CACHE-SIZE",
+			"rules" : [
+				{ "env_name": "WEB", "formula": "(TOTAL_RAM / MAX_CONNECTIONS)" },
+				{ "env_name": "OLTP", "formula": "(TOTAL_RAM / MAX_CONNECTIONS)" },
+				{ "env_name": "DW", "formula": "((TOTAL_RAM / 2) / MAX_CONNECTIONS)" },
+				{ "env_name": "Mixed", "formula": "( (TOTAL_RAM / 2) / MAX_CONNECTIONS)" },
+				{ "env_name": "Desktop", "formula": "((TOTAL_RAM / 6) / MAX_CONNECTIONS)" }
+			]
+		},
+		{
+			"name": "maintenance_work_mem",
+			"doc_url": "http://www.postgresql.org/docs/PG_VERSION/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM",
+			"max_value": "2GB",
+			"rules" : [
+				{ "env_name": "WEB", "formula": "(TOTAL_RAM / 16)" },
+				{ "env_name": "OLTP", "formula": "(TOTAL_RAM / 16)" },
+				{ "env_name": "DW", "formula": "(TOTAL_RAM / 8)" },
+				{ "env_name": "Mixed", "formula": "(TOTAL_RAM / 16)" },
+				{ "env_name": "Desktop", "formula": "(TOTAL_RAM / 16)" }
 			]
 		}
 	]
