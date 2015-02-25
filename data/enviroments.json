@@ -1,0 +1,7 @@
+[
+ { "name": "WEB" },
+ { "name": "OLTP" },
+ { "name": "DW" },
+ { "name": "Mixed" },
+ { "name": "Desktop" }
+]
