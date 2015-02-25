@@ -47,6 +47,12 @@ pgConfigApp.filter('to_bytes', function() {
   };
 });
 
+pgConfigApp.filter('adjust_version', function() {
+  return function(input, version) {
+    return input.replace('PG_VERSION', version);
+  };
+});
+
 function to_bytes(input) {
 	var returnValue = 0;
   
@@ -61,7 +67,6 @@ function to_bytes(input) {
   } else if (String(input).toUpperCase().indexOf("KB") !=-1) {
     returnValue = input.match(/[0-9]{1,}/i)[0] * 1024;
   }
-
 
 	return returnValue;
 }
