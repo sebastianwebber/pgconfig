@@ -36,14 +36,34 @@ pgConfigApp.filter('process_formula', function() {
   };
 });
 
-pgConfigApp.filter('bytes', function() {
-	return function(bytes, precision) {
-		if (isNaN(parseFloat(bytes)) || !isFinite(bytes)) return '-';
-		if (typeof precision === 'undefined') precision = 0;
-		var units = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB'],
-		number = Math.floor(Math.log(bytes) / Math.log(1024));
-		return (bytes / Math.pow(1024, Math.floor(number))).toFixed(precision) +  units[number];
-	}
+function to_bytes(bytes, precision) {
+  // console.info('asfasfafs');
+
+    if (isNaN(parseFloat(bytes)) || !isFinite(bytes)) return '-';
+    if (typeof precision === 'undefined') precision = 0;
+    var units = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB'],
+    number = Math.floor(Math.log(bytes) / Math.log(1024));
+
+        console.info(number);
+    return (bytes / Math.pow(1024, Math.floor(number))).toFixed(precision) +  units[number];
+};
+
+pgConfigApp.filter('format_field', function() {
+  return function(input, format) {
+
+
+    if (format != null) {
+      if (format === "bytes") {
+        if (isNaN(parseFloat(input)) || !isFinite(input)) return '-';
+        if (typeof precision === 'undefined') precision = 2;
+        var units = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB'],
+        number = Math.floor(Math.log(input) / Math.log(1024));
+        return (input / Math.pow(1024, Math.floor(number))).toFixed(precision) +  units[number];
+      };
+
+    };
+    return input;
+  }
 }); 
 
 

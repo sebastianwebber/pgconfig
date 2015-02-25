@@ -6,6 +6,7 @@
 			"name": "shared_buffers",
 			"doc_url": "http://www.postgresql.org/docs/PG_VERSION/static/runtime-config-resource.html#GUC-SHARED-BUFFERS",
 			"max_value": "8GB",
+			"format" : "bytes",
 			"rules" : [
 				{ "env_name": "WEB", "formula": "TOTAL_RAM / 4" },
 				{ "env_name": "OLTP", "formula": "TOTAL_RAM / 4" },
@@ -17,6 +18,7 @@
 		{
 			"name": "effective_cache_size",
 			"doc_url": "http://www.postgresql.org/docs/PG_VERSION/static/runtime-config-resource.html#GUC-WORK-MEM",
+			"format" : "bytes",
 			"rules" : [
 				{ "env_name": "WEB", "formula": "(TOTAL_RAM / 4) * 3" },
 				{ "env_name": "OLTP", "formula": "(TOTAL_RAM / 4) * 3" },
@@ -28,6 +30,7 @@
 		{
 			"name": "work_mem",
 			"doc_url": "http://www.postgresql.org/docs/PG_VERSION/static/runtime-config-query.html#GUC-EFFECTIVE-CACHE-SIZE",
+			"format" : "bytes",
 			"rules" : [
 				{ "env_name": "WEB", "formula": "(TOTAL_RAM / MAX_CONNECTIONS)" },
 				{ "env_name": "OLTP", "formula": "(TOTAL_RAM / MAX_CONNECTIONS)" },
@@ -40,12 +43,53 @@
 			"name": "maintenance_work_mem",
 			"doc_url": "http://www.postgresql.org/docs/PG_VERSION/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM",
 			"max_value": "2GB",
+			"format" : "bytes",
 			"rules" : [
 				{ "env_name": "WEB", "formula": "(TOTAL_RAM / 16)" },
 				{ "env_name": "OLTP", "formula": "(TOTAL_RAM / 16)" },
 				{ "env_name": "DW", "formula": "(TOTAL_RAM / 8)" },
 				{ "env_name": "Mixed", "formula": "(TOTAL_RAM / 16)" },
 				{ "env_name": "Desktop", "formula": "(TOTAL_RAM / 16)" }
+			]
+		}
+	]
+},
+{
+	"category": "Checkpoint Related Configuration",
+	"parameterList" : [
+		{
+			"name": "checkpoint_segments",
+			"doc_url": "http://www.postgresql.org/docs/PG_VERSION/static/runtime-config-wal.html#GUC-CHECKPOINT-SEGMENTS",
+			"rules" : [
+				{ "env_name": "WEB", "formula": "32" },
+				{ "env_name": "OLTP", "formula": "64" },
+				{ "env_name": "DW", "formula": "128" },
+				{ "env_name": "Mixed", "formula": "32" },
+				{ "env_name": "Desktop", "formula": "3" }
+			]
+		},
+		{
+			"name": "checkpoint_completion_target",
+			"doc_url": "http://www.postgresql.org/docs/PG_VERSION/static/runtime-config-wal.html#GUC-CHECKPOINT-COMPLETION-TARGET",
+			"rules" : [
+				{ "env_name": "WEB", "formula": "0.7" },
+				{ "env_name": "OLTP", "formula": "0.9" },
+				{ "env_name": "DW", "formula": "0.9" },
+				{ "env_name": "Mixed", "formula": "0.9" },
+				{ "env_name": "Desktop", "formula": "0.5" }
+			]
+		},
+		{
+			"name": "wal_buffers",
+			"doc_url": "http://www.postgresql.org/docs/PG_VERSION/static/runtime-config-wal.html#GUC-WAL-BUFFERS",
+			"max_value": "16MB",
+			"format" : "bytes",
+			"rules" : [
+				{ "env_name": "WEB", "formula": "(TOTAL_RAM / 4 ) * 0.03" },
+				{ "env_name": "OLTP", "formula": "(TOTAL_RAM / 4 ) * 0.03" },
+				{ "env_name": "DW", "formula": "(TOTAL_RAM / 4 ) * 0.03" },
+				{ "env_name": "Mixed", "formula": "(TOTAL_RAM / 4 ) * 0.03" },
+				{ "env_name": "Desktop", "formula": "(TOTAL_RAM / 16 ) * 0.03" }
 			]
 		}
 	]
