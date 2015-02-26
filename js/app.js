@@ -1,4 +1,4 @@
-var pgConfigApp = angular.module('pgConfig', []);
+var pgConfigApp = angular.module('pgConfig', ['angular-loading-bar']);
 
 pgConfigApp.controller('ConfigurationController', function ($scope, $http) {
   $http.get('data/enviroments.json').success(function(data) {
