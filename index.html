@@ -25,26 +25,8 @@
             <h3>PostgreSQL Configuration Tool
               <small><sup ng-model="pgconfig.version" ng-init="pgconfig.version=1.0"></sup></small></h3></a>
         </div>
-
-      <ul class="nav navbar-nav navbar-right" id="context-menu">
-        <!-- <li><a href="#pgsql-related">PostgreSQL</a></li> -->
-        <!-- 
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li> -->
-      </ul>
       </div>
     </div>
-
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-
     <div class="container">
       <div class="visible-print">
         <div class="row">
@@ -54,18 +36,18 @@
           </div>
         </div>
       </div>
-        <div class="row">
-          <div class="col-md-2">
-            <server-details></server-details>
-          </div>
-          <div class="col-md-10">
-            <pgsql-related></pgsql-related>
-          </div>
+      <div class="row">
+        <div class="col-md-2">
+          <server-details></server-details>
         </div>
-        <footer>
-          <hr>
-          <p>Developed by <a href="http://github.com/sebastianwebber">Sebastian Webber</a>. Based on pgtune.</p>
-        </footer>
+        <div class="col-md-10">
+          <pgsql-related></pgsql-related>
+        </div>
+      </div>
+      <footer>
+        <hr>
+        <p>Developed by <a href="http://github.com/sebastianwebber">Sebastian Webber</a>. Based on pgtune.</p>
+      </footer>
     </div>
 
     <script src="js/jquery-2.1.1.min.js"></script>
