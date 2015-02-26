@@ -1,0 +1,24 @@
+<div class="page-header">
+  <h3>PostgreSQL Related</h3>
+</div>
+<div class="panel panel-default" ng-repeat="categories in pgsql_parameters">
+    <div class="panel-heading">{{ categories.category }}</div>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th class="col-sm-7">Parameter</th>
+          <th class="col-sm-1" ng-repeat="env in enviroments"> {{ env.name }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="parm in categories.parameterList">
+          <td>
+            <a href="{{ parm.doc_url | adjust_version : form.version }}">{{ parm.name }}</a>
+          </td>
+          <td class="col-sm-1" ng-repeat="env in enviroments">
+            <span ng-repeat="rule in parm.rules | filter: env.name" title="{{rule.formula}}">{{rule.formula | process_formula : form.total_ram : parm.max_value : form.max_connections | format_field : parm.format }}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div>
