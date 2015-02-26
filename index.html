@@ -47,103 +47,27 @@
 
     <div class="container">
       <div class="visible-print">
-      <div class="row">
-        <div class="col-md-12" style="padding-left: 0px;">
-          <h1>PostgreSQL Configuration Tool
-              <small><sup class="pgconfig_version"></sup></small></h1></a>
+        <div class="row">
+          <div class="col-md-12" style="padding-left: 0px;">
+            <h1>PostgreSQL Configuration Tool
+                <small><sup class="pgconfig_version"></sup></small></h1></a>
+          </div>
         </div>
       </div>
-      </div>
-<!--       <div class="row" id="generated_data">
-        <div class="col-md-12">
-            <p class="text-center">Input your server details and press generate.</p>
-        </div>
-      </div> -->
-      <div class="row">
+        <div class="row">
           <div class="col-md-2">
-          <!-- <div class="page-header"> -->
-            <!-- <h4>Server Details</h4> -->
-          <!-- </div> -->
-            <form action="#" method="post" class="form-horizontal" style="padding-top: 20px">            
-                <fieldset>
-                    <legend>Server Details</legend>
-                    <div class="form-group">
-                        <!-- <div class="col-sm-4">
-                            <label for="cpu_count">CPU cores</label>
-                            <input class="form-control" id="cpu_count" name="server[cpu_count]" required="true" size="30" type="text" />
-                        </div> -->
-                        <div class="col-sm-12">
-                            <label for="total_memory">Total Memory</label>
-                            <div class="input-group">
-                              <input class="form-control" id="total_memory" name="server[total_memory]" required="true" size="30" type="text" ng-model="form.total_ram" ng-init="form.total_ram=2" />
-                              <span class="input-group-addon">GB</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <label for="max_connections">Total Connections</label>
-                            <input class="form-control" id="max_connections" name="server[max_connections]" required="true" size="30" type="text" value="100" ng-model="form.max_connections" ng-init="form.max_connections=100" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <label for="pg_version">Version</label>
-                            <select class="form-control" id="pg_version" name="server[pg_version]" ng-model="form.version" ng-init="form.version=9.4">
-                                <option value="9.3">9.3.x</option>
-                                <option value="9.4" selected="selected">9.4.x</option>
-                            </select>
-                        </div>
-                    </div>
-                </fieldset>
-            </form>
+            <server-details></server-details>
           </div>
-        <div class="col-md-10">
-          <div class="page-header">
-            <h3>PostgreSQL Related</h3>
-          </div>
-          <div class="panel panel-default" ng-repeat="categories in pgsql_parameters">
-            <div class="panel-heading">{{ categories.category }}</div>
-            <table class="table table-striped table-bordered">
-              <thead>
-                <tr>
-                  <th class="col-sm-7">Parameter</th>
-                  <th class="col-sm-1" ng-repeat="env in enviroments"> {{ env.name }}</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat="parm in categories.parameterList">
-                  <td>
-                    <a href="{{ parm.doc_url | adjust_version : form.version }}">{{ parm.name }}</a>
-                  </td>
-                  <td class="col-sm-1" ng-repeat="env in enviroments">
-                    <span ng-repeat="rule in parm.rules | filter: env.name" title="{{rule.formula}}">{{rule.formula | process_formula : form.total_ram : parm.max_value : form.max_connections | format_field : parm.format }}</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="col-md-10">
+            <pgsql-related></pgsql-related>
           </div>
         </div>
-      </div>
+        <footer>
+          <hr>
+          <p>Developed by <a href="http://github.com/sebastianwebber">Sebastian Webber</a>. Based on pgtune.</p>
+        </footer>
+    </div>
 
-<!-- 
-  <ul>
-    <li ng-repeat="categories in pgsql_parameters">
-      <p>{{env.category}}</p>
-    </li>
-  </ul> -->
-
-
-
-      <footer>
-              <hr>
-
-        <p>Developed by <a href="http://github.com/sebastianwebber">Sebastian Webber</a>. Based on pgtune.</p>
-      </footer>
-    </div> <!-- /container -->
-
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery-2.1.1.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>

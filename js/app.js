@@ -79,6 +79,21 @@ pgConfigApp.filter('adjust_version', function() {
   };
 });
 
+pgConfigApp.directive('pgsqlRelated', function() {
+  return {
+    restrict: 'E',
+    templateUrl: 'app/templates/pgsql-related.html'
+  };
+});
+
+// server-details.html
+pgConfigApp.directive('serverDetails', function() {
+  return {
+    restrict: 'E',
+    templateUrl: 'app/templates/server-details.html'
+  };
+});
+
 function to_bytes(input) {
 	var returnValue = 0;
   
