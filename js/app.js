@@ -25,6 +25,14 @@ pgConfigApp.directive('usage', function() {
   };
 });
 
+// usage.html
+pgConfigApp.directive('forkMe', function() {
+  return {
+    restrict: 'E',
+    templateUrl: 'app/templates/fork-me.html'
+  };
+});
+
 pgConfigApp.controller('ConfigurationController', function ($scope, $http, $filter, $location) {
 
   USAGE_FILE = [];
