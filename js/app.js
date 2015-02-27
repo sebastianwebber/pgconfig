@@ -45,6 +45,17 @@ pgConfigApp.controller('ConfigurationController', function ($scope, $http, $filt
     $scope.pgsql_parameters = data;
   });
   // 
+
+  $scope.selectedUsageTab = "WEB";
+  $scope.selectUsageTab = function(envName) {
+    $scope.selectedUsageTab = envName;
+  };
+
+  $scope.isSelectUsageTab = function(tabName) {
+    // console.info(tabName);
+    return $scope.selectedUsageTab === tabName;
+  };
+
   $scope.formatParameters = function (envName) {
 
     var data = $scope.pgsql_parameters;
