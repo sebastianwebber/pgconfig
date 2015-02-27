@@ -1,30 +1,29 @@
-
-            <form action="#" method="post" class="form-horizontal" style="padding-top: 20px">            
-                <fieldset>
-                    <legend>Server Details</legend>
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <label for="total_memory">Total Memory</label>
-                            <div class="input-group">
-                              <input class="form-control" id="total_memory" name="server[total_memory]" required="true" size="30" type="text" ng-model="form.total_ram" ng-init="form.total_ram=2" />
-                              <span class="input-group-addon">GB</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <label for="max_connections">Total Connections</label>
-                            <input class="form-control" id="max_connections" name="server[max_connections]" required="true" size="30" type="text" value="100" ng-model="form.max_connections" ng-init="form.max_connections=100" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <label for="pg_version">Version</label>
-                            <select class="form-control" id="pg_version" name="server[pg_version]" ng-model="form.version" ng-init="form.version=9.4">
-                                <option value="9.3">9.3.x</option>
-                                <option value="9.4" selected="selected">9.4.x</option>
-                            </select>
-                        </div>
-                    </div>
-                </fieldset>
-            </form>
+<form action="#" method="post" class="form-horizontal" style="padding-top: 20px">            
+    <fieldset>
+        <legend>Server Details</legend>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <label for="total_memory">Total Memory</label>
+                <div class="input-group">
+                  <input class="form-control" id="total_memory" name="server[total_memory]" required="true" size="30" type="text" ng-model="form.total_ram" ng-init="form.total_ram=2" />
+                  <span class="input-group-addon">GB</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <label for="max_connections">Total Connections</label>
+                <input class="form-control" id="max_connections" name="server[max_connections]" required="true" size="30" type="text" value="100" ng-model="form.max_connections" ng-init="form.max_connections=100" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <label for="pg_version">Version</label>
+                <select class="form-control" id="pg_version" name="server[pg_version]" ng-model="form.version" ng-init="form.version=9.4">
+                    <option value="9.3">9.3.x</option>
+                    <option value="9.4" selected="selected">9.4.x</option>
+                </select>
+            </div>
+        </div>
+    </fieldset>
+</form>

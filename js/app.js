@@ -1,13 +1,83 @@
-var pgConfigApp = angular.module('pgConfig', ['angular-loading-bar']);
+var pgConfigApp = angular.module('pgConfig', ['ngAnimate', 'angular-loading-bar']);
 
-pgConfigApp.controller('ConfigurationController', function ($scope, $http) {
+
+
+pgConfigApp.directive('pgsqlRelated', function() {
+  return {
+    restrict: 'E',
+    templateUrl: 'app/templates/pgsql-related.html'
+  };
+});
+
+// server-details.html
+pgConfigApp.directive('serverDetails', function() {
+  return {
+    restrict: 'E',
+    templateUrl: 'app/templates/server-details.html'
+  };
+});
+
+// usage.html
+pgConfigApp.directive('usage', function() {
+  return {
+    restrict: 'E',
+    templateUrl: 'app/templates/usage.html'
+  };
+});
+
+pgConfigApp.controller('ConfigurationController', function ($scope, $http, $filter, $location) {
+
+  USAGE_FILE = [];
+
   $http.get('data/enviroments.json').success(function(data) {
     $scope.enviroments = data;
   });
 
+  $scope.isActive = function (viewLocation) {
+    var active = (viewLocation === $location.path());
+    return active;
+  };
+
+
+  $scope.version = '1.0';
+
   $http.get('data/pgsql-parameters.json').success(function(data) {
     $scope.pgsql_parameters = data;
   });
+  
+  $scope.formatParameters = function (envName) {
+
+    var data = $scope.pgsql_parameters;
+    var returnData = "# Using '" + envName + "' profile\n\n";
+
+    for (var parmGroupId = data.length - 1; parmGroupId >= 0; parmGroupId--) {
+
+      var parameterList = data[parmGroupId].parameterList;
+      
+      for (var parmId = parameterList.length - 1; parmId >= 0; parmId--) {
+
+        var rulesList = parameterList[parmId].rules;
+
+        for (var ruleId = rulesList.length - 1; ruleId >= 0; ruleId--) {
+          if (envName === rulesList[ruleId].env_name) {
+            console.info($scope.form.total_ram);
+            var newValue = $filter('process_formula')(rulesList[ruleId].formula, $scope.form.total_ram, parameterList[parmId].max_value, $scope.form.max_connections);
+            var newParsedLine = parameterList[parmId].name + ' = ' + $filter('format_field')(newValue, parameterList[parmId].format);
+
+            returnData += newParsedLine + '\n';
+
+
+            // console.info( envName + ": " + newParsedLine);
+          };
+        };
+      };
+    };
+
+      // console.info(envName);
+    console.info(returnData);
+    return returnData;
+  };
+
 });
 
 pgConfigApp.filter('process_formula', function() {
@@ -76,21 +146,6 @@ pgConfigApp.filter('to_bytes', function() {
 pgConfigApp.filter('adjust_version', function() {
   return function(input, version) {
     return input.replace('PG_VERSION', version);
-  };
-});
-
-pgConfigApp.directive('pgsqlRelated', function() {
-  return {
-    restrict: 'E',
-    templateUrl: 'app/templates/pgsql-related.html'
-  };
-});
-
-// server-details.html
-pgConfigApp.directive('serverDetails', function() {
-  return {
-    restrict: 'E',
-    templateUrl: 'app/templates/server-details.html'
   };
 });
 

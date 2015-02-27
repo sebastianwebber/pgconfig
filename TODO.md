@@ -8,6 +8,7 @@
 
 - Implement localization support. 
 - Migrate all stuff to angularjs (and material design perhaps?)
+- share button to display the URL
 
 ## Others
 
