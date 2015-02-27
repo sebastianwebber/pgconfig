@@ -44,37 +44,37 @@ pgConfigApp.controller('ConfigurationController', function ($scope, $http, $filt
   $http.get('data/pgsql-parameters.json').success(function(data) {
     $scope.pgsql_parameters = data;
   });
-  
+  // 
   $scope.formatParameters = function (envName) {
 
     var data = $scope.pgsql_parameters;
     var returnData = "# Using '" + envName + "' profile\n\n";
 
-    for (var parmGroupId = data.length - 1; parmGroupId >= 0; parmGroupId--) {
+    if (data != null) {
 
-      var parameterList = data[parmGroupId].parameterList;
-      
-      for (var parmId = parameterList.length - 1; parmId >= 0; parmId--) {
+      for (var parmGroupId = data.length - 1; parmGroupId >= 0; parmGroupId--) {
 
-        var rulesList = parameterList[parmId].rules;
+        var parameterList = data[parmGroupId].parameterList;
+        
+        for (var parmId = parameterList.length - 1; parmId >= 0; parmId--) {
 
-        for (var ruleId = rulesList.length - 1; ruleId >= 0; ruleId--) {
-          if (envName === rulesList[ruleId].env_name) {
-            console.info($scope.form.total_ram);
-            var newValue = $filter('process_formula')(rulesList[ruleId].formula, $scope.form.total_ram, parameterList[parmId].max_value, $scope.form.max_connections);
-            var newParsedLine = parameterList[parmId].name + ' = ' + $filter('format_field')(newValue, parameterList[parmId].format);
+          var rulesList = parameterList[parmId].rules;
 
-            returnData += newParsedLine + '\n';
+          for (var ruleId = rulesList.length - 1; ruleId >= 0; ruleId--) {
+            if (envName === rulesList[ruleId].env_name) {
 
+              var newValue = $filter('process_formula')(rulesList[ruleId].formula, $scope.form.total_ram, parameterList[parmId].max_value, $scope.form.max_connections);
+              var newParsedLine = parameterList[parmId].name + ' = ' + $filter('format_field')(newValue, parameterList[parmId].format);
 
-            // console.info( envName + ": " + newParsedLine);
+              returnData += newParsedLine + '\n';
+            };
           };
         };
       };
     };
 
       // console.info(envName);
-    console.info(returnData);
+    // console.info(returnData);
     return returnData;
   };
 
@@ -114,7 +114,7 @@ function to_bytes(bytes, precision) {
     var units = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB'],
     number = Math.floor(Math.log(bytes) / Math.log(1024));
 
-        console.info(number);
+        // console.info(number);
     return (bytes / Math.pow(1024, Math.floor(number))).toFixed(precision) +  units[number];
 };
 
