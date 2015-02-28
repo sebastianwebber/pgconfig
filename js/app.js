@@ -25,6 +25,14 @@ pgConfigApp.directive('usage', function() {
   };
 });
 
+// pgbadger-usage.html
+pgConfigApp.directive('pgbadgerUsage', function() {
+  return {
+    restrict: 'E',
+    templateUrl: 'app/templates/pgbadger-usage.html'
+  };
+});
+
 // usage.html
 pgConfigApp.directive('forkMe', function() {
   return {
@@ -52,7 +60,6 @@ pgConfigApp.controller('ConfigurationController', function ($scope, $http, $filt
   $http.get('data/pgsql-parameters.json').success(function(data) {
     $scope.pgsql_parameters = data;
   });
-  // 
 
   $scope.selectedUsageTab = "WEB";
   $scope.selectUsageTab = function(envName) {
@@ -60,8 +67,35 @@ pgConfigApp.controller('ConfigurationController', function ($scope, $http, $filt
   };
 
   $scope.isSelectUsageTab = function(tabName) {
-    // console.info(tabName);
     return $scope.selectedUsageTab === tabName;
+  };
+
+
+  $scope.selectedPGBadgerTab = "stderr";
+  $scope.selectBadgerTab = function(tabName) {
+    $scope.selectedPGBadgerTab = tabName;
+  };
+
+  $scope.isSelectedBadgerTab = function(tabName) {
+    return $scope.selectedPGBadgerTab === tabName;
+  };
+
+
+  $scope.formatBadgerSpecifics = function (logFormat) {
+
+    var returnData = "";
+
+    if (logFormat === 'stderr') {
+      return "log_line_prefix = '%t [%p]: [%l-1] user=%u,db=%d '\n";
+    } else {
+      return "log_line_prefix = 'user=%u,db=%d '\n" +
+             "\nsyslog_facility = 'LOCAL0'\n" +
+             "syslog_ident = 'postgres'\n";
+    };
+
+    console.info(returnData);
+
+    return returnData;
   };
 
   $scope.formatParameters = function (envName) {
