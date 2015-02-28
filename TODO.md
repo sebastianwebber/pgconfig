@@ -7,8 +7,9 @@
 ## Interface stuff
 
 - Implement localization support. 
-- Migrate all stuff to angularjs (and material design perhaps?)
+- ~~Migrate all stuff to angularjs~~
 - share button to display the URL
+- use material design
 
 ## Others
 
