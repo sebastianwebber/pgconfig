@@ -1,6 +1,11 @@
-var pgConfigApp = angular.module('pgConfig', ['ngAnimate', 'angular-loading-bar']);
+var pgConfigApp = angular.module('pgConfig', ['ngAnimate', 'angular-loading-bar', 'ngNumeraljs']);
 
-
+pgConfigApp.config(['$numeraljsConfigProvider', function ($numeraljsConfigProvider) {
+    $numeraljsConfigProvider.setFormat('bytes', '0b');
+    $numeraljsConfigProvider.setFormat('decimal', '0');
+    $numeraljsConfigProvider.setFormat('float', '0.0');
+    $numeraljsConfigProvider.setDefaultFormat('0.0');
+}]);
 
 pgConfigApp.directive('pgsqlRelated', function() {
   return {
@@ -93,7 +98,7 @@ pgConfigApp.controller('ConfigurationController', function ($scope, $http, $filt
              "syslog_ident = 'postgres'\n";
     };
 
-    console.info(returnData);
+    // console.info(returnData);
 
     return returnData;
   };
@@ -116,7 +121,7 @@ pgConfigApp.controller('ConfigurationController', function ($scope, $http, $filt
           for (var ruleId = rulesList.length - 1; ruleId >= 0; ruleId--) {
             if (envName === rulesList[ruleId].env_name) {
 
-              var newValue = $filter('process_formula')(rulesList[ruleId].formula, $scope.form.total_ram, parameterList[parmId].max_value, $scope.form.max_connections);
+              var newValue = $filter('process_formula')(rulesList[ruleId].formula, $scope.form.total_ram, parameterList[parmId].max_value, $scope.form.max_connections, 0);
               var newParsedLine = parameterList[parmId].name + ' = ' + $filter('format_field')(newValue, parameterList[parmId].format);
 
               returnData += newParsedLine + '\n';
@@ -134,7 +139,9 @@ pgConfigApp.controller('ConfigurationController', function ($scope, $http, $filt
 });
 
 pgConfigApp.filter('process_formula', function() {
-  return function(input, total_ram, max_value, max_connections) {
+  return function(input, total_ram, max_value, max_connections, precision) {
+
+    if (typeof precision === 'undefined') precision = 2;
 
   	var new_formula=
     input.replace('TOTAL_RAM', to_bytes(total_ram + 'GB'));
@@ -148,7 +155,7 @@ pgConfigApp.filter('process_formula', function() {
   	var resultData = eval(new_formula);
   	
   	if (max_value != null) {
-	  	var max_value_bytes = to_bytes(max_value);
+	  	var max_value_bytes = to_bytes(max_value, precision);
 
 	  	if (resultData > max_value_bytes) {
 	  		resultData = max_value_bytes;
@@ -159,20 +166,9 @@ pgConfigApp.filter('process_formula', function() {
   };
 });
 
-function to_bytes(bytes, precision) {
-  // console.info('asfasfafs');
-
-    if (isNaN(parseFloat(bytes)) || !isFinite(bytes)) return '-';
-    if (typeof precision === 'undefined') precision = 0;
-    var units = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB'],
-    number = Math.floor(Math.log(bytes) / Math.log(1024));
-
-        // console.info(number);
-    return (bytes / Math.pow(1024, Math.floor(number))).toFixed(precision) +  units[number];
-};
 
 pgConfigApp.filter('format_field', function() {
-  return function(input, format) {
+  return function(input, format, precision) {
 
 
     if (format != null) {
@@ -181,6 +177,7 @@ pgConfigApp.filter('format_field', function() {
         if (typeof precision === 'undefined') precision = 2;
         var units = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB'],
         number = Math.floor(Math.log(input) / Math.log(1024));
+        // console.info("input: " + input + " number: " + number);
         return (input / Math.pow(1024, Math.floor(number))).toFixed(precision) +  units[number];
       };
 

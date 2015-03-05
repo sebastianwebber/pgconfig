@@ -59,6 +59,7 @@
 	"parameterList" : [
 		{
 			"name": "checkpoint_segments",
+			"format" : "decimal",
 			"doc_url": "http://www.postgresql.org/docs/PG_VERSION/static/runtime-config-wal.html#GUC-CHECKPOINT-SEGMENTS",
 			"rules" : [
 				{ "env_name": "WEB", "formula": "32" },
@@ -71,6 +72,7 @@
 		{
 			"name": "checkpoint_completion_target",
 			"doc_url": "http://www.postgresql.org/docs/PG_VERSION/static/runtime-config-wal.html#GUC-CHECKPOINT-COMPLETION-TARGET",
+			"format" : "float",
 			"rules" : [
 				{ "env_name": "WEB", "formula": "0.7" },
 				{ "env_name": "OLTP", "formula": "0.9" },
