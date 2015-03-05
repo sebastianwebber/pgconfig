@@ -98,8 +98,6 @@ pgConfigApp.controller('ConfigurationController', function ($scope, $http, $filt
              "syslog_ident = 'postgres'\n";
     };
 
-    // console.info(returnData);
-
     return returnData;
   };
 
@@ -131,17 +129,13 @@ pgConfigApp.controller('ConfigurationController', function ($scope, $http, $filt
       };
     };
 
-      // console.info(envName);
-    // console.info(returnData);
     return returnData;
   };
 
 });
 
 pgConfigApp.filter('process_formula', function() {
-  return function(input, total_ram, max_value, max_connections, precision) {
-
-    if (typeof precision === 'undefined') precision = 2;
+  return function(input, total_ram, max_value, max_connections) {
 
   	var new_formula=
     input.replace('TOTAL_RAM', to_bytes(total_ram + 'GB'));
@@ -151,11 +145,10 @@ pgConfigApp.filter('process_formula', function() {
       new_formula = new_formula.replace('MAX_CONNECTIONS', max_connections)
     };
 
-
   	var resultData = eval(new_formula);
   	
   	if (max_value != null) {
-	  	var max_value_bytes = to_bytes(max_value, precision);
+	  	var max_value_bytes = to_bytes(max_value);
 
 	  	if (resultData > max_value_bytes) {
 	  		resultData = max_value_bytes;
