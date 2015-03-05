@@ -122,7 +122,7 @@ pgConfigApp.controller('ConfigurationController', function ($scope, $http, $filt
             if (envName === rulesList[ruleId].env_name) {
 
               var newValue = $filter('process_formula')(rulesList[ruleId].formula, $scope.form.total_ram, parameterList[parmId].max_value, $scope.form.max_connections, 0);
-              var newParsedLine = parameterList[parmId].name + ' = ' + $filter('format_field')(newValue, parameterList[parmId].format);
+              var newParsedLine = parameterList[parmId].name + ' = ' + $filter('numeraljs')(newValue, parameterList[parmId].format);
 
               returnData += newParsedLine + '\n';
             };
