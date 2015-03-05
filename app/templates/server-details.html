@@ -1,11 +1,12 @@
 <form action="#" method="post" class="form-horizontal" style="padding-top: 20px">            
     <fieldset>
         <legend>Server Details</legend>
-        <div class="form-group">
+        <div class="form-group" ng-class="{ 'has-error': form.total_ram.$invalid }">
             <div class="col-sm-12">
                 <label for="total_memory">Total Memory</label>
                 <div class="input-group">
-                  <input class="form-control" id="total_memory" name="server[total_memory]" required="true" size="30" type="text" ng-model="form.total_ram" ng-init="form.total_ram=2" />
+                  <input id="total_memory" type="number" min="1" max="1096" class="form-control"  ng-minlength="1"
+       ng-maxlength="1096" ng-model="form.total_ram" ng-init="form.total_ram=2" required/>
                   <span class="input-group-addon">GB</span>
                 </div>
             </div>
@@ -27,3 +28,5 @@
         </div>
     </fieldset>
 </form>
+<p>Developed by <br /><a href="http://github.com/sebastianwebber">Sebastian Webber</a>.</p>
+<p>Based on pgtune.</p>        

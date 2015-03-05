@@ -8,7 +8,7 @@
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" media="all" rel="stylesheet">
-    <link href="css/jumbotron.css" media="screen" rel="stylesheet">
+    <link href="css/pgconfig.css" media="screen" rel="stylesheet">
     <link href="bower_components/angular-loading-bar/build/loading-bar.min.css" media="screen" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -29,7 +29,7 @@
         </div>
       </div>
     </div>
-    <div class="container">
+    <div class="container-fluid">
       <div class="visible-print">
         <div class="row">
           <div class="col-md-12" style="padding-left: 0px;">
@@ -44,18 +44,16 @@
         </div>
       </div>
       <div class="row" class="hidden-print">
-        <div class="col-md-2">
+        <div class="col-sm-3 col-md-2 sidebar">
           <server-details></server-details>
         </div>
-        <div class="col-md-10">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <pgsql-related></pgsql-related>
           <usage></usage>
           <pgbadger-usage></pgbadger-usage>
         </div>
       </div>
       <footer>
-        <hr>
-        <p>Developed by <a href="http://github.com/sebastianwebber">Sebastian Webber</a>. Based on pgtune.</p>
       </footer>
     </div>
 

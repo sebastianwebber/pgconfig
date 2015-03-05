@@ -194,6 +194,10 @@ pgConfigApp.filter('adjust_version', function() {
 
 function to_bytes(input) {
 	var returnValue = 0;
+
+  if (input == null) {
+    return returnValue;
+  };
   
   if (String(input).toUpperCase().indexOf("PB") !=-1) {
     returnValue = input.match(/[0-9]{1,}/i)[0] * 1024 * 1024 * 1024 * 1024 * 1024;
