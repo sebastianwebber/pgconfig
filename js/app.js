@@ -120,10 +120,19 @@ pgConfigApp.controller('ConfigurationController', function ($scope, $http, $filt
     return returnData;
   };
 
-  $scope.formatParameters = function (envName) {
+  $scope.formatParameters = function (envName, format) {
+
+    if (typeof format === 'undefined') format = 'PLAIN';
 
     var data = $scope.pgsql_parameters;
-    var returnData = "# Using '" + envName + "' profile\n\n";
+    var returnData = '';
+
+    if (format == 'PLAIN')
+      returnData = '# '
+    else
+      returnData = "-- ";
+
+    returnData += "Using '" + envName + "' profile\n\n";
 
     if (data != null) {
 
@@ -139,7 +148,15 @@ pgConfigApp.controller('ConfigurationController', function ($scope, $http, $filt
             if (envName === rulesList[ruleId].env_name) {
 
               var newValue = $filter('process_formula')(rulesList[ruleId].formula, $scope.form.total_ram, parameterList[parmId].max_value, $scope.form.max_connections, 0);
-              var newParsedLine = parameterList[parmId].name + ' = ' + $filter('numeraljs')(newValue, parameterList[parmId].format);
+
+              var newValuePretty = $filter('numeraljs')(newValue, parameterList[parmId].format);
+
+              var newParsedLine = '';
+              if (format == 'PLAIN')
+                newParsedLine = parameterList[parmId].name + ' = ' +  newValuePretty;
+              else if (format == 'SQL')
+                newParsedLine = 'ALTER SYSTEM SET ' + parameterList[parmId].name + ' TO \'' +  newValuePretty + '\';';
+
 
               returnData += newParsedLine + '\n';
             };
