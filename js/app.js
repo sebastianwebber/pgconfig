@@ -62,6 +62,15 @@ pgConfigApp.controller('ConfigurationController', function ($scope, $http, $filt
 
   $scope.version = '1.25';
 
+  $scope.showAtVersion = function(currentVersion, minimumVersion) {
+    // console.info("currentVersion: " + currentVersion) + "--" + "minimumVersion: " + minimumVersion;
+    if (currentVersion == minimumVersion) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   $http.get('data/pgsql-parameters.json').success(function(data) {
     $scope.pgsql_parameters = data;
   });
@@ -86,16 +95,26 @@ pgConfigApp.controller('ConfigurationController', function ($scope, $http, $filt
   };
 
 
-  $scope.formatBadgerSpecifics = function (logFormat) {
+  $scope.formatBadgerSpecifics = function (logFormat, format) {
 
     var returnData = "";
 
+    if (typeof format === 'undefined') format = 'PLAIN';
+
     if (logFormat === 'stderr') {
-      return "log_line_prefix = '%t [%p]: [%l-1] user=%u,db=%d '\n";
+      if (format === 'PLAIN')
+        return "log_line_prefix = '%t [%p]: [%l-1] user=%u,db=%d '\n";
+      else if (format === 'SQL')
+        return "ALTER SYSTEM SET log_line_prefix TO '%t [%p]: [%l-1] user=%u,db=%d ';\n";
     } else {
-      return "log_line_prefix = 'user=%u,db=%d '\n" +
-             "\nsyslog_facility = 'LOCAL0'\n" +
-             "syslog_ident = 'postgres'\n";
+      if (format === 'PLAIN')
+        return "log_line_prefix = 'user=%u,db=%d '\n" +
+               "\nsyslog_facility = 'LOCAL0'\n" +
+               "syslog_ident = 'postgres'\n";
+      else if (format === 'SQL')
+        return "ALTER SYSTEM SET log_line_prefix TO 'user=%u,db=%d ';\n" +
+               "\nALTER SYSTEM SET syslog_facility TO 'LOCAL0';\n" +
+               "ALTER SYSTEM SET syslog_ident TO 'postgres';\n";
     };
 
     return returnData;
