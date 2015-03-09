@@ -7,9 +7,9 @@
 ## Interface stuff
 
 - Implement localization support. 
-- use alter system when version greater than 9.4
 - share button to display the URL
 - use material design
+- ~~use alter system when version greater than 9.4~~
 - ~~Migrate all stuff to angularjs~~
 
 ## Others
