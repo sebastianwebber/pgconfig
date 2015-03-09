@@ -60,7 +60,7 @@ pgConfigApp.controller('ConfigurationController', function ($scope, $http, $filt
   };
 
 
-  $scope.version = '1.2';
+  $scope.version = '1.25';
 
   $http.get('data/pgsql-parameters.json').success(function(data) {
     $scope.pgsql_parameters = data;
