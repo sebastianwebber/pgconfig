@@ -7,6 +7,28 @@ pgConfigApp.config(['$numeraljsConfigProvider', function ($numeraljsConfigProvid
     $numeraljsConfigProvider.setDefaultFormat('0.0');
 }]);
 
+pgConfigApp.directive('highlight', function($interpolate, $window){
+    return {
+    restrict: 'EA',
+    scope: true,
+    compile: function (tElem, tAttrs) {
+      var interpolateFn = $interpolate(tElem.html(), true);
+      tElem.html(''); // stop automatic intepolation
+
+      return function(scope, elem, attrs){
+        scope.$watch(interpolateFn, function (value) {
+          var format = attrs.highlight;
+
+          if (format == "")
+            format = 'bash';
+
+          elem.html(hljs.highlight(format,value).value);
+        });
+      }
+    }
+  };
+});
+
 pgConfigApp.directive('pgsqlRelated', function() {
   return {
     restrict: 'E',
@@ -129,7 +151,7 @@ pgConfigApp.controller('ConfigurationController', function ($scope, $http, $filt
 
     if (format == 'PLAIN')
       returnData = '# '
-    else
+    else if (format == 'SQL')
       returnData = "-- ";
 
     returnData += "Using '" + envName + "' profile\n\n";
