@@ -84,9 +84,9 @@ pgConfigApp.controller('ConfigurationController', function ($scope, $http, $filt
 
   $scope.version = '1.3';
 
-  $scope.showAtVersion = function(currentVersion, minimumVersion) {
+  $scope.showAtVersion = function(currentVersion, minimumVersion, maximunVersion) {
     // console.info("currentVersion: " + currentVersion) + "--" + "minimumVersion: " + minimumVersion;
-    if (currentVersion == minimumVersion) {
+    if (currentVersion >= minimumVersion && currentVersion <= maximunVersion) {
       return true;
     } else {
       return false;
