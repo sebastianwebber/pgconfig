@@ -7,6 +7,15 @@ pgConfigApp.config(['$numeraljsConfigProvider', function ($numeraljsConfigProvid
     $numeraljsConfigProvider.setDefaultFormat('0.0');
 }]);
 
+pgConfigApp.directive('autoFocus', function() {
+    return {
+        restrict: 'AC',
+        link: function(_scope, _element) {
+            _element[0].focus();
+        }
+    };
+});
+
 pgConfigApp.directive('highlight', function($interpolate, $window){
     return {
     restrict: 'EA',
