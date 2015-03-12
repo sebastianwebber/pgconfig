@@ -41,7 +41,7 @@ pgConfigApp.directive('highlight', function($interpolate, $window){
 pgConfigApp.directive('pgsqlRelated', function() {
   return {
     restrict: 'E',
-    templateUrl: 'app/templates/pgsql-related.html'
+    templateUrl: '/app/templates/pgsql-related.html'
   };
 });
 
@@ -49,7 +49,7 @@ pgConfigApp.directive('pgsqlRelated', function() {
 pgConfigApp.directive('serverDetails', function() {
   return {
     restrict: 'E',
-    templateUrl: 'app/templates/server-details.html'
+    templateUrl: '/app/templates/server-details.html'
   };
 });
 
@@ -57,7 +57,7 @@ pgConfigApp.directive('serverDetails', function() {
 pgConfigApp.directive('usage', function() {
   return {
     restrict: 'E',
-    templateUrl: 'app/templates/usage.html'
+    templateUrl: '/app/templates/usage.html'
   };
 });
 
@@ -65,7 +65,7 @@ pgConfigApp.directive('usage', function() {
 pgConfigApp.directive('pgbadgerUsage', function() {
   return {
     restrict: 'E',
-    templateUrl: 'app/templates/pgbadger-usage.html'
+    templateUrl: '/app/templates/pgbadger-usage.html'
   };
 });
 
@@ -73,7 +73,7 @@ pgConfigApp.directive('pgbadgerUsage', function() {
 pgConfigApp.directive('forkMe', function() {
   return {
     restrict: 'E',
-    templateUrl: 'app/templates/fork-me.html'
+    templateUrl: '/app/templates/fork-me.html'
   };
 });
 
