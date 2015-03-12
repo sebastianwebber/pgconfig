@@ -21,5 +21,6 @@ Temporary Items
 .apdisk
 
 # bower stuff
+node_modules
 bower_components
 app/bower_components
