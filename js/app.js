@@ -91,7 +91,7 @@ pgConfigApp.controller('ConfigurationController', function ($scope, $http, $filt
   };
 
 
-  $scope.version = '1.40';
+  $scope.version = '1.50';
 
   $scope.showAtVersion = function(currentVersion, minimumVersion, maximunVersion) {
     // console.info("currentVersion: " + currentVersion) + "--" + "minimumVersion: " + minimumVersion;
@@ -99,6 +99,40 @@ pgConfigApp.controller('ConfigurationController', function ($scope, $http, $filt
       return true;
     } else {
       return false;
+    }
+  };
+
+  $scope.filterVersion = function(currentVersion) {
+    return function(item) {
+      // console.debug(item);
+
+      // console.info('---------------');
+      // console.info('nome: ' + item.name);
+      minimumVersion = parseFloat(item.min_version);
+      maximunVersion = parseFloat(item.max_version);
+          // console.debug('minimumVersion: ' + minimumVersion);
+          // console.debug('maximunVersion: ' +maximunVersion);
+          // console.debug('currentVersion: ' + currentVersion);
+
+      // console.info('filter: ' + currentVersion + ' - min: ' + item.min_version + ' - max: '+ item.max_version );
+
+      // logica insana:
+      // 1. se não tem minimo declarado, mostra
+      // 2. se tem minimo, e tem maximo, filtra o intervalo
+      // 3. se tem minimo, mas não maximo, compara se o minimo é >= que a versão atual
+      if (minimumVersion > 0) {
+        if (maximunVersion > 0) {
+          if (currentVersion >= minimumVersion && currentVersion <= maximunVersion) {
+            return item;
+          }
+        } else {
+          if (currentVersion >= minimumVersion) {
+            return item;
+          }
+        }
+      } else {
+        return item;
+      }
     }
   };
 
@@ -151,7 +185,10 @@ pgConfigApp.controller('ConfigurationController', function ($scope, $http, $filt
     return returnData;
   };
 
-  $scope.formatParameters = function (envName, format) {
+  $scope.formatParameters = function (envName, format, currentVersion) {
+
+    // console.info('---------------');
+    // console.debug(envName, format, currentVersion);
 
     if (typeof format === 'undefined') format = 'PLAIN';
 
@@ -173,10 +210,34 @@ pgConfigApp.controller('ConfigurationController', function ($scope, $http, $filt
         
         for (var parmId = parameterList.length - 1; parmId >= 0; parmId--) {
 
-          var rulesList = parameterList[parmId].rules;
 
+
+          // testa se parametro pertence a versao...
+          minimumVersion = parseFloat(parameterList[parmId].min_version);
+          maximunVersion = parseFloat(parameterList[parmId].max_version);
+
+          var showParameter = false;
+
+          if (minimumVersion > 0) {
+            if (maximunVersion > 0) {
+              if (currentVersion >= minimumVersion && currentVersion <= maximunVersion) {
+                showParameter = true;
+              }
+            } else {
+              if (currentVersion >= minimumVersion) {
+                showParameter = true;
+              }
+            }
+          } else {
+            showParameter = true;
+          }
+
+          if (showParameter == true) {
+
+                      var rulesList = parameterList[parmId].rules;
           for (var ruleId = rulesList.length - 1; ruleId >= 0; ruleId--) {
             if (envName === rulesList[ruleId].env_name) {
+
 
               var newValue = $filter('process_formula')(rulesList[ruleId].formula, $scope.form.total_ram, parameterList[parmId].max_value, $scope.form.max_connections, 0);
 
@@ -190,7 +251,9 @@ pgConfigApp.controller('ConfigurationController', function ($scope, $http, $filt
 
 
               returnData += newParsedLine + '\n';
+              // console.debug(minimumVersion, maximunVersion)
             };
+          };
           };
         };
       };

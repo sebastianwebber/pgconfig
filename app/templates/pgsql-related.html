@@ -11,9 +11,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="parm in categories.parameterList">
+        <tr ng-repeat="parm in categories.parameterList | filter: filterVersion( form.version ) ">
           <td>
-            <a href="{{ parm.doc_url | adjust_version : form.version }}">{{ parm.name }}</a>
+            <a href="{{ parm.doc_url | adjust_version : form.version }}" target="_blank">{{ parm.name }}</a>
           </td>
           <td class="col-sm-1" ng-repeat="env in enviroments">
             <span ng-repeat="rule in parm.rules | filter: env.name" title="{{rule.formula}}">{{rule.formula | process_formula : form.total_ram : parm.max_value : form.max_connections | numeraljs : parm.format }}</span>
