@@ -168,16 +168,16 @@ pgConfigApp.controller('ConfigurationController', function ($scope, $http, $filt
 
     if (logFormat === 'stderr') {
       if (format === 'PLAIN')
-        return "log_line_prefix = '%t [%p]: [%l-1] user=%u,db=%d '\n";
+        return "log_line_prefix = '%t [%p]: [%l-1] user=%u,db=%d,app=%a,client=%h '\n";
       else if (format === 'SQL')
-        return "ALTER SYSTEM SET log_line_prefix TO '%t [%p]: [%l-1] user=%u,db=%d ';\n";
+        return "ALTER SYSTEM SET log_line_prefix TO '%t [%p]: [%l-1] user=%u,db=%d,app=%a,client=%h ';\n";
     } else {
       if (format === 'PLAIN')
-        return "log_line_prefix = 'user=%u,db=%d '\n" +
+        return "log_line_prefix = 'user=%u,db=%d,app=%aclient=%h '\n" +
                "\nsyslog_facility = 'LOCAL0'\n" +
                "syslog_ident = 'postgres'\n";
       else if (format === 'SQL')
-        return "ALTER SYSTEM SET log_line_prefix TO 'user=%u,db=%d ';\n" +
+        return "ALTER SYSTEM SET log_line_prefix TO 'user=%u,db=%d,app=%aclient=%h ';\n" +
                "\nALTER SYSTEM SET syslog_facility TO 'LOCAL0';\n" +
                "ALTER SYSTEM SET syslog_ident TO 'postgres';\n";
     };
