@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css" />
+    <link rel="stylesheet" href="/bower_components/angular-loading-bar/build/loading-bar.min.css" />
+    <link rel="stylesheet" href="pgconfig.css" />
+</head>
+
+<body ng-app="PGConfigUI">
+
+    <md-toolbar class="md-accent">
+        <h2 class="md-toolbar-tools">
+                <span>PostgreSQL Configuration Tool <sup>2.0</sup> </span>
+            </h2>
+    </md-toolbar>
+    <div>
+        <div ng-controller="MenuController">
+            <md-tabs md-selected="selectedIndex" md-dynamic-height md-border-bottom flex>
+                <md-tab> <a href="#/tuning">Tuning Advisor</a> </md-tab>
+                <md-tab> <a href="#/about">About</a> </md-tab>
+            </md-tabs>
+            <div id="content" ng-view flex> </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-aria/angular-aria.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/bower_components/angular-material/angular-material.js"></script>
+    <script src="/bower_components/angular-route/angular-route.min.js"></script>
+    <script src="/bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
+    <script src="app/main.js"></script>
+</body>
+
+</html>
