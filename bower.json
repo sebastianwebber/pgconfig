@@ -1,0 +1,30 @@
+{
+  "name": "pgconfig-ui",
+  "homepage": "https://github.com/sebastianwebber/pgconfig",
+  "authors": [
+    "Sebastian Webber <sebastian@swebber.me>"
+  ],
+  "description": "Frontend from pgconfig.org",
+  "main": "index.html",
+  "keywords": [
+    "postgresql",
+    "pg",
+    "pgsql",
+    "tuning"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-loading-bar": "^0.9.0",
+    "angular-material": "^1.0.8",
+    "angular-route": "^1.5.5",
+    "angular-resource": "^1.5.5"
+  }
+}
