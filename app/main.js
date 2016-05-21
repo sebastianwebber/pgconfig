@@ -1,6 +1,6 @@
 (function (angular, undefined) {
     "use strict";
-    angular.module('PGConfigUI', ['ngMaterial', 'ngRoute', 'angular-loading-bar'])
+    angular.module('PGConfigUI', ['ngMaterial', 'ngRoute', 'angular-loading-bar', 'ngResource'])
         .config(["$routeProvider", function ($routeProvider) {
 
             $routeProvider.when("/tuning", {
@@ -35,7 +35,7 @@
             });
         })
 
-        .controller('TuningController', function ($scope, $location, $log) {
+        .controller('TuningController', function ($scope, $location, $log, $http, $resource, $mdSidenav, $mdComponentRegistry) {
 
             $scope.total_memory = 2;
             $scope.max_connections = 100;
@@ -49,6 +49,28 @@
                 "9.1",
                 "9.0",
             ];
+
+
+            var TuningAPI = $resource("http://api.pgconfig.org/v1/tuning/get-config", {});
+
+            $scope.close = function () {
+                $mdSidenav('left').close()
+                    .then(function () {
+                        // $log.debug("close LEFT is done");
+                    });
+            };
+            
+            $scope.call_api = function () {
+                TuningAPI.get({
+                    pg_version : $scope.pg_version,
+                    total_ram : $scope.total_memory + "GB",
+                    max_connections : $scope.max_connections ,
+                    format : "json"
+                }, function (apiResult) {
+                    $scope.api_data = apiResult.data;
+                    $scope.close();
+                });
+            };
         });
 
 })(angular);

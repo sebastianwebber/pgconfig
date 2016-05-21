@@ -1,4 +1,55 @@
-<md-content class="md-padding">
+<div ng-controller="TuningController" class="md-padding" flex>
     <h1 class="md-display-1">Tuning Advisor</h1>
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-open="true">
+        <md-toolbar>
+            <h1 class="md-toolbar-tools">Server Options</h1>
+        </md-toolbar>
+        <md-content layout-padding="" flex>
+            <form name="projectForm">
+                <md-input-container style="width: 80%;">
+                    <label for="i_total_memory">Total Memory (GB)</label>
+                    <input required type="number" id="i_total_memory" ng-model="total_memory" min="1" max="3072" />
+                    <div ng-messages="projectForm.i_total_memory.$error">
+                        <div ng-message="required">This is required.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container style="width: 80%;">
+                    <label for="i_max_connections">Max connections</label>
+                    <input required type="number" id="i_max_connections" ng-model="max_connections" min="100" max="99999" />
+                    <div ng-messages="projectForm.i_max_connections.$error">
+                        <div ng-message="required">This is required.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container style="width: 80%;">
+                    <label>PostgreSQL version</label>
+                    <md-select ng-model="pg_version">
+                        <md-option ng-repeat="version in supported_versions" value="{{version}}">
+                            {{version}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <md-button ng-click="call_api()" class="md-primary">
+                    RUN IT NOW!
+                </md-button>
+            </form>
+        </md-content>
 
-</md-content>
+    </md-sidenav>
+    <md-content>
+        <md-list>
+            <md-list-item class="md-3-line" ng-repeat="category in api_data">
+                <div class="md-list-item-text">
+                    <h2>{{category.description}}</h2>
+                </div>
+                <md-card data-ng-repeat="param in category.paramaters">
+                    <md-card-content>
+                        <tt>{{param.name}}</tt>
+                    </md-card-content>
+                    <md-card-footer>
+                        <p>Sugested value: {{ param.config_value }}</p>
+                    </md-card-footer>
+                </md-card>
+            </md-list-item>
+        </md-list>
+    </md-content>
+</div>
