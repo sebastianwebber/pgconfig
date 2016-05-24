@@ -1,18 +1,22 @@
 (function (angular, undefined) {
     "use strict";
-    angular.module('PGConfigUI', ['ngMaterial', 'ngRoute', 'angular-loading-bar', 'ngResource'])
-        .config(["$routeProvider", function ($routeProvider) {
-
-            $routeProvider.when("/tuning", {
-                templateUrl: "app/partials/tuning.html"
-            });
-            $routeProvider.when("/about", {
-                templateUrl: "app/partials/about.html"
-            });
-            $routeProvider.otherwise({
-                redirectTo: "/about"
-            });
-        }])
+    angular.module('PGConfigUI', ['ngMaterial', 'angular-loading-bar', 'ngResource', 'ui.router'])
+        .config(function ($stateProvider, $urlRouterProvider) {
+            // $urlRouterProvider.otherwise("/about");
+            $stateProvider
+                .state('about_url', {
+                    url: "/about",
+                    templateUrl: "app/partials/about.html"
+                })
+                .state('tuning_url', {
+                    url: "/tuning?total_ram&max_connections&enviroment_name&pg_version&share_link",
+                    templateUrl: "app/partials/tuning.html"
+                })
+                .state("otherwise", {
+                    url: "*path",
+                    templateUrl: "app/partials/about.html",
+                });
+        })
         .config(function ($mdThemingProvider) {
             $mdThemingProvider
                 .theme('default')
@@ -39,23 +43,23 @@
             $templateCache.removeAll();
         }])
 
-        .controller('TuningController', function ($scope, $location, $log, $http, $resource, $mdSidenav, $routeParams) {
-                    
-    
+        .controller('TuningController', function ($scope, $location, $log, $http, $resource, $mdSidenav, $stateParams) {
+
+
             $scope.total_memory = 2;
             $scope.max_connections = 100;
             $scope.pg_version = "9.5";
             $scope.enviroment = "WEB";
-            
-            if($routeParams.total_ram != null) 
-                $scope.total_memory = Number($routeParams.total_ram);
-            if($routeParams.max_connections != null)
-                $scope.max_connections = Number($routeParams.max_connections);
-            if($routeParams.pg_version != null)
-                $scope.pg_version = $routeParams.pg_version;
-            if($routeParams.env_name != null)
-                $scope.enviroment = $routeParams.env_name;
-                
+
+            if ($stateParams.total_ram != null)
+                $scope.total_memory = Number($stateParams.total_ram);
+            if ($stateParams.max_connections != null)
+                $scope.max_connections = Number($stateParams.max_connections);
+            if ($stateParams.pg_version != null)
+                $scope.pg_version = $stateParams.pg_version;
+            if ($stateParams.enviroment_name != null)
+                $scope.enviroment = $stateParams.enviroment_name;
+
 
             $scope.supported_versions = [
                 "9.5",
@@ -110,10 +114,10 @@
                     $scope.show_toolbar = true;
                 });
             };
-            
-            
-            // http://localhost:5000/#/tuning?env_name=OLTP&total_ram=256&max_connections=200&pg_version=9.4&share_link=true
-            if($routeParams.share_link != null && $routeParams.share_link == "true")
+
+
+            // http://localhost:5000/#/tuning?enviroment_name=OLTP&total_ram=256&max_connections=200&pg_version=9.4&share_link=true
+            if ($stateParams.share_link != null && $stateParams.share_link == "true")
                 $scope.call_api();
         });
 
