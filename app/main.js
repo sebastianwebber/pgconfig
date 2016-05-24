@@ -55,6 +55,7 @@
                 $scope.pg_version = $routeParams.pg_version;
             if($routeParams.env_name != null)
                 $scope.enviroment = $routeParams.env_name;
+                
 
             $scope.supported_versions = [
                 "9.5",
@@ -109,6 +110,11 @@
                     $scope.show_toolbar = true;
                 });
             };
+            
+            
+            // http://localhost:5000/#/tuning?env_name=OLTP&total_ram=256&max_connections=200&pg_version=9.4&share_link=true
+            if($routeParams.share_link != null && $routeParams.share_link == "true")
+                $scope.call_api();
         });
 
 })(angular);
