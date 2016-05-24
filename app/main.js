@@ -36,7 +36,7 @@
                 }
             });
         })
-        
+
         // cache stuff
         .run(['$templateCache', function ($templateCache) {
             $templateCache.removeAll();
@@ -93,6 +93,14 @@
                 $mdSidenav('left').close()
                     .then(function () {
                         // $log.debug("close LEFT is done");
+                    });
+            };
+            $scope.open_menu = function () {
+                $mdSidenav('left').open()
+                    .then(function () {
+                        // $log.debug("close LEFT is done");
+                        $scope.api_data = null;
+                        $scope.show_toolbar = false;
                     });
             };
 

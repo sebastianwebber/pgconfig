@@ -10,21 +10,21 @@
     <title>PGConfig 2.0</title>
 </head>
 
-<body ng-app="PGConfigUI">
-
-    <md-toolbar class="md-accent">
-        <h2 class="md-toolbar-tools">
+<body ng-app="PGConfigUI" layout="column" class="layout layout-column">
+    <div>
+        <md-toolbar class="md-accent">
+            <h2 class="md-toolbar-tools">
                 <span>PostgreSQL Configuration Tool <sup>2.0</sup> </span>
             </h2>
-    </md-toolbar>
-    <div>
-        <div ng-controller="MenuController">
-            <md-tabs md-selected="selectedIndex" md-dynamic-height md-border-bottom flex>
-                <md-tab label="About" ui-sref="about_url"></md-tab>
-                <md-tab label="Tuning Advisor" ui-sref="tuning_url"></md-tab>
-            </md-tabs>
-            <div id="content" ui-view flex> </div>
-        </div>
+        </md-toolbar>
+        <md-tabs md-selected="selectedIndex" md-dynamic-height md-border-bottom flex>
+            <md-tab label="About" ui-sref="about_url"></md-tab>
+            <md-tab label="Tuning Advisor" ui-sref="tuning_url"></md-tab>
+        </md-tabs>
+    </div>
+    <md-content flex ng-controller="MenuController" layout="column" layout-fill>
+        <ui-view></ui-view>
+    </md-content>
     </div>
     <script src="/bower_components/angular/angular.js"></script>
     <script src="/bower_components/angular-aria/angular-aria.js"></script>
