@@ -23,10 +23,8 @@
                 .primaryPalette('blue-grey')
                 .accentPalette('grey');
         })
-
         .controller('MenuController', function ($scope, $location, $log) {
             $scope.selectedIndex = 0;
-
             $scope.$watch('selectedIndex', function (current, old) {
                 switch (current) {
                     case 0:
@@ -38,14 +36,13 @@
                 }
             });
         })
+        
         // cache stuff
         .run(['$templateCache', function ($templateCache) {
             $templateCache.removeAll();
         }])
 
         .controller('TuningController', function ($scope, $location, $log, $http, $resource, $mdSidenav, $stateParams) {
-
-
             $scope.total_memory = 2;
             $scope.max_connections = 100;
             $scope.pg_version = "9.5";
@@ -99,7 +96,6 @@
                     });
             };
 
-
             $scope.call_api = function () {
                 TuningAPI.get({
                     pg_version: $scope.pg_version,
@@ -114,7 +110,6 @@
                     $scope.show_toolbar = true;
                 });
             };
-
 
             // http://localhost:5000/#/tuning?enviroment_name=OLTP&total_ram=256&max_connections=200&pg_version=9.4&share_link=true
             if ($stateParams.share_link != null && $stateParams.share_link == "true")

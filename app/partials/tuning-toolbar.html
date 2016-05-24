@@ -1,0 +1,44 @@
+<md-toolbar ng-show="show_toolbar" class="md-tall md-primary  md-hue-3">
+    <div class="md-toolbar-tools md-toolbar-tools-bottom">
+        <span flex></span>
+        <span layout="row" layout-sm="column">
+            <form>
+            <md-input-container md-no-float style="width: 175px">
+                <label for="i_total_memory">Total Memory (GB)</label>
+                <input required type="number" id="i_total_memory" ng-model="total_memory" min="1" max="10240" />
+                <div ng-messages="projectForm.i_total_memory.$error">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+            
+            <md-input-container md-no-float>
+                <label for="i_max_connections">Max connections</label>
+                <input required type="number" id="i_max_connections" ng-model="max_connections" min="100" max="99999" />
+                <div ng-messages="projectForm.i_max_connections.$error">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+            <md-input-container md-no-float>
+                <label>Enviroment</label>
+                <md-select ng-model="enviroment">
+                    <md-option ng-repeat="d in envFilters" value="{{d.value}}">
+                        {{d.value}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container md-no-float>
+                <label>PostgreSQL version</label>
+                <md-select ng-model="pg_version">
+                    <md-option ng-repeat="version in supported_versions" value="{{version}}">
+                        {{version}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        <md-button class="md-raised md-primary" ng-click="call_api()" aria-label="Learn More">
+          (re)generate
+        </md-button>
+</form>
+        </span>
+    </div>
+    <!--TODO: colocar valores do filtro aqui também. com um botão de (re)gerar-->
+</md-toolbar>

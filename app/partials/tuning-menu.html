@@ -1,0 +1,44 @@
+<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-open="true">
+    <md-toolbar>
+        <h1 class="md-toolbar-tools">Server Options</h1>
+    </md-toolbar>
+    <md-content layout-padding="" flex>
+        <form name="projectForm">
+            <md-input-container style="width: 80%;">
+                <label for="i_total_memory">Total Memory (GB)</label>
+                <input required type="number" id="i_total_memory" ng-model="total_memory" min="1" max="3072" />
+                <div ng-messages="projectForm.i_total_memory.$error">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+            <div class="radioButtondemoBasicUsage">
+                <p>Enviroment:</p>
+                <md-radio-group ng-model="enviroment">
+                    <md-radio-button ng-repeat="d in envFilters" ng-value="d.value" aria-label="{{ d.description }}">
+                        {{ d.value }} <br/>
+                        <span>{{d.description}}</span>
+                    </md-radio-button>
+                </md-radio-group>
+            </div>
+            <md-input-container style="width: 80%;">
+                <label for="i_max_connections">Max connections</label>
+                <input required type="number" id="i_max_connections" ng-model="max_connections" min="100" max="99999" />
+                <div ng-messages="projectForm.i_max_connections.$error">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+            <md-input-container style="width: 80%;">
+                <label>PostgreSQL version</label>
+                <md-select ng-model="pg_version">
+                    <md-option ng-repeat="version in supported_versions" value="{{version}}">
+                        {{version}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-button ng-click="call_api()" class="md-raised md-primary">
+                RUN IT NOW!
+            </md-button>
+        </form>
+    </md-content>
+
+</md-sidenav>
