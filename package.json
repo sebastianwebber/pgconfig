@@ -1,0 +1,31 @@
+{
+  "name": "pgconfig-ui",
+  "version": "2.0.0",
+  "description": "PGConfig.org UI",
+  "main": "index.html",
+  "scripts": {
+    "postinstall": "bower install",
+    "prestart": "npm install",
+    "start": "http-server -a localhost -p 8000 -c-1 ./app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebastianwebber/pgconfig.git"
+  },
+  "keywords": [
+    "pgconfig",
+    "posgtres",
+    "postgresql",
+    "pgsql"
+  ],
+  "author": "Sebastian Webber",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/sebastianwebber/pgconfig/issues"
+  },
+  "homepage": "https://github.com/sebastianwebber/pgconfig#readme",
+  "dependencies": {
+    "bower": "^1.7.9",
+    "http-server": "^0.9.0"
+  }
+}

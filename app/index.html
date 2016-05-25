@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css" />
     <link rel="stylesheet" href="/bower_components/angular-loading-bar/build/loading-bar.min.css" />
-    <link rel="stylesheet" href="pgconfig.css" />
+    <link rel="stylesheet" href="/styles/pgconfig.css" />
     <title>PGConfig 2.0</title>
 </head>
 
-<body ng-app="PGConfigUI" layout="column" class="layout layout-column">
+<body ng-app="pgconfig" layout="column" class="layout layout-column">
     <div ng-hide="true">
         PGConfig: Loading angular stuff...
     </div>
     <div ng-cloak>
-        <ng-include src="'/app/partials/app-toolbar.html'"></ng-include>
+        <ng-include src="'/partials/app-toolbar.html'"></ng-include>
         <md-tabs md-selected="selectedIndex" md-dynamic-height md-border-bottom flex>
             <md-tab label="About" ui-sref="about_url"></md-tab>
             <md-tab label="Tuning Advisor" ui-sref="tuning_url"></md-tab>
         </md-tabs>
     </div>
-    <md-content flex ng-controller="MenuController" layout="column" layout-fill>
+    <md-content flex ng-controller="MainMenuController" layout="column" layout-fill>
         <ui-view></ui-view>
     </md-content>
     </div>
@@ -34,7 +34,18 @@
     <script src="/bower_components/angular-resource/angular-resource.min.js"></script>
     <script src="/bower_components/clipboard/dist/clipboard.min.js"></script>
     <script src="/bower_components/ngclipboard/dist/ngclipboard.min.js"></script>
-    <script src="app/main.js"></script>
+    <!-- GRUNTSTART -->
+    <script src="/factories/mainFactory.js"></script>
+    <script src="/routes/mainRoute.js"></script>
+    <script src="/configuration/mainConfig.js"></script>
+    <script src="/controllers/mainMenuController.js"></script>
+    <script src="/controllers/mainReaderController.js"></script>
+    <script src="/controllers/tuningController.js"></script>
+    <script src="/controllers/dialogController.js"></script>
+    <script src="/controllers/tuningToolbarController.js"></script>
+    <script src="/controllers/mainController.js"></script>
+    <script src="/main.js"></script>
+    <!-- GRUNTEND -->
 </body>
 
 </html>
