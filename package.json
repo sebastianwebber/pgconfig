@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "bower install",
     "prestart": "npm install",
-    "start": "http-server -a ${OPENSHIFT_NODEJS_IP:-localhost} -p ${OPENSHIFT_NODEJS_PORT:-8000} -c-1 ./app"
+    "start": "http-server -a ${OPENSHIFT_NODEJS_IP:=localhost} -p ${OPENSHIFT_NODEJS_PORT:=8000} -c-1 ./app"
   },
   "repository": {
     "type": "git",
