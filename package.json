@@ -2,11 +2,10 @@
   "name": "pgconfig-ui",
   "version": "2.0.0",
   "description": "PGConfig.org UI",
-  "main": "index.html",
   "scripts": {
-    "postinstall": "bower install",
-    "prestart": "npm install",
-    "start": "http-server -a ${OPENSHIFT_NODEJS_IP:=localhost} -p ${OPENSHIFT_NODEJS_PORT:=8000} -c-1 ./app"
+    "postinstall": "HOME=$OPENSHIFT_REPO_DIR bower install || bower install",
+    "prestart": "HOME=$OPENSHIFT_REPO_DIR npm install || npm install",
+    "start": "HOME=$OPENSHIFT_REPO_DIR http-server -a ${OPENSHIFT_NODEJS_IP:=localhost} -p ${OPENSHIFT_NODEJS_PORT:=8000} -c-1 ./app || http-server -a ${OPENSHIFT_NODEJS_IP:=localhost} -p ${OPENSHIFT_NODEJS_PORT:=8000} -c-1 ./app"
   },
   "repository": {
     "type": "git",
