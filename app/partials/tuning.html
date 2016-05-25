@@ -37,7 +37,7 @@
                         </md-option>
                     </md-select>
                 </md-input-container>
-                <md-button ng-click="call_api()" class="md-raised md-primary">
+                <md-button ng-click="make_url()" class="md-raised md-primary">
                     RUN IT NOW!
                 </md-button>
             </form>
@@ -45,16 +45,16 @@
 
     </md-sidenav>
     <md-content>
-        <section>
+        <section  ng-show="show_toolbar">
             <md-subheader class="md-primary">Summary</md-subheader>
             <md-list layout-padding>
-                <md-list-item class="md-3-line"style="margin-bottom: 10px;">
+                <md-list-item class="md-3-line">
                     <div class="md-list-item-text">
                         <p>Sugested tuning for the parameters below:</p>
                         <ul>
                             <li>{{total_memory}}GB of memory avaliable for the database;</li>
                             <li>{{max_connections}} connections are spected;</li>
-                            <li>For {{enviroment}}-base enviroment</li>
+                            <li>For {{enviroment}}-based enviroment;</li>
                             <li>Using PostgreSQL {{pg_version}} version.</li>
                         </ul>
                     </div>

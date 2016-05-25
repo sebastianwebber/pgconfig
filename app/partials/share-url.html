@@ -1,0 +1,28 @@
+<md-dialog aria-label="Mango (Fruit)"  ng-cloak>
+  <form>
+    <md-toolbar class="md-secundary">
+      <div class="md-toolbar-tools">
+        <h2>Share URL</h2>
+        <span flex></span>
+        <md-button class="md-cancel" ng-click="cancel()">
+          Cancel
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <!--<h2>Share URL</h2>-->
+        <p>
+          Copy the URL below to share:
+        </p>
+        <code>{{share_url}}</code>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="cancel()" ngclipboard data-clipboard-text="{{share_url}}">
+       Copy to clipboard
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

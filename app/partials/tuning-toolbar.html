@@ -1,10 +1,13 @@
-<md-toolbar ng-show="show_toolbar">
+<md-toolbar ng-controller="TuningToolbarController" ng-show="show_toolbar">
     <div class="md-toolbar-tools md-toolbar-tools-bottom">
         <span flex></span>
         <span layout="row" layout-sm="column">
-                    <md-button class="md-raised md-warn" ng-click="open_menu()" aria-label="Learn More">
-          (re)generate
-        </md-button>
+            <md-button class="md-raised md-warn" ng-click="open_menu()" aria-label="Learn More">
+            (re)generate
+            </md-button>
+            <md-button class="md-raised md-secudary" ng-click="showAdvanced($event)" aria-label="Learn More">
+            share!
+            </md-button>
         </span>
     </div>
 </md-toolbar>

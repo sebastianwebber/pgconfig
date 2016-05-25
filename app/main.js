@@ -1,6 +1,6 @@
 (function (angular, undefined) {
     "use strict";
-    angular.module('PGConfigUI', ['ngMaterial', 'angular-loading-bar', 'ngResource', 'ui.router'])
+    angular.module('PGConfigUI', ['ngMaterial', 'angular-loading-bar', 'ngResource', 'ui.router', 'ngclipboard'])
         .config(function ($stateProvider, $urlRouterProvider) {
             // $urlRouterProvider.otherwise("/about");
             $stateProvider
@@ -42,7 +42,7 @@
             $templateCache.removeAll();
         }])
 
-        .controller('TuningController', function ($scope, $location, $log, $http, $resource, $mdSidenav, $stateParams) {
+        .controller('TuningController', function ($scope, $location, $log, $http, $resource, $mdSidenav, $stateParams, $state) {
             $scope.total_memory = 2;
             $scope.max_connections = 100;
             $scope.pg_version = "9.5";
@@ -103,6 +103,16 @@
                         $scope.show_toolbar = false;
                     });
             };
+            
+            $scope.make_url = function() {
+                $state.go('.', {
+                    enviroment_name: $scope.enviroment,
+                    total_ram : $scope.total_memory,
+                    max_connections : $scope.max_connections,
+                    pg_version : $scope.pg_version,
+                    share_link : true
+                });
+            };
 
             $scope.call_api = function () {
                 TuningAPI.get({
@@ -118,10 +128,68 @@
                     $scope.show_toolbar = true;
                 });
             };
-
-            // http://localhost:5000/#/tuning?enviroment_name=OLTP&total_ram=256&max_connections=200&pg_version=9.4&share_link=true
+            
             if ($stateParams.share_link != null && $stateParams.share_link == "true")
                 $scope.call_api();
-        });
+        })
+
+
+        .controller('TuningToolbarController', function ($scope, $location, $log, $mdDialog, $mdMedia) {
+            $scope.status = '  ';
+            $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
+            $scope.share_url = function (ev) {
+                // Appending dialog to document.body to cover sidenav in docs app
+                // Modal dialogs should fully cover application
+                // to prevent interaction outside of dialog
+                $mdDialog.show(
+                    $mdDialog.alert()
+                        .parent(angular.element(document.querySelector('#popupContainer')))
+                        .clickOutsideToClose(false)
+                        .title('Share URL')
+                        .textContent('You can specify some description text in here.')
+                        .ariaLabel('Alert Dialog Demo')
+                        .ok('Got it!')
+                        .targetEvent(ev)
+                );
+            };
+
+            $scope.showAdvanced = function (ev) {
+                var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
+                $mdDialog.show({
+                    controller: DialogController,
+                    templateUrl: 'app/partials/share-url.html',
+                    parent: angular.element(document.body),
+                    targetEvent: ev,
+                    clickOutsideToClose: false,
+                    fullscreen: useFullScreen
+                })
+                    .then(function (answer) {
+                        $scope.status = 'You said the information was "' + answer + '".';
+                    }, function () {
+                        $scope.status = 'You cancelled the dialog.';
+                    });
+                $scope.$watch(function () {
+                    return $mdMedia('xs') || $mdMedia('sm');
+                }, function (wantsFullScreen) {
+                    $scope.customFullscreen = (wantsFullScreen === true);
+                });
+            };
+        })
+        ;
+
+    function DialogController($scope, $mdDialog,$location) {
+        $scope.hide = function () {
+            $mdDialog.hide();
+        };
+        $scope.cancel = function () {
+            $mdDialog.cancel();
+        };
+        $scope.answer = function (answer) {
+            $mdDialog.hide(answer);
+        };
+        
+        // TODO: Review generation of this fucking URL
+        $scope.share_url = $location.absUrl();
+    };
 
 })(angular);
