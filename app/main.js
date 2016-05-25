@@ -17,6 +17,12 @@
                     templateUrl: "app/partials/about.html",
                 });
         })
+        .constant('config', {
+            appName: 'PGConfigUI',
+            appFullName: 'PostgreSQL Configuration Tool',
+            appVersion: '2.0 beta',
+            apiURL: 'http://api.pgconfig.org/v1'
+        })
         .config(function ($mdThemingProvider) {
             $mdThemingProvider
                 .theme('default')
@@ -37,14 +43,10 @@
             });
         })
 
-        .factory('TuningAPI', function ($resource) {
-            var resource = $resource('http://api.pgconfig.org/v1/tuning/get-config', {}, {
+        .factory('TuningAPI', function ($resource, config) {
+            var resource = $resource(config.apiURL + '/tuning/get-config', {}, {
                 get: {
                     method: "get",
-                    // isArray: false,
-                    // headers: {
-                    //     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-                    // } // ignored
                 },
                 get_simple: {
                     method: "get",
@@ -156,6 +158,10 @@
                 $scope.call_api();
         })
 
+        .controller('HeaderController', function(config, $scope){
+            $scope.app_version = config.appVersion;
+            $scope.app_desc = config.appFullName;
+        })
 
         .controller('TuningToolbarController', function ($scope, $location, $log, $mdDialog, $mdMedia) {
             $scope.status = '  ';
