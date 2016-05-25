@@ -37,12 +37,35 @@
             });
         })
 
+        .factory('TuningAPI', function ($resource) {
+            var resource = $resource('http://api.pgconfig.org/v1/tuning/get-config', {}, {
+                get: {
+                    method: "get",
+                    // isArray: false,
+                    // headers: {
+                    //     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                    // } // ignored
+                },
+                get_simple: {
+                    method: "get",
+                    isArray: false,
+                    headers: {
+                        'Content-Type': 'text/plain; charset=UTF-8'
+                    },
+                    transformResponse: function (data) {
+                        return { collection: data }
+                    }
+                }
+            });
+            return resource;
+        })
+
         // cache stuff
         .run(['$templateCache', function ($templateCache) {
             $templateCache.removeAll();
         }])
 
-        .controller('TuningController', function ($scope, $location, $log, $http, $resource, $mdSidenav, $stateParams, $state) {
+        .controller('TuningController', function ($scope, $location, $log, $http, $resource, $mdSidenav, $stateParams, $state, TuningAPI) {
             $scope.total_memory = 2;
             $scope.max_connections = 100;
             $scope.pg_version = "9.5";
@@ -87,7 +110,7 @@
                 },
             ];
 
-            var TuningAPI = $resource("http://api.pgconfig.org/v1/tuning/get-config", {});
+            // var TuningAPI = $resource("http://api.pgconfig.org/v1/tuning/get-config", {});
 
             $scope.close = function () {
                 $mdSidenav('left').close()
@@ -103,14 +126,14 @@
                         $scope.show_toolbar = false;
                     });
             };
-            
-            $scope.make_url = function() {
+
+            $scope.make_url = function () {
                 $state.go('.', {
                     enviroment_name: $scope.enviroment,
-                    total_ram : $scope.total_memory,
-                    max_connections : $scope.max_connections,
-                    pg_version : $scope.pg_version,
-                    share_link : true
+                    total_ram: $scope.total_memory,
+                    max_connections: $scope.max_connections,
+                    pg_version: $scope.pg_version,
+                    share_link: true
                 });
             };
 
@@ -128,7 +151,7 @@
                     $scope.show_toolbar = true;
                 });
             };
-            
+
             if ($stateParams.share_link != null && $stateParams.share_link == "true")
                 $scope.call_api();
         })
@@ -153,7 +176,24 @@
                 );
             };
 
-            $scope.showAdvanced = function (ev) {
+            $scope.showExportWindow = function (ev) {
+                var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
+                $mdDialog.show({
+                    controller: DialogController,
+                    templateUrl: 'app/partials/export.html',
+                    parent: angular.element(document.body),
+                    targetEvent: ev,
+                    clickOutsideToClose: false,
+                    fullscreen: useFullScreen
+                });
+                $scope.$watch(function () {
+                    return $mdMedia('xs') || $mdMedia('sm');
+                }, function (wantsFullScreen) {
+                    $scope.customFullscreen = (wantsFullScreen === true);
+                });
+            };
+
+            $scope.showShareURL = function (ev) {
                 var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
                 $mdDialog.show({
                     controller: DialogController,
@@ -162,12 +202,7 @@
                     targetEvent: ev,
                     clickOutsideToClose: false,
                     fullscreen: useFullScreen
-                })
-                    .then(function (answer) {
-                        $scope.status = 'You said the information was "' + answer + '".';
-                    }, function () {
-                        $scope.status = 'You cancelled the dialog.';
-                    });
+                });
                 $scope.$watch(function () {
                     return $mdMedia('xs') || $mdMedia('sm');
                 }, function (wantsFullScreen) {
@@ -177,7 +212,7 @@
         })
         ;
 
-    function DialogController($scope, $mdDialog,$location) {
+    function DialogController($scope, $mdDialog, $location, $resource, $stateParams, TuningAPI) {
         $scope.hide = function () {
             $mdDialog.hide();
         };
@@ -187,9 +222,46 @@
         $scope.answer = function (answer) {
             $mdDialog.hide(answer);
         };
-        
+
         // TODO: Review generation of this fucking URL
         $scope.share_url = $location.absUrl();
+
+        $scope.export_format = "alter_system"
+        $scope.supported_formats = [
+            {
+                value: "alter_system",
+                description: 'ALTER SYSTEM command',
+            },
+            {
+                value: "conf",
+                description: 'UNIX-like config file',
+            },
+        ];
+
+        if ($stateParams.total_ram != null)
+            $scope.total_memory = Number($stateParams.total_ram);
+        if ($stateParams.max_connections != null)
+            $scope.max_connections = Number($stateParams.max_connections);
+        if ($stateParams.pg_version != null)
+            $scope.pg_version = $stateParams.pg_version;
+        if ($stateParams.enviroment_name != null)
+            $scope.enviroment = $stateParams.enviroment_name;
+
+        $scope.call_api = function () {
+            TuningAPI.get_simple({
+                pg_version: $scope.pg_version,
+                total_ram: $scope.total_memory + "GB",
+                max_connections: $scope.max_connections,
+                env_name: $scope.enviroment,
+                format: $scope.export_format,
+                // show_doc: false
+            }, function (apiResult) {
+                $scope.code_output = apiResult.collection;
+                // $log.debug($scope.code_output);
+                // $scope.close();
+                // $scope.show_toolbar = true;
+            });
+        };
     };
 
 })(angular);

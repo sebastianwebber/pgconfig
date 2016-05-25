@@ -1,0 +1,32 @@
+<md-dialog aria-label="Export" ng-cloak>
+  <form>
+    <md-toolbar class="md-secundary">
+      <div class="md-toolbar-tools">
+        <h2>Export</h2>
+        <span flex></span>
+        <md-button class="md-cancel" ng-click="cancel()">
+          Cancel
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content" layout="column">
+          <md-input-container>
+            <label>Format</label>
+            <md-select ng-model="export_format" ng-change="call_api()">
+              <md-option ng-repeat="format in supported_formats" value="{{format.value}}">
+                {{format.description}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+          <pre style="width: 600px;">{{code_output}}</pre>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="cancel()" ngclipboard data-clipboard-text="{{code_output}}">
+        Copy to clipboard
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
