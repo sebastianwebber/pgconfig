@@ -5,8 +5,9 @@
   "scripts": {
     "postinstall": "HOME=$OPENSHIFT_REPO_DIR bower install || bower install",
     "prestart": "HOME=$OPENSHIFT_REPO_DIR npm install || npm install",
-    "start": "HOME=$OPENSHIFT_REPO_DIR http-server -a ${OPENSHIFT_NODEJS_IP:=localhost} -p ${OPENSHIFT_NODEJS_PORT:=8000} -c-1 ./app || http-server -a ${OPENSHIFT_NODEJS_IP:=localhost} -p ${OPENSHIFT_NODEJS_PORT:=8000} -c-1 ./app"
+    "start": "HOME=$OPENSHIFT_REPO_DIR node server.js || node server.js"
   },
+  "main": "server.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sebastianwebber/pgconfig.git"
@@ -24,7 +25,10 @@
   },
   "homepage": "https://github.com/sebastianwebber/pgconfig#readme",
   "dependencies": {
+    "body-parser": "^1.15.1",
     "bower": "^1.7.9",
-    "http-server": "^0.9.0"
+    "express": "^4.13.4",
+    "method-override": "^2.3.6",
+    "morgan": "^1.7.0"
   }
 }
