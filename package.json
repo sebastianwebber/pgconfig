@@ -3,9 +3,9 @@
   "version": "2.0.0",
   "description": "PGConfig.org UI",
   "scripts": {
-    "postinstall": "HOME=$OPENSHIFT_REPO_DIR bower install || bower install",
-    "prestart": "HOME=$OPENSHIFT_REPO_DIR npm install || npm install",
-    "start": "HOME=$OPENSHIFT_REPO_DIR node server.js || node server.js"
+    "postinstall": "HOME=$HOME/app-root/runtime bower install",
+    "prestart": "npm install",
+    "start": "node server.js"
   },
   "main": "server.js",
   "repository": {
