@@ -20,8 +20,8 @@ function TuningToolbarController($scope, $location, $log, $mdDialog, $mdMedia) {
     $scope.showExportWindow = function (ev) {
         var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
         $mdDialog.show({
-            controller: DialogController,
-            templateUrl: 'partials/export.html',
+            controller: DialogExportController,
+            templateUrl: 'partials/tuning-export.html',
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose: false,

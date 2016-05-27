@@ -19,5 +19,5 @@
 ## BETA TODO LIST:
 - show Linux kernel tuning output
 - on tuning, fix toolbar at the top
-- on tuning, export option, get the exported values when window open
-- start with the tuning tab, not with the about tab
+- ~~on tuning, export option, get the exported values when window open~~
+- ~~start with the tuning tab, not with the about tab~~
