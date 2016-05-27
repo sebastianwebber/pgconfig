@@ -25,3 +25,5 @@ Temporary Items
 bower_components
 
 _site/
+dist/
+.tmp/
