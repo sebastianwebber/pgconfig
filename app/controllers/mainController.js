@@ -4,7 +4,6 @@ angular.module('pgconfig.controllers',
         'ngclipboard',
         'ngMaterial',
     ])
-    .controller('MainMenuController', MainMenuController)
     .controller('MainHeaderController', MainHeaderController)
     .controller('TuningController', TuningController)
     .controller('TuningToolbarController', TuningToolbarController);
