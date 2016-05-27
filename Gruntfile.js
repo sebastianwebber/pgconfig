@@ -3,7 +3,18 @@ module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
 
     grunt.config.init({
+        bower: {
+            install: {
+                //just run 'grunt bower:install' and you'll see files from your Bower packages in lib directory
+                options: {
+                    production: true,
+                    targetDir: './app/bower_components', 
+                    install: true,
+                    verbose: false,
+                }
 
+            }
+        },
         uglify: {
             options: {
                 mangle: false
@@ -20,7 +31,7 @@ module.exports = function (grunt) {
                 options: {
                     module: 'pgconfig.templates',
                     standalone: true,
-                    usemin: 'assets/js/app.js',
+                    usemin: 'assets/js/app.min.js',
                     prefix: '/',
                     htmlmin: {
                         collapseBooleanAttributes: true,
@@ -75,25 +86,20 @@ module.exports = function (grunt) {
                 src: './app/index.html',
                 dest: './dist/index.html'
             },
-            // templates: {
-
-            //     src: '.tmp/templates.js',
-            //     dest: 'dist/assets/js/templates.js'
-            // }
         },
     });
 
     grunt.registerTask('default', [
         'clean',
+        'bower',
         'copy:html',
         'useminPrepare',
         'ngtemplates',
         'concat',
         'uglify',
-        // 'concat:dist',
-        // 'uglify:templates',
         'cssmin',
         'rev',
         'usemin',
+        'clean:1',
     ]);
 }
