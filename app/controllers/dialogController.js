@@ -1,4 +1,4 @@
-function DialogController($scope, $mdDialog, $location, $resource, $stateParams, tuningAPIFactory) {
+function DialogController($scope, $mdDialog, $location, $resource, $stateParams, tuningApiFactory) {
     $scope.hide = function () {
         $mdDialog.hide();
     };
@@ -34,7 +34,7 @@ function DialogController($scope, $mdDialog, $location, $resource, $stateParams,
         $scope.enviroment = $stateParams.enviroment_name;
 
     $scope.call_api = function () {
-        tuningAPIFactory.get_simple({
+        tuningApiFactory.get_simple({
             pg_version: $scope.pg_version,
             total_ram: $scope.total_memory + "GB",
             max_connections: $scope.max_connections,

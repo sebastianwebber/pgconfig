@@ -1,4 +1,4 @@
-function TuningController($scope, $location, $log, $http, $resource, $mdSidenav, $stateParams, $state, tuningAPIFactory) {
+function TuningController($scope, $location, $log, $http, $resource, $mdSidenav, $stateParams, $state, tuningApiFactory) {
     $scope.total_memory = 2;
     $scope.max_connections = 100;
     $scope.pg_version = "9.5";
@@ -69,7 +69,7 @@ function TuningController($scope, $location, $log, $http, $resource, $mdSidenav,
     };
 
     $scope.call_api = function () {
-        tuningAPIFactory.get({
+        tuningApiFactory.get({
             pg_version: $scope.pg_version,
             total_ram: $scope.total_memory + "GB",
             max_connections: $scope.max_connections,

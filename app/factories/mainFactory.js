@@ -1,5 +1,5 @@
 angular.module('pgconfig.factories',[])
-    .factory('tuningAPIFactory', function ($resource, config) {
+    .factory('tuningApiFactory', function ($resource, config) {
         var resource = $resource(config.apiURL + '/tuning/get-config', {}, {
             get: {
                 method: "get",
