@@ -3,12 +3,17 @@ module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
 
     grunt.config.init({
+        dirs: {
+            source: 'app',
+            output: 'dist',
+            temp: '.tmp'
+        },
         bower: {
             install: {
                 //just run 'grunt bower:install' and you'll see files from your Bower packages in lib directory
                 options: {
                     production: true,
-                    targetDir: './app/bower_components', 
+                    targetDir: '<%= dirs.source %>/bower_components',
                     install: true,
                     verbose: false,
                 }
@@ -22,12 +27,12 @@ module.exports = function (grunt) {
         },
         ngtemplates: {
             app: {
-                cwd: 'app',
+                cwd: '<%= dirs.source %>',
                 src: [
                     'partials/*.html',
                     'partials/tuning/*.html'
                 ],
-                dest: '.tmp/templates.js',
+                dest: '<%= dirs.temp %>/templates.js',
                 options: {
                     module: 'pgconfig.templates',
                     standalone: true,
@@ -55,16 +60,16 @@ module.exports = function (grunt) {
                     encoding: 'utf8'
                 },
                 src: [
-                    'dist/assets/js/*.js',
-                    'dist/assets/css/*.css',
+                    '<%= dirs.output %>/assets/js/*.js',
+                    '<%= dirs.output %>/assets/css/*.css',
                 ]
             }
         },
         useminPrepare: {
             html: 'app/index.html',
             options: {
-                dest: 'dist',
-                staging: '.tmp',
+                dest: '<%= dirs.output %>',
+                staging: '<%= dirs.temp %>',
                 flow: {
                     html: {
                         steps: {
@@ -75,7 +80,7 @@ module.exports = function (grunt) {
                 }
             }
         },
-        clean: ['dist', '.tmp'],
+        clean: ['<%= dirs.output %>', '<%= dirs.temp %>'],
         usemin: {
             html: [
                 'dist/index.html'
@@ -83,8 +88,8 @@ module.exports = function (grunt) {
         },
         copy: {
             html: {
-                src: './app/index.html',
-                dest: './dist/index.html'
+                src: '<%= dirs.source %>/index.html',
+                dest: '<%= dirs.output %>/index.html',
             },
         },
     });
