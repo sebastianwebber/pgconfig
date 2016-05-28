@@ -5,20 +5,23 @@
 - ~~add syslog configuration~~
 
 ## Interface stuff
-
-- Implement localization support. 
 - ~~share button to display the URL~~
 - ~~use material design~~
 - ~~use alter system when version greater than 9.4~~
 - ~~Migrate all stuff to angularjs~~
+- Implement localization support. 
 
 ## Others
 
 - ~~Split data logic and interface.~~
 
 ## BETA TODO LIST:
-- show Linux kernel tuning output
-- on tuning, fix toolbar at the top
 - ~~on tuning, export option, get the exported values when window open~~
 - ~~start with the tuning tab, not with the about tab~~
 - ~~make grunt compile css and js to load pages faster~~
+- add a graph to explain memory parameters
+- create a box expand doc if clicked
+- on tuning, fix toolbar at the top
+- add syslog configuration
+- add pgbadger configuration
+- show Linux kernel tuning output
