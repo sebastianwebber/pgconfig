@@ -7,7 +7,7 @@ module.exports = function (grunt) {
             source: 'src',
             output: 'dist',
             temp: '.tmp',
-            template_dir: 'app/partials'
+            template_dir: 'app/templates'
         },
         bower: {
             install: {

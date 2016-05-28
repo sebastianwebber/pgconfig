@@ -12,7 +12,7 @@
     <md-dialog-content>
       <div class="md-dialog-content" layout="column">
           <md-input-container>
-            <label>Select the Format:</label>
+            <label>Select the format</label>
             <md-select ng-model="export_format" ng-change="call_api()">
               <md-option ng-repeat="format in supported_formats" value="{{format.value}}">
                 {{format.description}}

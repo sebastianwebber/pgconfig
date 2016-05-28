@@ -3,11 +3,11 @@ angular.module('pgconfig.routes', ['ui.router'])
         $stateProvider
             .state('tuning_url', {
                 url: "/tuning?total_ram&max_connections&enviroment_name&pg_version&share_link",
-                templateUrl: "/app/partials/tuning/main.html"
+                templateUrl: "/app/templates/tuning/main.html"
             })
             .state('about_url', {
                 url: "/about",
-                templateUrl: "/app/partials/about.html"
+                templateUrl: "/app/templates/about.html"
             });
             
         $urlRouterProvider.otherwise('/tuning');
