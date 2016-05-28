@@ -19,7 +19,8 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "dist",
+    ".tmp"
   ],
   "dependencies": {
     "angular-loading-bar": "^0.9.0",
