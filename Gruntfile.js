@@ -51,6 +51,31 @@ module.exports = function (grunt) {
                     }
 
                 }
+            },
+
+            dev: {
+                cwd: '<%= dirs.source %>',
+                src: [
+                    '<%= dirs.template_dir %>/*.html',
+                    '<%= dirs.template_dir %>/tuning/*.html'
+                ],
+                dest: '<%= dirs.temp %>/templates.js',
+                options: {
+                    module: 'pgconfig.templates',
+                    standalone: true,
+                    prefix: '/',
+                    htmlmin: {
+                        collapseBooleanAttributes: true,
+                        collapseWhitespace: true,
+                        removeAttributeQuotes: true,
+                        removeComments: true,
+                        removeEmptyAttributes: true,
+                        removeRedundantAttributes: true,
+                        removeScriptTypeAttributes: true,
+                        removeStyleLinkTypeAttributes: true
+                    }
+
+                }
             }
         },
         rev: {
@@ -92,10 +117,6 @@ module.exports = function (grunt) {
                 src: '<%= dirs.source %>/index.html',
                 dest: '<%= dirs.output %>/index.html',
             },
-            assets: {
-                src: '<%= dirs.temp %>/assets',
-                dest: '<%= dirs.output %>/assets',
-            },
         },
         concat: {
             options: {
@@ -109,33 +130,50 @@ module.exports = function (grunt) {
                         return '\n/* Source file: ' + filepath + ' */\n' + src;
                 },
             },
-            js: {
+            vendorjs: {
                 src: [
-                    '<%= dirs.output %>/assets/js/app.min.js',
-                    '<%= dirs.temp %>/*.js',
+                    // '<%= dirs.output %>/assets/js/app.min.js',
+                    '<%= dirs.source %>/bower_components/ngclipboard/dist/ngclipboard.js',
+                ],
+                dest: '<%= dirs.output %>/assets/js/vendor.min.js'
+            },
+            appjs: {
+                src: [
+                    // '<%= dirs.output %>/assets/js/app.min.js',
+                    '<%= dirs.source %>/app/*.js',
+                    '<%= dirs.source %>/app/**/*.js',
+                    '<%= dirs.temp %>/templates.js',
                 ],
                 dest: '<%= dirs.output %>/assets/js/app.min.js'
+            },
+            css: {
+                options: {
+                    banner: '',
+                },
+                src: [
+                    '<%= dirs.source %>/app/styles/*.css',
+                    '<%= dirs.source %>/bower_components/angular-loading-bar/build/loading-bar.css'
+                ],
+                dest: '<%= dirs.output %>/assets/css/style.min.css'
             }
 
         },
         watch: {
             dev: {
                 files: [
-                    'Gruntfile.js', 
-                    '<%= dirs.source %>/app/**.js', 
+                    'Gruntfile.js',
+                    '<%= dirs.source %>/app/**.js',
                     '<%= dirs.source %>/**.html',
                     '<%= dirs.source %>/styles/*.css'
                 ],
                 tasks: [
                     'clean',
-                    // 'bower',
                     'copy:html',
                     'useminPrepare',
-                    'ngtemplates',
-                    'concat',
-                    'uglify',
-                    'cssmin',
-                    // 'rev',
+                    'ngtemplates:dev',
+                    'concat:appjs',
+                    'concat:vendorjs',
+                    'concat:css',
                     'usemin',
                     'clean:1',
                 ],
@@ -144,6 +182,15 @@ module.exports = function (grunt) {
                 }
             },
         },
+        connect: {
+            server: {
+                options: {
+                    hostname: 'localhost',
+                    port: 8000,
+                    base: '<%= dirs.output %>'
+                }
+            }
+        }
     });
 
     grunt.registerTask('default', [
@@ -151,7 +198,7 @@ module.exports = function (grunt) {
         'bower',
         'copy:html',
         'useminPrepare',
-        'ngtemplates',
+        'ngtemplates:app',
         'concat',
         'uglify',
         'cssmin',
@@ -159,4 +206,6 @@ module.exports = function (grunt) {
         'usemin',
         'clean:1',
     ]);
+    
+    grunt.registerTask('dev', [ 'bower', 'connect:server', 'watch:dev' ]);
 }

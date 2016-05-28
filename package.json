@@ -45,5 +45,6 @@
     "load-grunt-tasks": "^3.5.0"
   },
   "devDependencies": {
+    "grunt-contrib-connect": "^1.0.2"
   }
 }
