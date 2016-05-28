@@ -21,6 +21,7 @@
 - ~~make grunt compile css and js to load pages faster~~
 - add a graph to explain memory parameters
 - create a box expand doc if clicked
+- add new details about parameters
 - on tuning, fix toolbar at the top
 - add syslog configuration
 - add pgbadger configuration
