@@ -4,13 +4,10 @@ module.exports = function (grunt) {
 
     grunt.config.init({
         dirs: {
-            source: 'app',
+            source: 'src',
             output: 'dist',
             temp: '.tmp',
-            template_files: [
-                'partials/*.html',
-                'partials/tuning/*.html'
-            ]
+            template_dir: 'app/partials'
         },
         bower: {
             install: {
@@ -32,7 +29,10 @@ module.exports = function (grunt) {
         ngtemplates: {
             app: {
                 cwd: '<%= dirs.source %>',
-                src: '<%= dirs.template_files %>',
+                src: [
+                    '<%= dirs.template_dir %>/*.html',
+                    '<%= dirs.template_dir %>/tuning/*.html'
+                ],
                 dest: '<%= dirs.temp %>/templates.js',
                 options: {
                     module: 'pgconfig.templates',
@@ -67,7 +67,7 @@ module.exports = function (grunt) {
             }
         },
         useminPrepare: {
-            html: 'app/index.html',
+            html: '<%= dirs.source %>/index.html',
             options: {
                 dest: '<%= dirs.output %>',
                 staging: '<%= dirs.temp %>',

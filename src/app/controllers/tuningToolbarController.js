@@ -21,7 +21,7 @@ function TuningToolbarController($scope, $location, $log, $mdDialog, $mdMedia) {
         var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
         $mdDialog.show({
             controller: DialogExportController,
-            templateUrl: '/partials/tuning/export.html',
+            templateUrl: '/app/partials/tuning/export.html',
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose: false,
@@ -38,7 +38,7 @@ function TuningToolbarController($scope, $location, $log, $mdDialog, $mdMedia) {
         var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
         $mdDialog.show({
             controller: DialogController,
-            templateUrl: '/partials/tuning/share-url.html',
+            templateUrl: '/app/partials/tuning/share-url.html',
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose: false,
