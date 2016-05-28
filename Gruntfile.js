@@ -92,6 +92,10 @@ module.exports = function (grunt) {
                 src: '<%= dirs.source %>/index.html',
                 dest: '<%= dirs.output %>/index.html',
             },
+            assets: {
+                src: '<%= dirs.temp %>/assets',
+                dest: '<%= dirs.output %>/assets',
+            },
         },
         concat: {
             options: {
@@ -105,7 +109,41 @@ module.exports = function (grunt) {
                         return '\n/* Source file: ' + filepath + ' */\n' + src;
                 },
             },
-        }
+            js: {
+                src: [
+                    '<%= dirs.output %>/assets/js/app.min.js',
+                    '<%= dirs.temp %>/*.js',
+                ],
+                dest: '<%= dirs.output %>/assets/js/app.min.js'
+            }
+
+        },
+        watch: {
+            dev: {
+                files: [
+                    'Gruntfile.js', 
+                    '<%= dirs.source %>/app/**.js', 
+                    '<%= dirs.source %>/**.html',
+                    '<%= dirs.source %>/styles/*.css'
+                ],
+                tasks: [
+                    'clean',
+                    // 'bower',
+                    'copy:html',
+                    'useminPrepare',
+                    'ngtemplates',
+                    'concat',
+                    'uglify',
+                    'cssmin',
+                    // 'rev',
+                    'usemin',
+                    'clean:1',
+                ],
+                options: {
+                    atBegin: true
+                }
+            },
+        },
     });
 
     grunt.registerTask('default', [
