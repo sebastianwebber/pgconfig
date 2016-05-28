@@ -6,7 +6,11 @@ module.exports = function (grunt) {
         dirs: {
             source: 'app',
             output: 'dist',
-            temp: '.tmp'
+            temp: '.tmp',
+            template_files: [
+                'partials/*.html',
+                'partials/tuning/*.html'
+            ]
         },
         bower: {
             install: {
@@ -28,10 +32,7 @@ module.exports = function (grunt) {
         ngtemplates: {
             app: {
                 cwd: '<%= dirs.source %>',
-                src: [
-                    'partials/*.html',
-                    'partials/tuning/*.html'
-                ],
+                src: '<%= dirs.template_files %>',
                 dest: '<%= dirs.temp %>/templates.js',
                 options: {
                     module: 'pgconfig.templates',
@@ -92,6 +93,19 @@ module.exports = function (grunt) {
                 dest: '<%= dirs.output %>/index.html',
             },
         },
+        concat: {
+            options: {
+                // Replace all 'use strict' statements in the code with a single one at the top
+                banner: "'use strict';\n",
+                process: function (src, filepath) {
+                    if (filepath.toLowerCase().indexOf('.js') != -1)
+                        return '\n// Source file: ' + filepath + ' \n' +
+                            src.replace(/(^|\n)[ \t]*('use strict'|"use strict");?\s*/g, '$1');
+                    else
+                        return '\n/* Source file: ' + filepath + ' */\n' + src;
+                },
+            },
+        }
     });
 
     grunt.registerTask('default', [
