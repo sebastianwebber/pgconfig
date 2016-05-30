@@ -1,4 +1,16 @@
-function TuningToolbarController($scope, $location, $log, $mdDialog, $mdMedia) {
+function TuningToolbarController($scope, $location, $log, $mdDialog, $mdMedia, tuningToolbarService) {
+
+    $scope.show_toolbar = false;
+
+    $scope.$on('toolbar:updated', function (event, data) {
+        $scope.show_toolbar = data;
+    });
+    
+    $scope.open_menu = function() {
+      tuningToolbarService.toolbar.hide();
+      tuningToolbarService.menu.show('left');  
+    };
+
     $scope.status = '  ';
     $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
     $scope.share_url = function (ev) {

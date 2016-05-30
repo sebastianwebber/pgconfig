@@ -1,4 +1,5 @@
-function TuningController($scope, $location, $log, $http, $resource, $mdSidenav, $stateParams, $state, tuningApiFactory) {
+function TuningController($scope, $mdSidenav, $stateParams, $state, tuningApiService, tuningToolbarService) {
+    tuningToolbarService.toolbar.hide();
     $scope.total_memory = 2;
     $scope.max_connections = 100;
     $scope.pg_version = "9.5";
@@ -22,7 +23,7 @@ function TuningController($scope, $location, $log, $http, $resource, $mdSidenav,
         "9.1",
     ];
 
-    $scope.show_toolbar = false;
+    // $scope.show_toolbar = false;
 
     $scope.envFilters = [
         {
@@ -44,19 +45,13 @@ function TuningController($scope, $location, $log, $http, $resource, $mdSidenav,
     ];
 
     $scope.close = function () {
-        $mdSidenav('left').close()
-            .then(function () {
-                // $log.debug("close LEFT is done");
-            });
+        tuningToolbarService.menu.hide('left');
     };
-    $scope.open_menu = function () {
-        $mdSidenav('left').open()
-            .then(function () {
-                // $log.debug("close LEFT is done");
-                $scope.api_data = null;
-                $scope.show_toolbar = false;
-            });
-    };
+
+
+    $scope.$on('menu:opened', function (event, data) {
+        $scope.api_data = null;
+    });
 
     $scope.make_url = function () {
         $state.go('.', {
@@ -69,7 +64,7 @@ function TuningController($scope, $location, $log, $http, $resource, $mdSidenav,
     };
 
     $scope.call_api = function () {
-        tuningApiFactory.get({
+        tuningApiService.get({
             pg_version: $scope.pg_version,
             total_ram: $scope.total_memory + "GB",
             max_connections: $scope.max_connections,
@@ -79,10 +74,14 @@ function TuningController($scope, $location, $log, $http, $resource, $mdSidenav,
         }, function (apiResult) {
             $scope.api_data = apiResult.data;
             $scope.close();
-            $scope.show_toolbar = true;
+            tuningToolbarService.toolbar.show();
         });
     };
 
     if ($stateParams.share_link != null && $stateParams.share_link == "true")
         $scope.call_api();
+
+    $scope.$on("$destroy", function () {
+        tuningToolbarService.toolbar.hide();
+    });
 };
