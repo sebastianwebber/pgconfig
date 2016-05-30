@@ -1,5 +1,5 @@
-angular.module('pgconfig.factories',[])
-    .factory('tuningApiFactory', function ($resource, config) {
+angular.module('pgconfig.services', [])
+    .factory('tuningApiService', function ($resource, config) {
         var resource = $resource(config.apiURL + '/tuning/get-config', {}, {
             get: {
                 method: "get",
@@ -16,4 +16,6 @@ angular.module('pgconfig.factories',[])
             }
         });
         return resource;
-    });
+    })
+    .service('tuningToolbarService', TuningToolbarService);
+
