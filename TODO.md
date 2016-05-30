@@ -19,10 +19,10 @@
 - ~~on tuning, export option, get the exported values when window open~~
 - ~~start with the tuning tab, not with the about tab~~
 - ~~make grunt compile css and js to load pages faster~~
+- ~~on tuning, fix toolbar at the top~~
 - add a graph to explain memory parameters
 - create a box expand doc if clicked
 - add new details about parameters
-- on tuning, fix toolbar at the top
 - add syslog configuration
 - add pgbadger configuration
 - show Linux kernel tuning output
