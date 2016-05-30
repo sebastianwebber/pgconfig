@@ -1,4 +1,4 @@
-function DialogController($scope, $mdDialog, $location, $resource, $stateParams, tuningApiFactory) {
+function DialogController($scope, $mdDialog, $location, $resource, $stateParams, tuningApiService) {
     $scope.hide = function () {
         $mdDialog.hide();
     };

@@ -3,7 +3,7 @@
     angular.module('pgconfig', [
         'angular-loading-bar',
         'pgconfig.controllers',
-        'pgconfig.factories',
+        'pgconfig.services',
         'pgconfig.routes',
         'pgconfig.config',
         'pgconfig.templates',

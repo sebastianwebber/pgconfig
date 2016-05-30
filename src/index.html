@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.9/angular-material.min.css"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.9/angular-material.min.css" />
     <!-- build:css assets/css/style.min.css -->
     <link rel="stylesheet" href="/bower_components/angular-loading-bar/build/loading-bar.css" />
     <link rel="stylesheet" href="/app/styles/pgconfig.css" />
@@ -19,10 +19,11 @@
     </div>
     <div ng-cloak>
         <ng-include src="'/app/templates/toolbar.html'"></ng-include>
-        <md-tabs md-selected="selectedIndex" md-dynamic-height md-border-bottom flex>
+        <md-tabs md-dynamic-height md-border-bottom flex>
             <md-tab label="Tuning Advisor" ui-sref="tuning_url"></md-tab>
             <md-tab label="About" ui-sref="about_url"></md-tab>
         </md-tabs>
+        <ng-include src="'/app/templates/tuning/toolbar.html'"></ng-include>
     </div>
     <md-content flex layout="column" layout-fill>
         <ui-view></ui-view>
@@ -41,7 +42,8 @@
     <script src="/bower_components/ngclipboard/dist/ngclipboard.js"></script>
     <!-- endbuild -->
     <!-- build:js assets/js/app.min.js -->
-    <script src="/app/factories/mainFactory.js"></script>
+    <script src="/app/services/tuningToolbarService.js"></script>
+    <script src="/app/services/mainService.js"></script>
     <script src="/app/routes/mainRoute.js"></script>
     <script src="/app/templates/mainTemplate.js"></script>
     <script src="/app/configuration/mainConfig.js"></script>
