@@ -1,5 +1,6 @@
+"use strict";
+
 (function (angular, undefined) {
-    "use strict";
     angular.module('pgconfig', [
         'angular-loading-bar',
         'pgconfig.controllers',
@@ -7,5 +8,6 @@
         'pgconfig.routes',
         'pgconfig.config',
         'pgconfig.templates',
+        'pgconfig.directives'
     ]);
 })(angular);
