@@ -3,7 +3,8 @@ angular.module('pgconfig.config', [])
         appName: 'PGConfigUI',
         appFullName: 'PostgreSQL Configuration Tool',
         appVersion: '2.0 beta',
-        apiURL: 'http://api.pgconfig.org/v1'
+        apiURL: 'http://api.pgconfig.org/v1',
+        // apiURL: 'http://localhost:5000/v1'
     })
     .config(function ($mdThemingProvider) {
         $mdThemingProvider
@@ -11,6 +12,6 @@ angular.module('pgconfig.config', [])
             .primaryPalette('blue-grey')
             .accentPalette('grey');
     })
-    .run(['$templateCache', function ($templateCache) {
-        $templateCache.removeAll();
+    .run(['$rootScope', function ($rootScope) {
+        $rootScope.angular = angular;
     }]);
