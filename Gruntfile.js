@@ -29,7 +29,7 @@ module.exports = function (grunt) {
                 cwd: '<%= dirs.source %>',
                 src: [
                     '<%= dirs.template_dir %>/*.html',
-                    '<%= dirs.template_dir %>/tuning/*.html'
+                    '<%= dirs.template_dir %>/**/*.html',
                 ],
                 dest: '<%= dirs.temp %>/templates.js',
                 options: {
@@ -55,7 +55,7 @@ module.exports = function (grunt) {
                 cwd: '<%= dirs.source %>',
                 src: [
                     '<%= dirs.template_dir %>/*.html',
-                    '<%= dirs.template_dir %>/tuning/*.html'
+                    '<%= dirs.template_dir %>/**/*.html',
                 ],
                 dest: '<%= dirs.temp %>/templates.js',
                 options: {
@@ -161,7 +161,7 @@ module.exports = function (grunt) {
                 files: [
                     'Gruntfile.js',
                     '<%= dirs.source %>/app/**.js',
-                    '<%= dirs.source %>/**.html',
+                    '<%= dirs.source %>/**/*.html',
                     '<%= dirs.source %>/styles/*.css'
                 ],
                 tasks: [
@@ -173,7 +173,7 @@ module.exports = function (grunt) {
                     'concat:vendorjs',
                     'concat:css',
                     'usemin',
-                    'clean:1',
+                    // 'clean:1',
                 ],
                 options: {
                     atBegin: true
