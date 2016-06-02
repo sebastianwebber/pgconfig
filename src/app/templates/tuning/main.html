@@ -1,5 +1,4 @@
 <div ng-controller="TuningController" layout="column" flex layout-fill ng-cloak>
-
     <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-open="true">
         <md-toolbar>
             <h1 class="md-toolbar-tools">Server Options</h1>
@@ -45,8 +44,8 @@
 
     </md-sidenav>
     <md-content>
-        <section  ng-show="show_toolbar">
-            <md-subheader class="md-primary">Summary</md-subheader>
+        <section>
+            <md-subheader class="md-primary"><h2>Summary</h2></md-subheader>
             <md-list layout-padding>
                 <md-list-item class="md-3-line">
                     <div class="md-list-item-text">
@@ -62,17 +61,8 @@
             </md-list>
         </section>
         <section ng-repeat="category in api_data">
-            <md-subheader class="md-primary">{{category.description}}</md-subheader>
-            <md-list layout-padding>
-                <md-list-item class="md-3-line" ng-repeat="param in category.paramaters" style="margin-bottom: 10px;">
-                    <div class="md-list-item-text">
-                        <h3>{{param.name}} ({{param.documentation.type}})</h3>
-                        <h4>Sugested value: {{ param.config_value }}</h4>
-                        <p ng-repeat="doc_line in param.documentation.details" style="margin-left: 20px;">{{doc_line}}</p>
-                    </div>
-                </md-list-item>
-            </md-list>
-
+            <md-subheader class="md-primary"><h2>{{category.description}}</h2></md-subheader>
+            <tuning-grid></tuning-grid>
         </section>
     </md-content>
 </div>
