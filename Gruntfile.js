@@ -150,7 +150,6 @@ module.exports = function (grunt) {
                 },
                 src: [
                     '<%= dirs.source %>/app/styles/*.css',
-                    '<%= dirs.source %>/bower_components/angular-loading-bar/build/loading-bar.css'
                 ],
                 dest: '<%= dirs.output %>/assets/css/style.min.css'
             }
@@ -173,7 +172,7 @@ module.exports = function (grunt) {
                     'concat:vendorjs',
                     'concat:css',
                     'usemin',
-                    // 'clean:1',
+                    'clean:1',
                 ],
                 options: {
                     atBegin: true
