@@ -8,8 +8,10 @@ var bodyParser = require('body-parser');    // pull information from HTML POST (
 var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
 
 // configuration =================
-var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8000
-var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
+
+
+var server_port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080;
+var server_ip_address   = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 
 
 app.use(express.static(__dirname + '/dist'));                 // set the static files location /public/img will be /img for users
