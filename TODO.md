@@ -20,10 +20,10 @@
 - ~~start with the tuning tab, not with the about tab~~
 - ~~make grunt compile css and js to load pages faster~~
 - ~~on tuning, fix toolbar at the top~~
+- ~~add new details about parameters~~
 - add a graph to explain memory parameters
 - create a box expand doc if clicked
-- add new details about parameters
 - add syslog configuration
 - add pgbadger configuration
 - show Linux kernel tuning output
-- change label enviromento for 'application profile'
+- change label environment for 'application profile'
