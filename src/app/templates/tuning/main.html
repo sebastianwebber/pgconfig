@@ -23,7 +23,7 @@
                 </div>
                 <md-input-container style="width: 80%;">
                     <label for="i_max_connections">Max connections</label>
-                    <input required type="number" id="i_max_connections" ng-model="max_connections" min="100" max="99999" />
+                    <input required type="number" id="i_max_connections" ng-model="max_connections" min="1" max="99999" />
                     <div ng-messages="projectForm.i_max_connections.$error">
                         <div ng-message="required">This is required.</div>
                     </div>
