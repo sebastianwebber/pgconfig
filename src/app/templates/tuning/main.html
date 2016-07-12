@@ -13,7 +13,7 @@
                     </div>
                 </md-input-container>
                 <div class="radioButtondemoBasicUsage">
-                    <p>Enviroment:</p>
+                    <p>Application Profile:</p>
                     <md-radio-group ng-model="enviroment">
                         <md-radio-button ng-repeat="d in envFilters" ng-value="d.value" aria-label="{{ d.description }}">
                             {{ d.value }} <br/>
@@ -53,7 +53,7 @@
                         <ul>
                             <li>{{total_memory}}GB of memory avaliable for the database;</li>
                             <li>{{max_connections}} connections are spected;</li>
-                            <li>For {{enviroment}}-based enviroment;</li>
+                            <li>For {{enviroment}}-based application profile;</li>
                             <li>Using PostgreSQL {{pg_version}} version.</li>
                         </ul>
                     </div>

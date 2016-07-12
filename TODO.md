@@ -26,4 +26,4 @@
 - [ ] add syslog configuration
 - [ ] add pgbadger configuration
 - [ ] show Linux kernel tuning output
-- [ ] change label environment for 'application profile'
+- [x] change label environment for 'application profile'
