@@ -22,7 +22,7 @@
 - [x] on tuning, fix toolbar at the top
 - [x] add new details about parameters
 - [ ] add a graph to explain memory parameters
-- [ ] create a box expand doc if clicked
+- [ ] create a ~~box~~ button to expand doc if clicked
 - [ ] add syslog configuration
 - [ ] add pgbadger configuration
 - [ ] show Linux kernel tuning output
