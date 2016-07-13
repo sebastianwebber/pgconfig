@@ -22,8 +22,8 @@
 - [x] on tuning, fix toolbar at the top
 - [x] add new details about parameters
 - [ ] add a graph to explain memory parameters
-- [ ] create a ~~box~~ button to expand doc if clicked
-- [ ] add syslog configuration
-- [ ] add pgbadger configuration
-- [ ] show Linux kernel tuning output
+- [x] create a ~~box~~ button to expand doc if clicked
+- [ ] add syslog configuration (needs API implementation)
+- [ ] add pgbadger configuration (needs API implementation)
+- [ ] show Linux kernel tuning output (needs research and API implementation)
 - [x] change label environment for 'application profile'
