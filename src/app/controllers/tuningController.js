@@ -28,19 +28,19 @@ function TuningController($scope, $mdSidenav, $stateParams, $state, tuningApiSer
     $scope.envFilters = [
         {
             value: "WEB",
-            description: 'For general web applications',
+            description: 'General web applications',
         }, {
             value: "OLTP",
-            description: 'For ERP or long transaction applications',
+            description: 'ERP or long transaction applications',
         }, {
             value: "DW",
-            description: 'For DataWare house and BI Applications',
+            description: 'DataWare house and BI Applications',
         }, {
             value: "Mixed",
-            description: 'For DB and APP on the same server',
+            description: 'DB and APP on the same server',
         }, {
             value: "Desktop",
-            description: 'For developer local machine',
+            description: 'Developer local machine',
         },
     ];
 

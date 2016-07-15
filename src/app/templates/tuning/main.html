@@ -12,15 +12,14 @@
                         <div ng-message="required">This is required.</div>
                     </div>
                 </md-input-container>
-                <div class="radioButtondemoBasicUsage">
-                    <p>Application Profile:</p>
-                    <md-radio-group ng-model="enviroment">
-                        <md-radio-button ng-repeat="d in envFilters" ng-value="d.value" aria-label="{{ d.description }}">
-                            {{ d.value }} <br/>
-                            <span>{{d.description}}</span>
-                        </md-radio-button>
-                    </md-radio-group>
-                </div>
+                <md-input-container style="width: 80%;">
+                    <label>Application Profile:</label>
+                    <md-select ng-model="enviroment">
+                        <md-option ng-repeat="d in envFilters" value="{{ d.value }}">
+                            {{d.description}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
                 <md-input-container style="width: 80%;">
                     <label for="i_max_connections">Max connections</label>
                     <input required type="number" id="i_max_connections" ng-model="max_connections" min="1" max="99999" />
@@ -45,7 +44,9 @@
     </md-sidenav>
     <md-content>
         <section>
-            <md-subheader class="md-primary"><h2>Summary</h2></md-subheader>
+            <md-subheader class="md-primary">
+                <h2>Summary</h2>
+            </md-subheader>
             <md-list layout-padding>
                 <md-list-item class="md-3-line">
                     <div class="md-list-item-text">
@@ -61,7 +62,9 @@
             </md-list>
         </section>
         <section ng-repeat="category in api_data">
-            <md-subheader class="md-primary"><h2>{{category.description}}</h2></md-subheader>
+            <md-subheader class="md-primary">
+                <h2>{{category.description}}</h2>
+            </md-subheader>
             <tuning-grid></tuning-grid>
         </section>
     </md-content>
