@@ -37,7 +37,7 @@ function TuningToolbarController($scope, $location, $log, $mdDialog, $mdMedia, t
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose: false,
-            fullscreen: useFullScreen
+            fullscreen: true
         });
         $scope.$watch(function () {
             return $mdMedia('xs') || $mdMedia('sm');

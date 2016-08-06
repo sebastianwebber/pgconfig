@@ -10,15 +10,33 @@
       </div>
     </md-toolbar>
     <md-dialog-content>
-      <div class="md-dialog-content" layout="column">
-          <md-input-container>
-            <label>Select the format</label>
-            <md-select ng-model="export_format" ng-change="call_api()">
-              <md-option ng-repeat="format in supported_formats" value="{{format.value}}">
-                {{format.description}}
-              </md-option>
-            </md-select>
-          </md-input-container>
+      <md-toolbar  class="md-primary"> 
+<div layout="row" layout-align="center center" layout-padding layout-margin>
+  <md-input-container>
+    <label>Export format</label>
+    <md-select ng-model="export_format" ng-change="call_api()">
+      <md-option ng-repeat="format in supported_formats" value="{{format.value}}">
+        {{format.description}}
+      </md-option>
+    </md-select>
+  </md-input-container>
+  <md-input-container>
+    <md-checkbox ng-model="generate_pgbadger" ng-change="call_api()" aria-label="Checkbox 1">
+      PGBadger Stuff
+    </md-checkbox>
+  </md-input-container>
+  <md-input-container>
+    <label>Log format</label>
+    <md-select ng-disabled="!generate_pgbadger" ng-model="log_format" ng-change="call_api()">
+      <md-option ng-repeat="format in log_format_options" value="{{format.value}}">
+        {{format.description}}
+      </md-option>
+    </md-select>
+  </md-input-container>
+</div>
+    </md-toolbar>
+      <div class="md-dialog-content">
+
           <pre style="width: 600px;">{{code_output}}</pre>
       </div>
     </md-dialog-content>
