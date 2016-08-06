@@ -55,6 +55,9 @@ function DialogExportController($scope, $mdDialog, $location, $resource, $stateP
     $scope.call_api = function () {
 
         if (typeof $scope.export_format !== 'undefined') {
+
+            $scope.code_output = 'exporting...';
+
             tuningApiService.get_simple({
                 pg_version: $scope.pg_version,
                 total_ram: $scope.total_memory + "GB",
