@@ -2,38 +2,40 @@
   <form>
     <md-toolbar class="md-secundary">
       <div class="md-toolbar-tools">
-        <h2><Export></Export></h2>
+        <h2>
+          <Export></Export>
+        </h2>
         <span flex></span>
-        <div layout="row" layout-align="space-around center" layout-padding layout-margin  class="md-toolbar-tools">
-  <md-input-container  class="md-input-has-value">
-    <md-select-label>Export format</md-select-label>
-    <md-select ng-model="export_format" ng-change="call_api()">
-      <md-option ng-repeat="format in supported_formats" value="{{format.value}}">
-        {{format.description}}
-      </md-option>
-    </md-select>
-  </md-input-container>
-  <span flex></span>
-  <md-input-container>
-    <md-checkbox ng-model="generate_pgbadger" ng-change="call_api()" aria-label="Checkbox 1">
-      PGBadger Stuff
-    </md-checkbox>
-  </md-input-container>
-  <md-input-container>
-    <md-select-label>Log format</md-select-label>
-    <md-select ng-disabled="!generate_pgbadger" ng-model="log_format" ng-change="call_api()">
-      <md-option ng-repeat="format in log_format_options" value="{{format.value}}">
-        {{format.description}}
-      </md-option>
-    </md-select>
-  </md-input-container>
-</div>
+        <div layout="row" layout-align="space-around center" layout-padding layout-margin class="md-toolbar-tools">
+          <md-input-container class="md-input-has-value">
+            <md-select-label>Export format</md-select-label>
+            <md-select ng-model="export_format" ng-change="call_api()">
+              <md-option ng-repeat="format in supported_formats" value="{{format.value}}">
+                {{format.description}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+          <span flex></span>
+          <md-input-container>
+            <md-checkbox ng-model="generate_pgbadger" ng-change="call_api()" aria-label="Checkbox 1">
+              PGBadger Stuff
+            </md-checkbox>
+          </md-input-container>
+          <md-input-container>
+            <md-select-label>Log format</md-select-label>
+            <md-select ng-disabled="!generate_pgbadger" ng-model="log_format" ng-change="call_api()">
+              <md-option ng-repeat="format in log_format_options" value="{{format.value}}">
+                {{format.description}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+        </div>
       </div>
     </md-toolbar>
     <md-dialog-content>
       <div class="md-dialog-content">
 
-          <pre style="width: 600px;">{{code_output}}</pre>
+        <pre style="width: 600px;">{{code_output}}</pre>
       </div>
     </md-dialog-content>
     <md-dialog-actions layout="row">
