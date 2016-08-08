@@ -1,0 +1,49 @@
+<div ng-controller="TuningExportController" layout="column" flex layout-fill ng-cloak>
+    <md-content>
+        <md-toolbar class="md-menu-toolbar">
+            <div layout="row">
+                <md-toolbar-filler layout layout-align="space-around center">
+                    <md-icon md-font-set="material-icons">import_export</md-icon>
+                </md-toolbar-filler>
+                <div>
+                    <h3>&nbsp;Exporting Options</h3>
+                    <div layout="row">
+                        <md-input-container class="md-block">
+                            <label>Export format</label>
+                            <md-select ng-model="export_format" ng-change="call_api()">
+                                <md-option ng-repeat="format in supported_formats" value="{{format.value}}">
+                                    {{format.description}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container>
+                            <md-checkbox ng-model="generate_pgbadger" ng-change="call_api()" aria-label="Checkbox 1">
+                                PGBadger Stuff
+                            </md-checkbox>
+                        </md-input-container>
+                        <md-input-container>
+                            <label>Log format</label>
+                            <md-select ng-disabled="!generate_pgbadger" ng-model="log_format" ng-change="call_api()">
+                                <md-option ng-repeat="format in log_format_options" value="{{format.value}}">
+                                    {{format.description}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+                </div>
+            </div>
+        </md-toolbar>
+        <div layout="row">
+            <md-card flex>
+                <md-card-content>
+                    <pre>{{code_output}}</pre>
+                </md-card-content>
+            </md-card>
+        </div>
+        <div layout="row">
+            <md-button class="md-primary" ng-click="cancel()" ngclipboard data-clipboard-text="{{code_output}}">
+                Copy to clipboard
+            </md-button>
+        </div>
+    </md-content>
+</div>

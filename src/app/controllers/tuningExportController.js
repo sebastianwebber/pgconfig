@@ -1,17 +1,4 @@
-function DialogExportController($scope, $mdDialog, $location, $resource, $stateParams, tuningApiService, pgbadgerGeneratorService) {
-    $scope.hide = function () {
-        $mdDialog.hide();
-    };
-    $scope.cancel = function () {
-        $mdDialog.cancel();
-    };
-    $scope.answer = function (answer) {
-        $mdDialog.hide(answer);
-    };
-
-    // TODO: Review generation of this fucking URL
-    $scope.share_url = $location.absUrl();
-
+function TuningExportController($scope, $stateParams, tuningApiService, pgbadgerGeneratorService) {
     // $scope.export_format = "alter_system"
     $scope.supported_formats = [
         {
@@ -79,4 +66,4 @@ function DialogExportController($scope, $mdDialog, $location, $resource, $stateP
             }
         }
     };
-};
+}

@@ -1,14 +1,14 @@
-function TuningToolbarController($scope, $location, $log, $mdDialog, $mdMedia, tuningToolbarService) {
+function TuningToolbarController($scope, $location, $log, $mdDialog, $mdMedia, tuningToolbarService, $state, $stateParams) {
 
     $scope.show_toolbar = false;
 
     $scope.$on('toolbar:updated', function (event, data) {
         $scope.show_toolbar = data;
     });
-    
-    $scope.open_menu = function() {
-      tuningToolbarService.toolbar.hide();
-      tuningToolbarService.menu.show('left');  
+
+    $scope.open_menu = function () {
+        tuningToolbarService.toolbar.hide();
+        tuningToolbarService.menu.show('left');
     };
 
     $scope.status = '  ';
@@ -29,21 +29,8 @@ function TuningToolbarController($scope, $location, $log, $mdDialog, $mdMedia, t
         );
     };
 
-    $scope.showExportWindow = function (ev) {
-        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
-        $mdDialog.show({
-            controller: DialogExportController,
-            templateUrl: '/app/templates/tuning/export.html',
-            parent: angular.element(document.body),
-            targetEvent: ev,
-            clickOutsideToClose: false,
-            fullscreen: true
-        });
-        $scope.$watch(function () {
-            return $mdMedia('xs') || $mdMedia('sm');
-        }, function (wantsFullScreen) {
-            $scope.customFullscreen = (wantsFullScreen === true);
-        });
+    $scope.openExportURL = function () {
+        $state.go('tuning-export_url', $stateParams);
     };
 
     $scope.showShareURL = function (ev) {
