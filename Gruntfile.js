@@ -160,6 +160,7 @@ module.exports = function (grunt) {
                 files: [
                     'Gruntfile.js',
                     '<%= dirs.source %>/app/**.js',
+                    '<%= dirs.source %>/app/**/*.js',
                     '<%= dirs.source %>/**/*.html',
                     '<%= dirs.source %>/styles/*.css'
                 ],
