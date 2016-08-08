@@ -4,7 +4,8 @@ angular.module('pgconfig.controllers',
         'ngclipboard',
         'ngMaterial',
         'pgconfig.services',
-        'pgconfig.directives'
+        'pgconfig.directives',
+        'hljs'
     ])
     .controller('MainHeaderController', MainHeaderController)
     .controller('TuningController',  TuningController)
