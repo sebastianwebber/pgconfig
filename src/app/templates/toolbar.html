@@ -1,5 +1,9 @@
 <md-toolbar ng-controller="MainHeaderController" class="md-accent">
     <h2 class="md-toolbar-tools">
-        <span>{{app_desc}} <sup>{{app_version}}</sup> </span>
+        <span>
+            <md-icon md-font-set="material-icons">tune</md-icon>&nbsp;
+            <strong>{{app_desc}}</strong>
+            <sup><i>{{app_version}}</i></sup>
+        </span>
     </h2>
 </md-toolbar>

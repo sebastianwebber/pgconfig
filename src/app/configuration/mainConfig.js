@@ -9,8 +9,8 @@ angular.module('pgconfig.config', [])
     .config(function ($mdThemingProvider) {
         $mdThemingProvider
             .theme('default')
-            .primaryPalette('blue-grey')
-            .accentPalette('grey');
+            .primaryPalette('blue')
+            .accentPalette('orange');
     })
     .run(['$rootScope', function ($rootScope) {
         $rootScope.angular = angular;
