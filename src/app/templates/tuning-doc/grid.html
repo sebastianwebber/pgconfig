@@ -1,4 +1,39 @@
-<md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2"
-    md-gutter="12px" md-gutter-gt-sm="8px">
-    <tuning-doc ng-repeat="param in category.parameters"></tuning-doc>
-</md-grid-list>
+<!--<h2 ng-repeat="env in first_api_data">{{ env.description }}</h2>-->
+
+<div class="row" ng-repeat="first in first_api_data">
+    <md-card>
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">{{ first.description }}</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+
+
+            <table class="bordered highlight responsive-table">
+                <thead>
+                    <tr layout="row">
+                        <th flex>&nbsp;</th>
+                        <th flex="10">Default Value</th>
+                        <th flex="10" ng-repeat="env_list in api_data">
+                            {{ env_list.environment }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="param in first.parameters" layout="row">
+                        <td flex>{{param.name}}</td>
+                        <td flex="10">{{param.documentation.default_value}}</td>
+                        <td flex="10" layout-align="center" ng-repeat="env_list in api_data ">
+                            <span ng-repeat="category in env_list.configuration | filter: first.category">
+                                <span ng-repeat="parameter in category.parameters | filter: { name: param.name  } : true">
+                                    {{ parameter.config_value }}
+                                </span>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </md-card-content>
+    </md-card>
+</div>

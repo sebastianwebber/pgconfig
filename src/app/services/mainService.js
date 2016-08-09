@@ -1,6 +1,6 @@
 angular.module('pgconfig.services', [])
     .factory('tuningApiService', function ($resource, config) {
-        var resource = $resource(config.apiURL + '/tuning/get-config', {}, {
+        var resource = $resource(config.apiURL + '/tuning/get-config-all-environments', {}, {
             get: {
                 method: "get",
             },

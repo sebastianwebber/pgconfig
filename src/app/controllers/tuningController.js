@@ -51,6 +51,7 @@ function TuningController($scope, $mdSidenav, $stateParams, $state, tuningApiSer
 
     $scope.$on('menu:opened', function (event, data) {
         $scope.api_data = null;
+        $scope.first_api_data = null;
     });
 
     $scope.make_url = function () {
@@ -73,6 +74,7 @@ function TuningController($scope, $mdSidenav, $stateParams, $state, tuningApiSer
             show_doc: true
         }, function (apiResult) {
             $scope.api_data = apiResult.data;
+            $scope.first_api_data = apiResult.data[0].configuration;
             $scope.close();
             tuningToolbarService.toolbar.show();
         });
