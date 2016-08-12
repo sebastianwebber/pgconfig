@@ -32,21 +32,4 @@ function TuningToolbarController($scope, $location, $log, $mdDialog, $mdMedia, t
     $scope.openExportURL = function () {
         $state.go('tuning-export_url', $stateParams);
     };
-
-    $scope.showShareURL = function (ev) {
-        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
-        $mdDialog.show({
-            controller: DialogController,
-            templateUrl: '/app/templates/tuning/share-url.html',
-            parent: angular.element(document.body),
-            targetEvent: ev,
-            clickOutsideToClose: false,
-            fullscreen: useFullScreen
-        });
-        $scope.$watch(function () {
-            return $mdMedia('xs') || $mdMedia('sm');
-        }, function (wantsFullScreen) {
-            $scope.customFullscreen = (wantsFullScreen === true);
-        });
-    };
 };
