@@ -1,4 +1,4 @@
-function TuningController($scope, $mdSidenav, $stateParams, $state, tuningApiService, tuningToolbarService) {
+function TuningController($scope, $mdSidenav, $stateParams, $state, APITuningGetConfigAllEnvironmentService, tuningToolbarService) {
     tuningToolbarService.toolbar.hide();
     $scope.total_memory = 2;
     $scope.max_connections = 100;
@@ -65,7 +65,7 @@ function TuningController($scope, $mdSidenav, $stateParams, $state, tuningApiSer
     };
 
     $scope.call_api = function () {
-        tuningApiService.get({
+        APITuningGetConfigAllEnvironmentService.get({
             pg_version: $scope.pg_version,
             total_ram: $scope.total_memory + "GB",
             max_connections: $scope.max_connections,

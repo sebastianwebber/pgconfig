@@ -1,4 +1,4 @@
-function TuningExportController($scope, $stateParams, tuningApiService, pgbadgerGeneratorService) {
+function TuningExportController($scope, $stateParams, APITuningGetConfigSingleEnvironmentService, pgbadgerGeneratorService) {
     // $scope.export_format = "alter_system"
     $scope.supported_formats = [
         {
@@ -43,25 +43,26 @@ function TuningExportController($scope, $stateParams, tuningApiService, pgbadger
 
         if (typeof $scope.export_format !== 'undefined') {
 
-            $scope.code_output = 'exporting...';
+            $scope.code_output1 = 'exporting...';
+            $scope.code_output2 = 'exporting...';
 
-            tuningApiService.get_simple({
+            APITuningGetConfigSingleEnvironmentService.get_simple({
                 pg_version: $scope.pg_version,
                 total_ram: $scope.total_memory + "GB",
                 max_connections: $scope.max_connections,
                 env_name: $scope.enviroment,
                 format: $scope.export_format,
             }, function (apiResult) {
-                $scope.code_output = apiResult.collection;
+                $scope.code_output1 = apiResult.collection;
             });
 
             if ($scope.generate_pgbadger == true) {
                 pgbadgerGeneratorService.get_simple({
                     log_format: $scope.log_format,
-                    show_about: "false",
+                    // show_about: "false",
                     format: $scope.export_format,
                 }, function (apiResult) {
-                    $scope.code_output = $scope.code_output + apiResult.collection;
+                    $scope.code_output2 = apiResult.collection;
                 });
             }
         }
