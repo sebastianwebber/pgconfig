@@ -44,3 +44,86 @@ body {
         animation:octocat-wave 560ms ease-in-out
     }
 }
+
+
+/** TABLE STUFF*****/
+
+table {
+  width: 100%;
+  display: table;
+  border-collapse: collapse;
+  -webkit-border-horizontal-spacing: 0px;
+  -webkit-border-vertical-spacing: 0px;
+  font-size: 15px;
+}
+table, th, td {
+  border-top-width: initial;
+  border-right-width: initial;
+  border-bottom-width: initial;
+  border-left-width: initial;
+  border-top-style: none;
+  border-right-style: none;
+  border-bottom-style: none;
+  border-left-style: none;
+  border-top-color: initial;
+  border-right-color: initial;
+  border-bottom-color: initial;
+  border-left-color: initial;
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+}
+thead {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: inherit;
+  display: table-header-group;
+  vertical-align: middle;
+  border-top-color: inherit;
+  border-right-color: inherit;
+  border-left-color: inherit;
+}
+table.bordered > thead > tr, table.bordered > tbody > tr {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(208, 208, 208);
+}
+.layout, .layout-column, .layout-row {
+  box-sizing: border-box;
+  display: flex;
+}
+td, th {
+  padding-top: 15px;
+  padding-right: 5px;
+  padding-bottom: 15px;
+  padding-left: 5px;
+  display: table-cell;
+  text-align: left;
+  vertical-align: middle;
+  /*border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px;*/
+}
+th.selectedEnvironment {
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+
+tr:last-child td.selectedEnvironment {
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+th.selectedEnvironment, td.selectedEnvironment {
+    background-color: rgb(255,171,64);
+    color: rgba(0,0,0,0.87);
+}
+table.highlight > tbody > tr {
+  transition-duration: 0.25s;
+  transition-timing-function: ease;
+  transition-delay: initial;
+  transition-property: background-color;
+}

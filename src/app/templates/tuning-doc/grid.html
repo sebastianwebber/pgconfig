@@ -8,14 +8,12 @@
             </md-card-title-text>
         </md-card-title>
         <md-card-content>
-
-
-            <table class="bordered highlight responsive-table">
+            <table class="bordered highlight">
                 <thead>
                     <tr layout="row">
                         <th flex>&nbsp;</th>
                         <th flex="10">Default Value</th>
-                        <th flex="10" ng-repeat="env_list in api_data">
+                        <th flex="10" ng-repeat="env_list in api_data" ng-class="isSelectedEnvironment(env_list.environment)">
                             {{ env_list.environment }}
                         </th>
                     </tr>
@@ -23,11 +21,11 @@
                 <tbody>
                     <tr ng-repeat="param in first.parameters" layout="row">
                         <td flex>{{param.name}}</td>
-                        <td flex="10">{{param.documentation.default_value}}</td>
-                        <td flex="10" layout-align="center" ng-repeat="env_list in api_data ">
+                        <td flex="10"><code>{{param.documentation.default_value}}</code></td>
+                        <td flex="10" ng-class="isSelectedEnvironment(env_list.environment)" layout-align="center center" ng-repeat="env_list in api_data ">
                             <span ng-repeat="category in env_list.configuration | filter: first.category">
                                 <span ng-repeat="parameter in category.parameters | filter: { name: param.name  } : true">
-                                    {{ parameter.config_value }}
+                                    <code>{{ parameter.config_value }}</code>
                                 </span>
                             </span>
                         </td>

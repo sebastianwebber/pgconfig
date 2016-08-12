@@ -86,4 +86,8 @@ function TuningController($scope, $mdSidenav, $stateParams, $state, tuningApiSer
     $scope.$on("$destroy", function () {
         tuningToolbarService.toolbar.hide();
     });
+
+    $scope.isSelectedEnvironment = function (env) {
+        return (env == $scope.enviroment ) ? 'selectedEnvironment' : '';
+    };
 };

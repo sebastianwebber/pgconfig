@@ -43,24 +43,23 @@
 
     </md-sidenav>
     <md-content>
-        <section>
-            <md-subheader class="md-primary">
-                <h2>Summary</h2>
-            </md-subheader>
-            <md-list layout-padding>
-                <md-list-item class="md-3-line">
-                    <div class="md-list-item-text">
-                        <p>Sugested tuning for the parameters below:</p>
-                        <ul>
-                            <li>{{total_memory}}GB of memory avaliable for the database;</li>
-                            <li>{{max_connections}} connections are spected;</li>
-                            <li>For {{enviroment}}-based application profile;</li>
-                            <li>Using PostgreSQL {{pg_version}} version.</li>
-                        </ul>
-                    </div>
-                </md-list-item>
-            </md-list>
-        </section>
+
+        <md-card>
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">Summary</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <p>Sugested tuning for the parameters below:</p>
+                <ul>
+                    <li>{{total_memory}}GB of memory avaliable for the database;</li>
+                    <li>{{max_connections}} connections are spected;</li>
+                    <li>For {{enviroment}}-based application profile;</li>
+                    <li>Using PostgreSQL {{pg_version}} version.</li>
+                </ul>
+            </md-card-content>
+        </md-card>
         <tuning-grid></tuning-grid>
     </md-content>
 </div>
