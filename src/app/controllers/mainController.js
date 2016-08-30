@@ -9,5 +9,6 @@ angular.module('pgconfig.controllers',
     ])
     .controller('MainHeaderController', MainHeaderController)
     .controller('TuningController',  TuningController)
+    .controller('ParameterDirectiveController',  ParameterDirectiveController)
     .controller('TuningExportController',  TuningExportController)
     .controller('TuningToolbarController', TuningToolbarController);

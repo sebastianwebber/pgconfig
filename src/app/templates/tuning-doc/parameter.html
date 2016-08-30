@@ -1,0 +1,17 @@
+<span ng-show="!show_details" ng-click="toggle()"><md-icon md-font-set="material-icons">speaker_notes</md-icon>&nbsp;{{param.name}} <em>({{param.documentation.type}})</em></span>
+<div ng-show="show_details">
+    <span ng-click="toggle()"><md-icon md-font-set="material-icons">speaker_notes_off</md-icon>&nbsp;{{param.name}} <em>({{param.documentation.type}})</em></span>
+    <p>{{param.documentation.abstract}}</p>
+    <div ng-show="angular.isDefined(param.documentation.recomendations)">
+        <p>Suggested reading:</p>
+        <ul>
+            <li ng-repeat="(title,url) in param.documentation.recomendations">
+                <a href="{{url}}" target="_blank">{{title}}</a>
+            </li>
+        </ul>
+    </div>
+    <p>
+        <b>On the docs: </b>
+        <span dd-text-collapse dd-text-collapse-max-length="120" dd-text-collapse-text="{{param.documentation.details | toString}}"></span>
+    </p>
+</div>

@@ -20,7 +20,9 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="param in first.parameters" layout="row">
-                        <td flex>{{param.name}}</td>
+                        <td flex>
+                            <tuning-parameter param=param></tuning-parameter>
+                        </td>
                         <td flex="10"><code>{{param.documentation.default_value}}</code></td>
                         <td flex="10" ng-class="isSelectedEnvironment(env_list.environment)" layout-align="center center" ng-repeat="env_list in api_data ">
                             <span ng-repeat="category in env_list.configuration | filter: first.category">

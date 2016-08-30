@@ -20,11 +20,12 @@ angular.module('pgconfig.directives', [])
             templateUrl: '/app/templates/tuning-doc/grid.html'
         };
     })
-    .directive('tuningDoc', function () {
+    .directive('tuningParameter', function () {
         return {
             restrict: 'E',
             transclude: true,
-            templateUrl: '/app/templates/tuning-doc/doc.html'
+            templateUrl: '/app/templates/tuning-doc/parameter.html',
+            controller: 'ParameterDirectiveController'
         };
     }).directive('ddTextCollapse', ['$compile', function ($compile) {
 
