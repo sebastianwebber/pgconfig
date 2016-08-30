@@ -27,3 +27,4 @@ bower_components
 _site/
 dist/
 .tmp/
+.vscode
