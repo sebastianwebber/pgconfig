@@ -43,28 +43,41 @@ function TuningExportController($scope, $stateParams, APITuningGetConfigSingleEn
 
         if (typeof $scope.export_format !== 'undefined') {
 
-            $scope.code_output1 = 'exporting...';
-            $scope.code_output2 = 'exporting...';
-
-            APITuningGetConfigSingleEnvironmentService.get_simple({
-                pg_version: $scope.pg_version,
-                total_ram: $scope.total_memory + "GB",
-                max_connections: $scope.max_connections,
-                env_name: $scope.enviroment,
-                format: $scope.export_format,
-            }, function (apiResult) {
-                $scope.code_output1 = apiResult.collection;
-            });
+            $scope.code_output = 'exporting...';
 
             if ($scope.generate_pgbadger == true) {
-                pgbadgerGeneratorService.get_simple({
-                    log_format: $scope.log_format,
-                    // show_about: "false",
+                APITuningGetConfigSingleEnvironmentService.get_simple({
+                    pg_version: $scope.pg_version,
+                    total_ram: $scope.total_memory + "GB",
+                    max_connections: $scope.max_connections,
+                    env_name: $scope.enviroment,
                     format: $scope.export_format,
+                    include_pgbadger: $scope.generate_pgbadger,
+                    log_format: $scope.log_format
                 }, function (apiResult) {
-                    $scope.code_output2 = apiResult.collection;
+                    $scope.code_output = apiResult.collection;
+                });
+            } else {
+                APITuningGetConfigSingleEnvironmentService.get_simple({
+                    pg_version: $scope.pg_version,
+                    total_ram: $scope.total_memory + "GB",
+                    max_connections: $scope.max_connections,
+                    env_name: $scope.enviroment,
+                    format: $scope.export_format
+                }, function (apiResult) {
+                    $scope.code_output = apiResult.collection;
                 });
             }
+
+            // if ($scope.generate_pgbadger == true) {
+            //     pgbadgerGeneratorService.get_simple({
+            //         log_format: $scope.log_format,
+            //         show_about: "false",
+            //         format: $scope.export_format,
+            //     }, function (apiResult) {
+            //         $scope.code_output2 = apiResult.collection;
+            //     });
+            // }
         }
     };
 }
