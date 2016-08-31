@@ -1,20 +1,18 @@
 <div ng-controller="TuningExportController" layout="column" flex layout-fill ng-cloak>
     <md-content>
-        <md-toolbar>
-            <div class="md-toolbar-tools">
-                <h2>
-                    <span>Exporting Options</span>
-                </h2>
-            </div>
-        </md-toolbar>
-        <div layout="row">
-
-
-        </div>
         <div layout="row">
             <md-card flex>
-                <md-card-actions layout="row" layout-align="start center">
-                        <md-input-container flex="50">
+                <md-toolbar>
+                    <div class="md-toolbar-tools">
+                        <h2>
+                            <span>Exporting Options</span>
+                        </h2>
+                    </div>
+                </md-toolbar>
+                <md-card-actions>
+
+                    <div layout="row" layout-align="start center" layout-xs="column">
+                        <md-input-container flex="66" flex-xs="100">
                             <label>Export format</label>
                             <md-select ng-model="export_format" ng-change="call_api()">
                                 <md-option ng-repeat="format in supported_formats" value="{{format.value}}">
@@ -23,12 +21,12 @@
                             </md-select>
                         </md-input-container>
                         <span flex></span>
-                        <md-input-container flex="10">
+                        <md-input-container flex="20" flex-xs="100">
                             <md-checkbox ng-model="generate_pgbadger" ng-change="call_api()" aria-label="Checkbox 1">
-                                PGBadger Stuff
+                                Include PGBadger Stuff
                             </md-checkbox>
                         </md-input-container>
-                        <md-input-container flex="30">
+                        <md-input-container flex="30" flex-xs="100">
                             <label>Log format</label>
                             <md-select ng-disabled="!generate_pgbadger" ng-model="log_format" ng-change="call_api()">
                                 <md-option ng-repeat="format in log_format_options" value="{{format.value}}">
@@ -36,18 +34,25 @@
                                 </md-option>
                             </md-select>
                         </md-input-container>
+                    </div>
                 </md-card-actions>
                 <md-card-content>
                     <div layout="column">
                         <code hljs source="code_output" ng-show="code_output"></code>
                     </div>
                 </md-card-content>
+                <md-card-actions layout="row" layout-align="end center">
+                    <md-button ng-click="backToTuning()">
+                        Cancel
+                    </md-button>
+                    <md-button class="md-primary" ng-click="cancel()" ngclipboard data-clipboard-text="{{code_output}}">
+                        Copy to clipboard
+                    </md-button>
+                </md-card-actions>
             </md-card>
         </div>
         <div layout="row">
-            <md-button class="md-primary" ng-click="cancel()" ngclipboard data-clipboard-text="{{code_output}}">
-                Copy to clipboard
-            </md-button>
+
         </div>
     </md-content>
 </div>

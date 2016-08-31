@@ -1,4 +1,4 @@
-function TuningExportController($scope, $stateParams, APITuningGetConfigSingleEnvironmentService, pgbadgerGeneratorService) {
+function TuningExportController($scope, $stateParams, APITuningGetConfigSingleEnvironmentService, $window) {
     // $scope.export_format = "alter_system"
     $scope.supported_formats = [
         {
@@ -38,6 +38,11 @@ function TuningExportController($scope, $stateParams, APITuningGetConfigSingleEn
         $scope.pg_version = $stateParams.pg_version;
     if ($stateParams.enviroment_name != null)
         $scope.enviroment = $stateParams.enviroment_name;
+
+
+    $scope.backToTuning = function() {
+        $window.history.back();
+    };
 
     $scope.call_api = function () {
 
