@@ -1,7 +1,8 @@
 <span ng-show="!show_details" ng-click="toggle()"><md-icon md-font-set="material-icons">speaker_notes</md-icon>&nbsp;{{param.name}} <em>({{param.documentation.type}})</em></span>
 <div ng-show="show_details">
     <span ng-click="toggle()"><md-icon md-font-set="material-icons">speaker_notes_off</md-icon>&nbsp;{{param.name}} <em>({{param.documentation.type}})</em></span>
-    <p>{{param.documentation.abstract}}</p>
+    <p></p>
+    <blockquote>{{param.documentation.abstract}}</blockquote>
     <div ng-show="angular.isDefined(param.documentation.recomendations)">
         <p>Suggested reading:</p>
         <ul>
@@ -10,8 +11,24 @@
             </li>
         </ul>
     </div>
+    <div ng-show="angular.isDefined(param.documentation.details)">
+        <md-card>
+            <md-card-title>
+                <md-card-title-text ng-click="toggle_doc()">
+                    Show/Hide documentation
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content ng-show="show_doc">
+                <p ng-repeat="line in param.documentation.details">{{line}}</p>
+            </md-card-content>
+            <md-card-actions layout="row" layout-align="end center" ng-show="angular.isDefined(param.documentation.url) && show_doc">
+                <md-button ng-href="{{param.documentation.url}}" target="_blank"><md-icon md-font-set="material-icons">link</md-icon>&nbsp;Open Documentation website</md-button>
+            </md-card-actions>
+        </md-card>
+    </div>
     <p>
-        <b>On the docs: </b>
-        <span dd-text-collapse dd-text-collapse-max-length="120" dd-text-collapse-text="{{param.documentation.details | toString}}"></span>
+        <!--<b>On the docs: </b>
+        <p ng-repeat="line in param.documentation.details">{{line}}</p>-->
+        <!--<span dd-text-collapse dd-text-collapse-max-length="120" dd-text-collapse-text="{{param.documentation.details | toString}}"></span>-->
     </p>
 </div>
