@@ -45,7 +45,7 @@
                     <md-button ng-click="backToTuning()">
                         Cancel
                     </md-button>
-                    <md-button class="md-primary" ng-click="cancel()" ngclipboard data-clipboard-text="{{code_output}}">
+                    <md-button class="md-primary" ng-click="showSimpleToast('Copied to Clipboard')" ngclipboard data-clipboard-text="{{code_output}}">
                         Copy to clipboard
                     </md-button>
                 </md-card-actions>

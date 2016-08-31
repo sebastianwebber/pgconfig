@@ -1,5 +1,5 @@
-function TuningExportController($scope, $stateParams, APITuningGetConfigSingleEnvironmentService, $window) {
-    // $scope.export_format = "alter_system"
+function TuningExportController($scope, $stateParams, APITuningGetConfigSingleEnvironmentService, $window, $mdToast) {
+
     $scope.supported_formats = [
         {
             value: "alter_system",
@@ -40,8 +40,17 @@ function TuningExportController($scope, $stateParams, APITuningGetConfigSingleEn
         $scope.enviroment = $stateParams.enviroment_name;
 
 
-    $scope.backToTuning = function() {
+    $scope.backToTuning = function () {
         $window.history.back();
+    };
+
+    $scope.showSimpleToast = function (message) {
+        $mdToast.show(
+            $mdToast.simple()
+                .textContent(message)
+                .position('bottom right')
+                .hideDelay(1500)
+        );
     };
 
     $scope.call_api = function () {
