@@ -1,4 +1,4 @@
-function TuningToolbarService($rootScope, $mdSidenav) {
+function TuningToolbarService($rootScope) {
     var toolbar_visible = false;
 
     var service = {
@@ -29,12 +29,10 @@ function TuningToolbarService($rootScope, $mdSidenav) {
     };
 
     function show_menu(menu_name) {
-        $mdSidenav(menu_name).open();
         $rootScope.$broadcast('menu:opened', null);
     }
 
     function hide_menu(menu_name) {
-        $mdSidenav(menu_name).close();
         // $rootScope.$broadcast('menu:hidden', null);
     }
 };

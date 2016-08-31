@@ -1,4 +1,4 @@
-function TuningController($scope, $mdSidenav, $stateParams, $state, APITuningGetConfigAllEnvironmentService, tuningToolbarService) {
+function TuningController($scope, $stateParams, $state, APITuningGetConfigAllEnvironmentService, tuningToolbarService) {
     tuningToolbarService.toolbar.hide();
     $scope.total_memory = 2;
     $scope.max_connections = 100;
