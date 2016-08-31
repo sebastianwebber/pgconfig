@@ -1,8 +1,6 @@
 <div ng-controller="TuningController" layout="column" flex layout-fill ng-cloak>
     <md-content>
-
         <md-card>
-
             <md-card-title>
                 <md-card-title-text>
                     <span class="md-headline">Summary</span>
@@ -11,8 +9,8 @@
             <md-card-content>
                 <form name="projectForm">
 
-                    <div layout="row">
-                        <md-input-container flex="50">
+                    <div layout="row" layout-xs="column">
+                        <md-input-container flex>
                             <label for="i_total_memory">Total Memory (GB)</label>
                             <input required type="number" id="i_total_memory" ng-model="total_memory" min="1" max="3072" />
                             <div ng-messages="projectForm.i_total_memory.$error">
@@ -27,9 +25,9 @@
                             </div>
                         </md-input-container>
                     </div>
-                    <div layout="row">
-                        <md-input-container flex="66">
-                            <label>Application Profile:</label>
+                    <div layout="row" layout-xs="column">
+                        <md-input-container flex="66" flex-xs="100">
+                            <label>Application Profile</label>
                             <md-select ng-model="enviroment">
                                 <md-option ng-repeat="d in envFilters" value="{{ d.value }}">
                                     {{d.description}}
