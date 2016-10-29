@@ -173,7 +173,7 @@ module.exports = function (grunt) {
                     'concat:vendorjs',
                     'concat:css',
                     'usemin',
-                    'clean:1',
+                    // 'clean:1',
                 ],
                 options: {
                     // atBegin: true
