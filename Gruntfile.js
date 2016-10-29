@@ -176,7 +176,8 @@ module.exports = function (grunt) {
                     'clean:1',
                 ],
                 options: {
-                    atBegin: true
+                    // atBegin: true
+                    livereload: true
                 }
             },
         },
@@ -185,7 +186,8 @@ module.exports = function (grunt) {
                 options: {
                     hostname: 'localhost',
                     port: 8000,
-                    base: '<%= dirs.output %>'
+                    base: '<%= dirs.output %>',
+                    livereload: true
                 }
             }
         }
@@ -204,6 +206,6 @@ module.exports = function (grunt) {
         'usemin',
         'clean:1',
     ]);
-    
-    grunt.registerTask('dev', [ 'bower', 'connect:server', 'watch:dev' ]);
+
+    grunt.registerTask('dev', ['bower', 'connect:server', 'watch:dev']);
 }
