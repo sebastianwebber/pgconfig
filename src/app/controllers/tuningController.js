@@ -4,6 +4,7 @@ function TuningController($scope, $stateParams, $state, APITuningGetConfigAllEnv
     $scope.max_connections = 100;
     $scope.pg_version = "9.5";
     $scope.enviroment = "WEB";
+    $scope.os_type = "Linux";
 
     if ($stateParams.total_ram != null)
         $scope.total_memory = Number($stateParams.total_ram);
@@ -13,6 +14,8 @@ function TuningController($scope, $stateParams, $state, APITuningGetConfigAllEnv
         $scope.pg_version = $stateParams.pg_version;
     if ($stateParams.enviroment_name != null)
         $scope.enviroment = $stateParams.enviroment_name;
+    if ($stateParams.os_type != null)
+        $scope.os_type = $stateParams.os_type;
 
 
     $scope.supported_versions = [
@@ -44,6 +47,21 @@ function TuningController($scope, $stateParams, $state, APITuningGetConfigAllEnv
         },
     ];
 
+    $scope.osFilters = [
+        {
+            value: "Linux",
+            description: 'GNU/Linux Based',
+        },
+        {
+            value: "Windows",
+            description: 'Windows Based',
+        },
+        {
+            value: "Unix",
+            description: 'Unix Based',
+        }
+    ];
+
     $scope.close = function () {
         tuningToolbarService.menu.hide('left');
     };
@@ -60,6 +78,7 @@ function TuningController($scope, $stateParams, $state, APITuningGetConfigAllEnv
             total_ram: $scope.total_memory,
             max_connections: $scope.max_connections,
             pg_version: $scope.pg_version,
+            os_type: $scope.os_type,
             share_link: true
         });
     };
@@ -70,8 +89,9 @@ function TuningController($scope, $stateParams, $state, APITuningGetConfigAllEnv
             total_ram: $scope.total_memory + "GB",
             max_connections: $scope.max_connections,
             env_name: $scope.enviroment,
+            os_type: $scope.os_type,
             format: "json",
-            show_doc: true
+            show_doc: true,
         }, function (apiResult) {
             $scope.api_data = apiResult.data;
             $scope.first_api_data = apiResult.data[0].configuration;
@@ -88,6 +108,6 @@ function TuningController($scope, $stateParams, $state, APITuningGetConfigAllEnv
     });
 
     $scope.isSelectedEnvironment = function (env) {
-        return (env == $scope.enviroment ) ? 'selectedEnvironment' : '';
+        return (env == $scope.enviroment) ? 'selectedEnvironment' : '';
     };
 };

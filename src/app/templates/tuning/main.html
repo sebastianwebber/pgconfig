@@ -1,56 +1,64 @@
 <div ng-controller="TuningController" layout="column" flex layout-fill ng-cloak>
-    <md-content>
-        <md-card>
-            <md-card-title>
-                <md-card-title-text>
-                    <span class="md-headline">Summary</span>
-                </md-card-title-text>
-            </md-card-title>
-            <md-card-content>
-                <form name="projectForm">
+	<md-content>
+		<md-card>
+			<md-card-title>
+				<md-card-title-text>
+					<span class="md-headline">Summary</span>
+				</md-card-title-text>
+			</md-card-title>
+			<md-card-content>
+				<form name="projectForm">
 
-                    <div layout="row" layout-xs="column">
-                        <md-input-container flex>
-                            <label for="i_total_memory">Total Memory (GB)</label>
-                            <input required type="number" id="i_total_memory" ng-model="total_memory" min="1" max="3072" />
-                            <div ng-messages="projectForm.i_total_memory.$error">
-                                <div ng-message="required">This is required.</div>
-                            </div>
-                        </md-input-container>
-                        <md-input-container flex>
-                            <label for="i_max_connections">Max connections</label>
-                            <input required type="number" id="i_max_connections" ng-model="max_connections" min="1" max="99999" />
-                            <div ng-messages="projectForm.i_max_connections.$error">
-                                <div ng-message="required">This is required.</div>
-                            </div>
-                        </md-input-container>
-                    </div>
-                    <div layout="row" layout-xs="column">
-                        <md-input-container flex="66" flex-xs="100">
-                            <label>Application Profile</label>
-                            <md-select ng-model="enviroment">
-                                <md-option ng-repeat="d in envFilters" value="{{ d.value }}">
-                                    {{d.description}}
-                                </md-option>
-                            </md-select>
-                        </md-input-container>
-                        <md-input-container flex>
-                            <label>PostgreSQL version</label>
-                            <md-select ng-model="pg_version">
-                                <md-option ng-repeat="version in supported_versions" value="{{version}}">
-                                    {{version}}
-                                </md-option>
-                            </md-select>
-                        </md-input-container>
-                    </div>
-                </form>
-            </md-card-content>
-            <md-card-actions layout="row" layout-align="end center">
-                <md-button ng-click="make_url()" class="md-raised md-warn">
-                    RUN IT NOW!
-                </md-button>
-            </md-card-actions>
-        </md-card>
-        <tuning-grid></tuning-grid>
-    </md-content>
+					<div layout="row" layout-xs="column">
+						<md-input-container flex="50" flex-xs="100">
+							<label>Operating system</label>
+							<md-select ng-model="os_type">
+								<md-option ng-repeat="d in osFilters" value="{{ d.value }}">
+									{{d.description}}
+								</md-option>
+							</md-select>
+						</md-input-container>
+						<md-input-container flex>
+							<label for="i_total_memory">Total Memory (GB)</label>
+							<input required type="number" id="i_total_memory" ng-model="total_memory" min="1" max="3072" />
+							<div ng-messages="projectForm.i_total_memory.$error">
+								<div ng-message="required">This is required.</div>
+							</div>
+						</md-input-container>
+						<md-input-container flex>
+							<label for="i_max_connections">Max connections</label>
+							<input required type="number" id="i_max_connections" ng-model="max_connections" min="1" max="99999" />
+							<div ng-messages="projectForm.i_max_connections.$error">
+								<div ng-message="required">This is required.</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row" layout-xs="column">
+						<md-input-container flex="66" flex-xs="100">
+							<label>Application Profile</label>
+							<md-select ng-model="enviroment">
+								<md-option ng-repeat="d in envFilters" value="{{ d.value }}">
+									{{d.description}}
+								</md-option>
+							</md-select>
+						</md-input-container>
+						<md-input-container flex>
+							<label>PostgreSQL version</label>
+							<md-select ng-model="pg_version">
+								<md-option ng-repeat="version in supported_versions" value="{{version}}">
+									{{version}}
+								</md-option>
+							</md-select>
+						</md-input-container>
+					</div>
+				</form>
+			</md-card-content>
+			<md-card-actions layout="row" layout-align="end center">
+				<md-button ng-click="make_url()" class="md-raised md-warn">
+					RUN IT NOW!
+				</md-button>
+			</md-card-actions>
+		</md-card>
+		<tuning-grid></tuning-grid>
+	</md-content>
 </div>
