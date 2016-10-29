@@ -2,7 +2,7 @@ function TuningController($scope, $stateParams, $state, APITuningGetConfigAllEnv
     tuningToolbarService.toolbar.hide();
     $scope.total_memory = 2;
     $scope.max_connections = 100;
-    $scope.pg_version = "9.5";
+    $scope.pg_version = "9.6";
     $scope.enviroment = "WEB";
     $scope.os_type = "Linux";
 
@@ -19,11 +19,11 @@ function TuningController($scope, $stateParams, $state, APITuningGetConfigAllEnv
 
 
     $scope.supported_versions = [
+        "9.6",
         "9.5",
         "9.4",
         "9.3",
         "9.2",
-        "9.1",
     ];
 
     // $scope.show_toolbar = false;
