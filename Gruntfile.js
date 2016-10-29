@@ -139,7 +139,7 @@ module.exports = function (grunt) {
                 src: [
                     // '<%= dirs.output %>/assets/js/app.min.js',
                     '<%= dirs.source %>/app/*.js',
-                    '<%= dirs.source %>/app/**/*.js',
+                    '<%= dirs.source %>/app/**/**.js',
                     '<%= dirs.temp %>/templates.js',
                 ],
                 dest: '<%= dirs.output %>/assets/js/app.min.js'
@@ -160,7 +160,7 @@ module.exports = function (grunt) {
                 files: [
                     'Gruntfile.js',
                     '<%= dirs.source %>/app/**.js',
-                    '<%= dirs.source %>/app/**/*.js',
+                    '<%= dirs.source %>/app/**/**.js',
                     '<%= dirs.source %>/**/*.html',
                     '<%= dirs.source %>/styles/*.css'
                 ],
