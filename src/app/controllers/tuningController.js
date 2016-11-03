@@ -5,6 +5,7 @@ function TuningController($scope, $stateParams, $state, APITuningGetConfigAllEnv
     $scope.pg_version = "9.6";
     $scope.enviroment = "WEB";
     $scope.os_type = "Linux";
+    $scope.arch = "x86-64";
 
     if ($stateParams.total_ram != null)
         $scope.total_memory = Number($stateParams.total_ram);
@@ -16,6 +17,8 @@ function TuningController($scope, $stateParams, $state, APITuningGetConfigAllEnv
         $scope.enviroment = $stateParams.enviroment_name;
     if ($stateParams.os_type != null)
         $scope.os_type = $stateParams.os_type;
+    if ($stateParams.arch != null)
+        $scope.arch = $stateParams.arch;
 
 
     $scope.supported_versions = [
@@ -62,6 +65,17 @@ function TuningController($scope, $stateParams, $state, APITuningGetConfigAllEnv
         }
     ];
 
+    $scope.archFilters = [
+        {
+            value: "x86-64",
+            description: '64 Bits (x86-64)',
+        },
+        {
+            value: "i686",
+            description: '32 Bits (i686)',
+        }
+    ];
+
     $scope.close = function () {
         tuningToolbarService.menu.hide('left');
     };
@@ -79,6 +93,7 @@ function TuningController($scope, $stateParams, $state, APITuningGetConfigAllEnv
             max_connections: $scope.max_connections,
             pg_version: $scope.pg_version,
             os_type: $scope.os_type,
+            arch: $scope.arch,
             share_link: true
         });
     };
@@ -90,6 +105,7 @@ function TuningController($scope, $stateParams, $state, APITuningGetConfigAllEnv
             max_connections: $scope.max_connections,
             env_name: $scope.enviroment,
             os_type: $scope.os_type,
+            arch: $scope.arch,
             format: "json",
             show_doc: true,
         }, function (apiResult) {
