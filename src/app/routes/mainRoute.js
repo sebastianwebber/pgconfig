@@ -6,7 +6,7 @@ angular.module('pgconfig.routes', ['ui.router'])
                 templateUrl: "/app/templates/tuning/main.html"
             })
             .state('tuning-export_url', {
-                url: "/tuning/export?total_ram&max_connections&enviroment_name&pg_version&os_type&share_link",
+                url: "/tuning/export?total_ram&max_connections&enviroment_name&pg_version&os_type&arch&share_link",
                 templateUrl: "/app/templates/tuning/export/main.html"
             })
             .state('about_url', {

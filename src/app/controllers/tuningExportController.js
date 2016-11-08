@@ -38,6 +38,10 @@ function TuningExportController($scope, $stateParams, APITuningGetConfigSingleEn
         $scope.pg_version = $stateParams.pg_version;
     if ($stateParams.enviroment_name != null)
         $scope.enviroment = $stateParams.enviroment_name;
+    if ($stateParams.os_type != null)
+        $scope.os_type = $stateParams.os_type;
+    if ($stateParams.arch != null)
+        $scope.arch = $stateParams.arch;
 
 
     $scope.backToTuning = function () {
@@ -66,6 +70,8 @@ function TuningExportController($scope, $stateParams, APITuningGetConfigSingleEn
                     max_connections: $scope.max_connections,
                     env_name: $scope.enviroment,
                     format: $scope.export_format,
+                    os_type: $scope.os_type,
+                    arch: $scope.arch,
                     include_pgbadger: $scope.generate_pgbadger,
                     log_format: $scope.log_format
                 }, function (apiResult) {
@@ -77,6 +83,8 @@ function TuningExportController($scope, $stateParams, APITuningGetConfigSingleEn
                     total_ram: $scope.total_memory + "GB",
                     max_connections: $scope.max_connections,
                     env_name: $scope.enviroment,
+                    os_type: $scope.os_type,
+                    arch: $scope.arch,
                     format: $scope.export_format
                 }, function (apiResult) {
                     $scope.code_output = apiResult.collection;
