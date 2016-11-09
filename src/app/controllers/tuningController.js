@@ -103,7 +103,7 @@ function TuningController($scope, $stateParams, $state, APITuningGetConfigAllEnv
             pg_version: $scope.pg_version,
             total_ram: $scope.total_memory + "GB",
             max_connections: $scope.max_connections,
-            env_name: $scope.environment,
+            environment_name: $scope.environment,
             os_type: $scope.os_type,
             arch: $scope.arch,
             format: "json",

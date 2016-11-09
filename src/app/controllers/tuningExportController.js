@@ -68,7 +68,7 @@ function TuningExportController($scope, $stateParams, APITuningGetConfigSingleEn
                     pg_version: $scope.pg_version,
                     total_ram: $scope.total_memory + "GB",
                     max_connections: $scope.max_connections,
-                    env_name: $scope.environment,
+                    environment_name: $scope.environment,
                     format: $scope.export_format,
                     os_type: $scope.os_type,
                     arch: $scope.arch,
@@ -82,7 +82,7 @@ function TuningExportController($scope, $stateParams, APITuningGetConfigSingleEn
                     pg_version: $scope.pg_version,
                     total_ram: $scope.total_memory + "GB",
                     max_connections: $scope.max_connections,
-                    env_name: $scope.environment,
+                    environment_name: $scope.environment,
                     os_type: $scope.os_type,
                     arch: $scope.arch,
                     format: $scope.export_format
