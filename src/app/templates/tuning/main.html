@@ -38,7 +38,7 @@
 					<div layout="row" layout-xs="column">
 						<md-input-container flex="66" flex-xs="100">
 							<label>Application Profile</label>
-							<md-select ng-model="enviroment">
+							<md-select ng-model="environment">
 								<md-option ng-repeat="d in envFilters" value="{{ d.value }}">
 									{{d.description}}
 								</md-option>
@@ -62,8 +62,11 @@
 					</div>
 				</form>
 			</md-card-content>
-			<md-card-actions layout="row" layout-align="end center">
-				<md-button ng-click="make_url()" class="md-raised md-warn">
+			<md-card-actions layout="row">
+				<md-checkbox ng-model="run-check" aria-label="Re-run on change?" flex>
+					Auto run on changes?
+				</md-checkbox>
+				<md-button ng-click="make_url()" class="md-raised md-warn" flex="20">
 					RUN IT NOW!
 				</md-button>
 			</md-card-actions>

@@ -3,7 +3,7 @@ function TuningController($scope, $stateParams, $state, APITuningGetConfigAllEnv
     $scope.total_memory = 2;
     $scope.max_connections = 100;
     $scope.pg_version = "9.6";
-    $scope.enviroment = "WEB";
+    $scope.environment = "WEB";
     $scope.os_type = "Linux";
     $scope.arch = "x86-64";
 
@@ -13,8 +13,8 @@ function TuningController($scope, $stateParams, $state, APITuningGetConfigAllEnv
         $scope.max_connections = Number($stateParams.max_connections);
     if ($stateParams.pg_version != null)
         $scope.pg_version = $stateParams.pg_version;
-    if ($stateParams.enviroment_name != null)
-        $scope.enviroment = $stateParams.enviroment_name;
+    if ($stateParams.environment_name != null)
+        $scope.environment = $stateParams.environment_name;
     if ($stateParams.os_type != null)
         $scope.os_type = $stateParams.os_type;
     if ($stateParams.arch != null)
@@ -88,7 +88,7 @@ function TuningController($scope, $stateParams, $state, APITuningGetConfigAllEnv
 
     $scope.make_url = function () {
         $state.go('.', {
-            enviroment_name: $scope.enviroment,
+            environment_name: $scope.environment,
             total_ram: $scope.total_memory,
             max_connections: $scope.max_connections,
             pg_version: $scope.pg_version,
@@ -103,7 +103,7 @@ function TuningController($scope, $stateParams, $state, APITuningGetConfigAllEnv
             pg_version: $scope.pg_version,
             total_ram: $scope.total_memory + "GB",
             max_connections: $scope.max_connections,
-            env_name: $scope.enviroment,
+            env_name: $scope.environment,
             os_type: $scope.os_type,
             arch: $scope.arch,
             format: "json",
@@ -124,6 +124,6 @@ function TuningController($scope, $stateParams, $state, APITuningGetConfigAllEnv
     });
 
     $scope.isSelectedEnvironment = function (env) {
-        return (env == $scope.enviroment) ? 'selectedEnvironment' : '';
+        return (env == $scope.environment) ? 'selectedEnvironment' : '';
     };
 };
