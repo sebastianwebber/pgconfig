@@ -44,6 +44,11 @@ function TuningExportController($scope, $stateParams, APITuningGetConfigSingleEn
         $scope.arch = $stateParams.arch;
 
 
+    // prior to 9.4 ALTER SYSTEM are not supported_formats
+    if($scope.pg_version <= 9.3) {
+        $scope.supported_formats.shift();
+    }
+
     $scope.backToTuning = function () {
         $window.history.back();
     };
@@ -90,16 +95,6 @@ function TuningExportController($scope, $stateParams, APITuningGetConfigSingleEn
                     $scope.code_output = apiResult.collection;
                 });
             }
-
-            // if ($scope.generate_pgbadger == true) {
-            //     pgbadgerGeneratorService.get_simple({
-            //         log_format: $scope.log_format,
-            //         show_about: "false",
-            //         format: $scope.export_format,
-            //     }, function (apiResult) {
-            //         $scope.code_output2 = apiResult.collection;
-            //     });
-            // }
         }
     };
 }
