@@ -3,7 +3,7 @@ angular.module('pgconfig.config', [])
         appName: 'PGConfigUI',
         appFullName: 'PostgreSQL Configuration Tool',
         appVersion: '2.0 beta',
-        apiURL: 'https://pgconfig.appspot.com/v1',
+        apiURL: 'https://api.pgconfig.org/v1',
         // apiURL: 'http://localhost:5000/v1'
     })
     .config(function($mdThemingProvider) {
