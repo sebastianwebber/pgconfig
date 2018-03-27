@@ -36,10 +36,18 @@
 						</md-input-container>
 					</div>
 					<div layout="row" layout-xs="column">
-						<md-input-container flex="66" flex-xs="100">
+						<md-input-container flex="50" flex-xs="100">
 							<label>Application Profile</label>
 							<md-select ng-model="environment">
 								<md-option ng-repeat="d in envFilters" value="{{ d.value }}">
+									{{d.description}}
+								</md-option>
+							</md-select>
+						</md-input-container>
+                        <md-input-container flex>
+							<label>Hard drive type</label>
+							<md-select ng-model="drive_type">
+								<md-option ng-repeat="d in supported_drivers" value="{{d.value}}">
 									{{d.description}}
 								</md-option>
 							</md-select>
