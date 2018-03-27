@@ -42,6 +42,9 @@ function TuningExportController($scope, $stateParams, APITuningGetConfigSingleEn
         $scope.os_type = $stateParams.os_type;
     if ($stateParams.arch != null)
         $scope.arch = $stateParams.arch;
+    if ($stateParams.drive_type != null)
+        $scope.drive_type = $stateParams.drive_type;
+
 
 
     // prior to 9.4 ALTER SYSTEM are not supported_formats
@@ -77,6 +80,7 @@ function TuningExportController($scope, $stateParams, APITuningGetConfigSingleEn
                     format: $scope.export_format,
                     os_type: $scope.os_type,
                     arch: $scope.arch,
+                    drive_type: $scope.drive_type,
                     include_pgbadger: $scope.generate_pgbadger,
                     log_format: $scope.log_format
                 }, function (apiResult) {
@@ -90,6 +94,7 @@ function TuningExportController($scope, $stateParams, APITuningGetConfigSingleEn
                     environment_name: $scope.environment,
                     os_type: $scope.os_type,
                     arch: $scope.arch,
+                    drive_type: $scope.drive_type,
                     format: $scope.export_format
                 }, function (apiResult) {
                     $scope.code_output = apiResult.collection;
