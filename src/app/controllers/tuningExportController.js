@@ -44,11 +44,11 @@ function TuningExportController($scope, $stateParams, APITuningGetConfigSingleEn
         $scope.arch = $stateParams.arch;
     if ($stateParams.drive_type != null)
         $scope.drive_type = $stateParams.drive_type;
-
-
+    if ($stateParams.cpus != null)
+        $scope.cpus = Number($stateParams.cpus);
 
     // prior to 9.4 ALTER SYSTEM are not supported_formats
-    if($scope.pg_version <= 9.3) {
+    if ($scope.pg_version <= 9.3) {
         $scope.supported_formats.shift();
     }
 
@@ -80,6 +80,7 @@ function TuningExportController($scope, $stateParams, APITuningGetConfigSingleEn
                     format: $scope.export_format,
                     os_type: $scope.os_type,
                     arch: $scope.arch,
+                    cpus: $scope.cpus,
                     drive_type: $scope.drive_type,
                     include_pgbadger: $scope.generate_pgbadger,
                     log_format: $scope.log_format

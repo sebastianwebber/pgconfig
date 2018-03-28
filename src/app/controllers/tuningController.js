@@ -23,8 +23,8 @@ function TuningController($scope, $stateParams, $state, APITuningGetConfigAllEnv
         $scope.arch = $stateParams.arch;
     if ($stateParams.drive_type != null)
         $scope.drive_type = $stateParams.drive_type;
-    // if ($stateParams.cpus != null)
-    //     $scope.cpus = Number($stateParams.cpus);
+    if ($stateParams.cpus != null)
+        $scope.cpus = Number($stateParams.cpus);
 
     $scope.supported_versions = [
         "10",
