@@ -6,12 +6,12 @@ angular.module('pgconfig.config', [])
         apiURL: 'https://api.pgconfig.org/v1',
         //apiURL: 'http://localhost:5000/v1'
     })
-    .config(function($mdThemingProvider) {
+    .config(function ($mdThemingProvider) {
         $mdThemingProvider
             .theme('default')
             .primaryPalette('blue')
             .accentPalette('orange');
     })
-    .run(['$rootScope', function($rootScope) {
+    .run(['$rootScope', function ($rootScope) {
         $rootScope.angular = angular;
     }]);

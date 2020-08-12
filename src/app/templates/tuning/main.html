@@ -10,7 +10,7 @@
 				<form name="projectForm">
 
 					<div layout="row" layout-xs="column">
-						<md-input-container flex="50" flex-xs="100">
+						<md-input-container flex="33" flex-xs="100">
 							<label>Operating system</label>
 							<md-select ng-model="os_type">
 								<md-option ng-repeat="d in osFilters" value="{{ d.value }}">
@@ -18,14 +18,43 @@
 								</md-option>
 							</md-select>
 						</md-input-container>
-						<md-input-container flex>
+                        <md-input-container flex="33" flex-xs="100">
+							<label>Application Profile</label>
+							<md-select ng-model="environment">
+								<md-option ng-repeat="d in envFilters" value="{{ d.value }}">
+									{{d.description}}
+								</md-option>
+							</md-select>
+						</md-input-container>
+                        <md-input-container flex="33" flex-xs="100">
+							<label>PostgreSQL version</label>
+							<md-select ng-model="pg_version">
+								<md-option ng-repeat="version in supported_versions" value="{{version}}">
+									{{version}}
+								</md-option>
+							</md-select>
+						</md-input-container>
+				    </div>
+					<div layout="row" layout-xs="column">
+                        <md-input-container flex>
 							<label for="i_arch">Architecture</label>
-
 							<md-select ng-model="arch">
 								<md-option ng-repeat="d in archFilters" value="{{ d.value }}">
 									{{d.description}}
 								</md-option>
 							</md-select>
+						</md-input-container>
+                        <md-input-container flex>
+							<label>Hard Drive Type</label>
+							<md-select ng-model="drive_type">
+								<md-option ng-repeat="d in supported_drivers" value="{{d.value}}">
+									{{d.description}}
+								</md-option>
+							</md-select>
+                        </md-input-container>
+                        <md-input-container flex>
+							<label for="i_cpus">Number of CPUs</label>
+							<input type="number" id="i_cpus" ng-model="cpus" min="1" max="" />
 						</md-input-container>
 						<md-input-container flex>
 							<label for="i_total_memory">Total Memory (GB)</label>
@@ -34,38 +63,12 @@
 								<div ng-message="required">This is required.</div>
 							</div>
 						</md-input-container>
-					</div>
-					<div layout="row" layout-xs="column">
-						<md-input-container flex="50" flex-xs="100">
-							<label>Application Profile</label>
-							<md-select ng-model="environment">
-								<md-option ng-repeat="d in envFilters" value="{{ d.value }}">
-									{{d.description}}
-								</md-option>
-							</md-select>
-						</md-input-container>
-                        <md-input-container flex>
-							<label>Hard drive type</label>
-							<md-select ng-model="drive_type">
-								<md-option ng-repeat="d in supported_drivers" value="{{d.value}}">
-									{{d.description}}
-								</md-option>
-							</md-select>
-						</md-input-container>
 						<md-input-container flex>
 							<label for="i_max_connections">Max connections</label>
 							<input required type="number" id="i_max_connections" ng-model="max_connections" min="1" max="99999" />
 							<div ng-messages="projectForm.i_max_connections.$error">
 								<div ng-message="required">This is required.</div>
 							</div>
-						</md-input-container>
-						<md-input-container flex>
-							<label>PostgreSQL version</label>
-							<md-select ng-model="pg_version">
-								<md-option ng-repeat="version in supported_versions" value="{{version}}">
-									{{version}}
-								</md-option>
-							</md-select>
 						</md-input-container>
 					</div>
 				</form>

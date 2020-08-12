@@ -7,6 +7,7 @@ function TuningController($scope, $stateParams, $state, APITuningGetConfigAllEnv
     $scope.os_type = "Linux";
     $scope.arch = "x86-64";
     $scope.drive_type = 'HDD';
+    //$scope.cpus = 1;
 
     if ($stateParams.total_ram != null)
         $scope.total_memory = Number($stateParams.total_ram);
@@ -22,7 +23,8 @@ function TuningController($scope, $stateParams, $state, APITuningGetConfigAllEnv
         $scope.arch = $stateParams.arch;
     if ($stateParams.drive_type != null)
         $scope.drive_type = $stateParams.drive_type;
-
+    if ($stateParams.cpus != null)
+        $scope.cpus = Number($stateParams.cpus);
 
     $scope.supported_versions = [
         "10",
@@ -34,9 +36,9 @@ function TuningController($scope, $stateParams, $state, APITuningGetConfigAllEnv
     ];
 
     $scope.supported_drivers = [
-        {value: "HDD", description: "HDD storage"},
-        {value: "SSD", description: "SSD storage"},
-        {value: "SAN", description: "Network (SAN) storage"}
+        { value: "HDD", description: "HDD storage" },
+        { value: "SSD", description: "SSD storage" },
+        { value: "SAN", description: "Network (SAN) storage" }
     ];
 
     // $scope.show_toolbar = false;
@@ -104,6 +106,7 @@ function TuningController($scope, $stateParams, $state, APITuningGetConfigAllEnv
             pg_version: $scope.pg_version,
             os_type: $scope.os_type,
             arch: $scope.arch,
+            cpus: $scope.cpus,
             drive_type: $scope.drive_type,
             share_link: true,
         });
@@ -117,6 +120,7 @@ function TuningController($scope, $stateParams, $state, APITuningGetConfigAllEnv
             environment_name: $scope.environment,
             os_type: $scope.os_type,
             arch: $scope.arch,
+            cpus: $scope.cpus,
             drive_type: $scope.drive_type,
             format: "json",
             show_doc: true,
