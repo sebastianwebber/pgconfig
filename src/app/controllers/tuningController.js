@@ -2,12 +2,12 @@ function TuningController($scope, $stateParams, $state, APITuningGetConfigAllEnv
     tuningToolbarService.toolbar.hide();
     $scope.total_memory = 2;
     $scope.max_connections = 100;
-    $scope.pg_version = "10";
+    $scope.pg_version = "12";
     $scope.environment = "WEB";
     $scope.os_type = "Linux";
     $scope.arch = "x86-64";
-    $scope.drive_type = 'HDD';
-    //$scope.cpus = 1;
+    $scope.drive_type = 'SSD';
+    $scope.cpus = 1;
 
     if ($stateParams.total_ram != null)
         $scope.total_memory = Number($stateParams.total_ram);
@@ -27,6 +27,8 @@ function TuningController($scope, $stateParams, $state, APITuningGetConfigAllEnv
         $scope.cpus = Number($stateParams.cpus);
 
     $scope.supported_versions = [
+        "12",
+        "11",
         "10",
         "9.6",
         "9.5",
